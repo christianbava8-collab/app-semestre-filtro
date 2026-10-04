@@ -203,6 +203,8 @@ svg.mc g{transform-box:fill-box;transform-origin:center;animation:nodein .4s eas
 .sl span{display:block}
 .sl input[type=range]{width:100%;height:44px;accent-color:var(--sc)}
 .chip[aria-pressed="true"]{border-color:var(--ink);background:var(--soft)}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.rev{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .ta{width:100%;font:inherit;font-size:.9rem;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);resize:vertical}
 .read{display:flex;gap:6px 22px;flex-wrap:wrap;margin:10px 0;font-family:var(--font-display);font-size:1.05rem}
 .read b{font-size:1.35rem}
@@ -294,6 +296,53 @@ svg.mc g{transform-box:fill-box;transform-origin:center;animation:nodein .4s eas
 .wire{stroke:var(--ink);stroke-width:3;fill:none}
 .batt{fill:var(--surface);stroke:var(--ink);stroke-width:3}
 .resb{fill:var(--surface);stroke:var(--ink);stroke-width:3}
+
+/* movimento v2 */
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes tick{0%{transform:scale(.4)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes barin{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes slideup{from{transform:translateY(100%)}to{transform:none}}
+main.enter{animation:fadein .2s ease-out}
+main.enter>*{animation:rise .38s cubic-bezier(.2,.7,.2,1) both}
+main.enter>*:nth-child(2){animation-delay:.04s}main.enter>*:nth-child(3){animation-delay:.08s}main.enter>*:nth-child(4){animation-delay:.12s}main.enter>*:nth-child(5){animation-delay:.16s}main.enter>*:nth-child(6){animation-delay:.2s}main.enter>*:nth-child(n+7){animation-delay:.24s}
+main.enter .opt{animation:rise .34s cubic-bezier(.2,.7,.2,1) both}
+main.enter .opt:nth-of-type(2){animation-delay:.05s}main.enter .opt:nth-of-type(3){animation-delay:.1s}main.enter .opt:nth-of-type(4){animation-delay:.15s}
+main.enter .cols>*{animation:rise .4s cubic-bezier(.2,.7,.2,1) both}
+main.enter .cols>*:nth-child(2){animation-delay:.07s}main.enter .cols>*:nth-child(3){animation-delay:.14s}
+main.enter .quick>*{animation:rise .38s cubic-bezier(.2,.7,.2,1) both}
+main.enter .quick>*:nth-child(2){animation-delay:.06s}
+.btn,.opt,.trow,.chip,.qc,.tab,.tabbar button,.fcard{transition:transform .14s ease,background-color .2s,border-color .2s,color .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent}
+.btn:active:not(:disabled),.opt:active:not(:disabled),.qc:active:not(:disabled),.chip:active,.tab:active{transform:scale(.97)}
+.trow:active{transform:scale(.99);background:var(--soft)}
+@media (hover:hover){.opt:hover:not(:disabled){border-color:var(--ink)}.btn.ghost:hover{border-color:var(--ink)}.qc:hover:not(:disabled){border-color:var(--ink)}}
+.prog>b{transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.tabbar button{overflow:visible}
+.tabbar button::before{content:"";position:absolute;top:0;left:30%;right:30%;height:3px;border-radius:0 0 3px 3px;background:var(--ink);transform:scaleX(0);transition:transform .25s}
+.tabbar button[aria-current="page"]::before{transform:scaleX(1)}
+.tabbar button[aria-current="page"] svg{animation:pop .35s ease-out}
+.btn.block,.hero .btn{box-shadow:0 1px 0 color-mix(in srgb,var(--ink) 25%,transparent)}
+.stat .cnt{display:inline-block;min-width:.6em}
+.hero{animation-fill-mode:both}
+/* quiz su misura */
+.pick h1{margin-bottom:6px}
+.shead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px}
+.shead h2{margin:0}
+.cb{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;background:var(--surface);transition:background-color .18s,border-color .18s}
+.cb svg{width:16px;height:16px;fill:none;stroke:var(--on-sub);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0;transform:scale(.4)}
+.trow[aria-checked="true"] .cb{background:var(--sc);border-color:var(--sc)}
+.trow[aria-checked="true"] .cb svg{opacity:1;animation:tick .3s ease-out both}
+.trow.pk{justify-content:flex-start;gap:14px}
+.trow.pk .nm{flex:1}
+.pickbar{position:sticky;bottom:0;z-index:12;background:var(--surface);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));margin:0 -14px;animation:slideup .35s cubic-bezier(.2,.7,.2,1) both}
+.pickbar .sum{margin:0 0 10px;font-weight:700}
+.pickbar .sum span{font-weight:400;color:var(--muted)}
+.pickbar .chips{margin-bottom:10px}
+.pickbar .chip{padding:6px 14px;min-height:40px}.pickbar .chip::before{display:none}
+.pickbar .go2{display:grid;grid-template-columns:auto 1fr;gap:10px}
+.pickrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+.sbtn{appearance:none;font:inherit;font-size:.85rem;font-weight:700;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:99px;padding:6px 12px;min-height:36px;cursor:pointer}
+.sbtn:active{transform:scale(.96)}
+.cnt-q{font-size:.8rem;color:var(--muted);font-weight:400}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
 @media (max-width:640px){.mole-grid,.ions{grid-template-columns:1fr}}
 
@@ -321,7 +370,21 @@ var TOPICS=[
  {id:'fi_cin',s:'fis',n:'Cinematica'},
  {id:'fi_din',s:'fis',n:'Forze e leggi di Newton'},
  {id:'fi_en',s:'fis',n:'Lavoro ed energia'},
- {id:'fi_el',s:'fis',n:'Circuiti elettrici'}
+ {id:'fi_el',s:'fis',n:'Circuiti elettrici'},
+ {id:'ch_materia',s:'chim',n:'Materia, miscugli e stati'},
+ {id:'ch_reaz',s:'chim',n:'Reazioni e bilanciamento'},
+ {id:'ch_sol',s:'chim',n:'Soluzioni e diluizioni'},
+ {id:'ch_neut',s:'chim',n:'Neutralizzazione'},
+ {id:'ch_org',s:'chim',n:'Chimica organica e gruppi funzionali'},
+ {id:'bi_ciclo',s:'bio',n:'Ciclo cellulare, mitosi e meiosi'},
+ {id:'bi_biomol',s:'bio',n:'Biomolecole'},
+ {id:'bi_prot',s:'bio',n:'Proteine ed enzimi'},
+ {id:'bi_metab',s:'bio',n:'Metabolismo'},
+ {id:'bi_gapp',s:'bio',n:'Genetica applicata'},
+ {id:'fi_gran',s:'fis',n:'Grandezze, unità e conversioni'},
+ {id:'fi_vet',s:'fis',n:'Vettori'},
+ {id:'fi_flu',s:'fis',n:'Fluidi e pressione'},
+ {id:'fi_cal',s:'fis',n:'Calore e termodinamica'}
 ];
 
 /* t = argomento, l = livello (1-3), o = opzioni, a = indice della risposta corretta, e = spiegazione */
@@ -408,7 +471,163 @@ var QB=[
 {id:'fi_en6',t:'fi_en',l:3,q:`Un motore compie 6000 J di lavoro in 20 s. Qual è la sua potenza?`,o:[`300 W`,`120000 W`,`30 W`,`3000 W`],a:0,e:`P = L / t = 6000 J / 20 s = 300 W.`},
 {id:'fi_el4',t:'fi_el',l:1,q:`Quale unità misura la resistenza elettrica?`,o:[`Ohm`,`Ampere`,`Volt`,`Watt`],a:0,e:`La resistenza si misura in ohm (Ω). L'ampere misura la corrente, il volt la tensione, il watt la potenza.`},
 {id:'fi_el5',t:'fi_el',l:2,q:`Una lampada è attraversata da 0,5 A con una tensione di 12 V. Qual è la sua potenza?`,o:[`6 W`,`24 W`,`2 W`,`12 W`],a:0,e:`P = V · I = 12 · 0,5 = 6 W.`},
-{id:'fi_el6',t:'fi_el',l:3,q:`Tre resistori da 6 Ω sono collegati in parallelo. Qual è la resistenza equivalente?`,o:[`2 Ω`,`18 Ω`,`6 Ω`,`3 Ω`],a:0,e:`1/R = 1/6 + 1/6 + 1/6 = 3/6, quindi R = 2 Ω. In parallelo si può usare anche R/n = 6/3 = 2 Ω quando i resistori sono uguali.`}
+{id:'fi_el6',t:'fi_el',l:3,q:`Tre resistori da 6 Ω sono collegati in parallelo. Qual è la resistenza equivalente?`,o:[`2 Ω`,`18 Ω`,`6 Ω`,`3 Ω`],a:0,e:`1/R = 1/6 + 1/6 + 1/6 = 3/6, quindi R = 2 Ω. In parallelo si può usare anche R/n = 6/3 = 2 Ω quando i resistori sono uguali.`},
+{id:'ch_atomo7',t:'ch_atomo',l:1,q:`Quale particella subatomica ha carica elettrica negativa?`,o:[`Elettrone`,`Protone`,`Neutrone`,`Nucleone`],a:0,e:`L'elettrone ha carica negativa, il protone positiva e il neutrone è neutro. "Nucleone" indica genericamente protoni e neutroni, cioè le particelle del nucleo.`},
+{id:'ch_atomo8',t:'ch_atomo',l:1,q:`In quale gruppo della tavola periodica si trovano i gas nobili?`,o:[`Gruppo 18`,`Gruppo 1`,`Gruppo 17`,`Gruppo 2`],a:0,e:`I gas nobili (He, Ne, Ar…) hanno il livello esterno completo e sono pochissimo reattivi. Il gruppo 1 contiene i metalli alcalini, il 2 gli alcalino-terrosi, il 17 gli alogeni.`},
+{id:'ch_atomo9',t:'ch_atomo',l:2,q:`Qual è il numero di massa di un atomo con 17 protoni e 18 neutroni?`,o:[`35`,`17`,`18`,`1`],a:0,e:`Il numero di massa è la somma di protoni e neutroni: A = Z + N = 17 + 18 = 35.`},
+{id:'ch_atomo10',t:'ch_atomo',l:2,q:`Quanti elettroni può contenere al massimo un singolo orbitale?`,o:[`2`,`1`,`6`,`8`],a:0,e:`Per il principio di esclusione di Pauli un orbitale ospita al massimo 2 elettroni, con spin opposto. Un sottolivello p ha 3 orbitali e quindi fino a 6 elettroni.`},
+{id:'ch_atomo11',t:'ch_atomo',l:3,q:`Qual è la configurazione elettronica dello ione Mg²⁺ (Z = 12)?`,o:[`1s² 2s² 2p⁶`,`1s² 2s² 2p⁶ 3s²`,`1s² 2s² 2p⁶ 3s² 3p²`,`1s² 2s² 2p⁴`],a:0,e:`Il magnesio neutro è 1s² 2s² 2p⁶ 3s². Perdendo i due elettroni 3s diventa Mg²⁺, con la stessa configurazione del neon.`},
+{id:'ch_atomo12',t:'ch_atomo',l:3,q:`Tra gli ioni isoelettronici O²⁻, F⁻, Na⁺ e Mg²⁺ (tutti con 10 elettroni), quale ha il raggio più piccolo?`,o:[`Mg²⁺`,`O²⁻`,`F⁻`,`Na⁺`],a:0,e:`Hanno lo stesso numero di elettroni, ma Mg²⁺ ha 12 protoni: la carica nucleare più alta attira con più forza gli stessi 10 elettroni e il raggio è il minore.`},
+{id:'ch_legami7',t:'ch_legami',l:1,q:`Che legame si forma quando due atomi non metallici condividono una coppia di elettroni?`,o:[`Covalente`,`Ionico`,`Metallico`,`A idrogeno`],a:0,e:`La condivisione di elettroni tra non metalli dà un legame covalente. Il legame ionico nasce da un trasferimento di elettroni tra un metallo e un non metallo.`},
+{id:'ch_legami8',t:'ch_legami',l:1,q:`Quale di queste sostanze è un composto ionico?`,o:[`MgCl₂`,`CO₂`,`H₂O`,`CH₄`],a:0,e:`MgCl₂ è formato da un metallo (Mg) e un non metallo (Cl): si formano ioni Mg²⁺ e Cl⁻. CO₂, H₂O e CH₄ sono composti covalenti tra non metalli.`},
+{id:'ch_legami9',t:'ch_legami',l:2,q:`Quale di queste molecole ha forma lineare?`,o:[`CO₂`,`H₂O`,`NH₃`,`CH₄`],a:0,e:`In CO₂ (O=C=O) il carbonio ha due sole zone di legame e nessuna coppia solitaria: gli atomi sono allineati a 180°. H₂O è angolare, NH₃ piramidale, CH₄ tetraedrica.`},
+{id:'ch_legami10',t:'ch_legami',l:2,q:`Quale di questi legami è il più polare?`,o:[`O–H`,`C–H`,`C–C`,`H–H`],a:0,e:`La polarità dipende dalla differenza di elettronegatività: tra O e H è la più grande. C–H è poco polare, mentre C–C e H–H collegano atomi uguali e sono apolari.`},
+{id:'ch_legami11',t:'ch_legami',l:3,q:`Quale di queste molecole ha un angolo di legame di circa 104,5°?`,o:[`H₂O`,`CH₄`,`CO₂`,`BF₃`],a:0,e:`L'acqua ha 4 zone elettroniche attorno all'ossigeno, di cui 2 coppie solitarie che comprimono l'angolo a circa 104,5°. CH₄ ha 109,5°, BF₃ 120° e CO₂ 180°.`},
+{id:'ch_legami12',t:'ch_legami',l:3,q:`Quale di queste sostanze può formare legami a idrogeno tra le proprie molecole?`,o:[`CH₃OH`,`CH₄`,`CO₂`,`CH₃CH₃`],a:0,e:`Il legame a idrogeno richiede un H legato a un atomo molto elettronegativo (O, N, F). Il metanolo ha un gruppo O–H, mentre CH₄, CO₂ ed etano non lo hanno.`},
+{id:'ch_mole7',t:'ch_mole',l:1,q:`Quanti atomi ci sono in 1 mol di atomi di carbonio?`,o:[`6,022 × 10²³`,`12`,`6,022 × 10²²`,`1`],a:0,e:`Una mole contiene sempre un numero di Avogadro di particelle, circa 6,022 × 10²³, qualunque sia la sostanza.`},
+{id:'ch_mole8',t:'ch_mole',l:1,q:`Quanto pesa 1 mol di NaCl (Na = 23 g/mol, Cl = 35,5 g/mol)?`,o:[`58,5 g`,`23 g`,`35,5 g`,`117 g`],a:0,e:`La massa molare è la somma delle masse atomiche: 23 + 35,5 = 58,5 g/mol, quindi 1 mol pesa 58,5 g.`},
+{id:'ch_mole9',t:'ch_mole',l:2,q:`Quante moli sono contenute in 11 g di CO₂ (M = 44 g/mol)?`,o:[`0,25 mol`,`4 mol`,`0,5 mol`,`2,5 mol`],a:0,e:`n = m / M = 11 g / 44 g/mol = 0,25 mol. Il risultato 4 si ottiene invertendo per errore il rapporto.`},
+{id:'ch_mole10',t:'ch_mole',l:2,q:`Nella reazione C + O₂ → CO₂, quante moli di CO₂ si formano da 2 mol di C con O₂ in eccesso?`,o:[`2 mol`,`1 mol`,`4 mol`,`0,5 mol`],a:0,e:`I coefficienti stechiometrici sono tutti 1: il rapporto tra C e CO₂ è 1 : 1, quindi 2 mol di carbonio danno 2 mol di CO₂.`},
+{id:'ch_mole11',t:'ch_mole',l:3,q:`Nella reazione N₂ + 3 H₂ → 2 NH₃, quanti grammi di NH₃ (M = 17 g/mol) si ottengono da 3 mol di H₂, con N₂ in eccesso?`,o:[`34 g`,`51 g`,`17 g`,`102 g`],a:0,e:`Dal rapporto 3 H₂ : 2 NH₃, da 3 mol di H₂ si formano 2 mol di NH₃. La massa è 2 · 17 = 34 g.`},
+{id:'ch_mole12',t:'ch_mole',l:3,q:`Quanti grammi di O₂ (M = 32 g/mol) servono per bruciare completamente 1 mol di metano secondo CH₄ + 2 O₂ → CO₂ + 2 H₂O?`,o:[`64 g`,`32 g`,`16 g`,`128 g`],a:0,e:`Per 1 mol di CH₄ servono 2 mol di O₂ (rapporto 1 : 2). La massa è 2 · 32 = 64 g.`},
+{id:'ch_ph7',t:'ch_ph',l:1,q:`Quale valore di pH indica una soluzione neutra a 25 °C?`,o:[`7`,`0`,`14`,`1`],a:0,e:`A 25 °C l'acqua pura ha [H⁺] = 10⁻⁷ M, quindi pH = 7. Sotto 7 la soluzione è acida, sopra 7 è basica.`},
+{id:'ch_ph8',t:'ch_ph',l:1,q:`Quale di queste sostanze è una base?`,o:[`NaOH`,`HCl`,`H₂SO₄`,`HNO₃`],a:0,e:`NaOH (idrossido di sodio) libera ioni OH⁻ in acqua ed è una base forte. HCl, H₂SO₄ e HNO₃ sono acidi forti.`},
+{id:'ch_ph9',t:'ch_ph',l:2,q:`Se [H⁺] = 10⁻⁴ M, quanto vale il pH?`,o:[`4`,`10`,`−4`,`1`],a:0,e:`pH = −log[H⁺] = −log(10⁻⁴) = 4. Il segno meno della definizione elimina quello dell'esponente.`},
+{id:'ch_ph10',t:'ch_ph',l:2,q:`Quanto vale il pOH di una soluzione con pH 9 a 25 °C?`,o:[`5`,`9`,`14`,`23`],a:0,e:`A 25 °C pH + pOH = 14, quindi pOH = 14 − 9 = 5. La soluzione è basica.`},
+{id:'ch_ph11',t:'ch_ph',l:3,q:`Qual è il pH di una soluzione di Ba(OH)₂ 0,005 M (base forte, completamente dissociata) a 25 °C?`,o:[`12`,`11,7`,`2`,`10`],a:0,e:`Ogni unità di Ba(OH)₂ libera 2 OH⁻: [OH⁻] = 2 · 0,005 = 0,01 M, quindi pOH = 2 e pH = 12. Il valore 11,7 deriva dal dimenticare il fattore 2.`},
+{id:'ch_ph12',t:'ch_ph',l:3,q:`Qual è la base coniugata dello ione HCO₃⁻?`,o:[`CO₃²⁻`,`H₂CO₃`,`CO₂`,`OH⁻`],a:0,e:`La base coniugata di un acido si ottiene togliendogli un H⁺: HCO₃⁻ − H⁺ = CO₃²⁻. H₂CO₃ è invece l'acido coniugato di HCO₃⁻.`},
+{id:'bi_cell7',t:'bi_cell',l:1,q:`Dove si trova la maggior parte del DNA di una cellula eucariote?`,o:[`Nel nucleo`,`Nei lisosomi`,`Nell'apparato di Golgi`,`Nei ribosomi`],a:0,e:`Il DNA è custodito nel nucleo, delimitato da una doppia membrana. Una piccola quota è presente anche nei mitocondri e nei cloroplasti.`},
+{id:'bi_cell8',t:'bi_cell',l:1,q:`Quale organulo svolge la fotosintesi nelle cellule vegetali?`,o:[`Cloroplasto`,`Mitocondrio`,`Vacuolo`,`Nucleo`],a:0,e:`I cloroplasti contengono la clorofilla e sono la sede della fotosintesi. I mitocondri producono ATP con la respirazione cellulare.`},
+{id:'bi_cell9',t:'bi_cell',l:2,q:`Qual è la funzione principale dell'apparato di Golgi?`,o:[`Modificare, smistare e impacchettare proteine e lipidi`,`Produrre ATP`,`Sintetizzare il DNA`,`Digerire le molecole`],a:0,e:`Il Golgi riceve le molecole dal reticolo endoplasmatico, le modifica (per esempio aggiungendo zuccheri) e le smista in vescicole verso la loro destinazione.`},
+{id:'bi_cell10',t:'bi_cell',l:2,q:`Quale di queste strutture è presente anche nelle cellule procariote?`,o:[`Ribosomi`,`Nucleo`,`Mitocondri`,`Reticolo endoplasmatico`],a:0,e:`Le cellule procariote hanno ribosomi (più piccoli di quelli eucarioti), ma non hanno nucleo né organuli delimitati da membrana come mitocondri e reticolo endoplasmatico.`},
+{id:'bi_cell11',t:'bi_cell',l:3,q:`Quale organulo è coinvolto nella sintesi dei lipidi e nella detossificazione dei farmaci nelle cellule del fegato?`,o:[`Reticolo endoplasmatico liscio`,`Reticolo endoplasmatico rugoso`,`Lisosoma`,`Ribosoma`],a:0,e:`Il reticolo endoplasmatico liscio, privo di ribosomi, sintetizza lipidi e partecipa alla detossificazione. Quello rugoso è specializzato nella sintesi di proteine.`},
+{id:'bi_cell12',t:'bi_cell',l:3,q:`Secondo la teoria endosimbiontica, quali organuli derivano da batteri inglobati da una cellula ospite?`,o:[`Mitocondri e cloroplasti`,`Nucleo e apparato di Golgi`,`Lisosomi e perossisomi`,`Ribosomi e reticolo endoplasmatico`],a:0,e:`Mitocondri e cloroplasti hanno una doppia membrana, un proprio DNA circolare e ribosomi simili a quelli batterici: sono indizi della loro origine da batteri inglobati.`},
+{id:'bi_memb7',t:'bi_memb',l:1,q:`Quale tipo di molecola forma il doppio strato della membrana plasmatica?`,o:[`Fosfolipidi`,`Amido`,`Acidi nucleici`,`Cellulosa`],a:0,e:`La membrana è un doppio strato di fosfolipidi in cui sono inserite proteine. Amido e cellulosa sono polisaccaridi, gli acidi nucleici contengono l'informazione genetica.`},
+{id:'bi_memb8',t:'bi_memb',l:1,q:`Quale tipo di trasporto attraverso la membrana consuma ATP?`,o:[`Trasporto attivo`,`Diffusione semplice`,`Osmosi`,`Diffusione facilitata`],a:0,e:`Il trasporto attivo muove le sostanze contro gradiente e richiede energia. Diffusione semplice, diffusione facilitata e osmosi sono trasporti passivi.`},
+{id:'bi_memb9',t:'bi_memb',l:2,q:`Una cellula animale viene messa in una soluzione ipertonica. Cosa accade?`,o:[`L'acqua esce e la cellula si raggrinzisce`,`L'acqua entra e la cellula scoppia`,`Non c'è nessun cambiamento`,`La cellula diventa turgida`],a:0,e:`Ipertonica significa più soluti fuori che dentro: l'acqua esce per osmosi verso l'ambiente più concentrato e la cellula si raggrinzisce.`},
+{id:'bi_memb10',t:'bi_memb',l:2,q:`In che cosa consiste la diffusione facilitata?`,o:[`Passaggio secondo gradiente attraverso proteine di membrana, senza ATP`,`Passaggio contro gradiente con consumo di ATP`,`Passaggio di acqua solo attraverso il doppio strato lipidico`,`Ingresso di particelle solide tramite vescicole`],a:0,e:`Le molecole polari o cariche non attraversano il doppio strato lipidico da sole: usano canali o proteine trasportatrici, ma si muovono comunque secondo gradiente e senza ATP.`},
+{id:'bi_memb11',t:'bi_memb',l:3,q:`Perché molecole piccole e apolari come O₂ attraversano facilmente la membrana?`,o:[`Perché si sciolgono nella parte idrofobica del doppio strato`,`Perché usano la pompa Na⁺/K⁺`,`Perché sono cariche elettricamente`,`Perché passano solo con ATP`],a:0,e:`L'interno della membrana è fatto di code idrofobiche: le molecole apolari e piccole vi si sciolgono e diffondono secondo gradiente senza bisogno di proteine né di energia.`},
+{id:'bi_memb12',t:'bi_memb',l:3,q:`Che cos'è l'endocitosi?`,o:[`L'ingresso di materiale nella cellula tramite vescicole formate dalla membrana`,`L'uscita di materiale dalla cellula tramite vescicole`,`Il passaggio di ioni attraverso canali`,`La diffusione dei gas attraverso la membrana`],a:0,e:`Nell'endocitosi la membrana si invagina e si chiude attorno al materiale, formando una vescicola che entra nel citoplasma. Il processo opposto, l'uscita, è l'esocitosi.`},
+{id:'bi_dna7',t:'bi_dna',l:1,q:`Quale molecola trasporta l'informazione per costruire una proteina dal nucleo ai ribosomi?`,o:[`mRNA`,`tRNA`,`rRNA`,`ATP`],a:0,e:`L'RNA messaggero (mRNA) è la copia del gene che esce dal nucleo. Il tRNA porta gli amminoacidi, l'rRNA è un componente dei ribosomi.`},
+{id:'bi_dna8',t:'bi_dna',l:1,q:`Quale base azotata è presente nell'RNA ma non nel DNA?`,o:[`Uracile`,`Timina`,`Adenina`,`Citosina`],a:0,e:`Nell'RNA l'uracile prende il posto della timina e si appaia con l'adenina.`},
+{id:'bi_dna9',t:'bi_dna',l:2,q:`Quale enzima sintetizza l'mRNA durante la trascrizione?`,o:[`RNA polimerasi`,`DNA polimerasi`,`Elicasi`,`Ligasi`],a:0,e:`L'RNA polimerasi legge il filamento stampo e costruisce l'mRNA. La DNA polimerasi lavora invece nella replicazione del DNA.`},
+{id:'bi_dna10',t:'bi_dna',l:2,q:`Da quanti nucleotidi è formato un codone?`,o:[`3`,`2`,`4`,`1`],a:0,e:`Un codone è una tripletta di nucleotidi dell'mRNA e codifica un amminoacido (oppure un segnale di inizio o di stop).`},
+{id:'bi_dna11',t:'bi_dna',l:3,q:`Un filamento stampo di DNA è 3'-CAGTTA-5'. Qual è l'mRNA trascritto, scritto da 5' a 3'?`,o:[`5'-GUCAAU-3'`,`5'-GTCAAT-3'`,`5'-UAACUG-3'`,`5'-CAGUUA-3'`],a:0,e:`L'mRNA è complementare e antiparallelo allo stampo: C→G, A→U, G→C, T→A, T→A, A→U, lette da 3' a 5', e dà 5'-GUCAAU-3'. Nell'RNA non c'è timina. L'opzione 5'-UAACUG-3' è la stessa sequenza letta al contrario.`},
+{id:'bi_dna12',t:'bi_dna',l:3,q:`Una mutazione cambia una base, ma il nuovo codone codifica lo stesso amminoacido. Come si chiama questo tipo di mutazione?`,o:[`Silente`,`Non senso`,`Frameshift`,`Missenso`],a:0,e:`Il codice genetico è ridondante: più codoni possono indicare lo stesso amminoacido. Una mutazione silente non cambia la proteina; una missenso cambia l'amminoacido, una non senso crea uno stop, un frameshift sposta la lettura.`},
+{id:'bi_gen7',t:'bi_gen',l:1,q:`Che cos'è un allele?`,o:[`Una forma alternativa dello stesso gene`,`Un cromosoma`,`Una proteina`,`Una cellula riproduttiva`],a:0,e:`Gli alleli sono le diverse versioni di uno stesso gene, per esempio A e a. Un individuo diploide ne possiede due per ogni gene.`},
+{id:'bi_gen8',t:'bi_gen',l:1,q:`Un individuo con genotipo aa è…`,o:[`omozigote recessivo`,`eterozigote`,`omozigote dominante`,`aploide`],a:0,e:`Ha due alleli uguali e recessivi: è omozigote recessivo e mostra il carattere recessivo.`},
+{id:'bi_gen9',t:'bi_gen',l:2,q:`Incrocio Aa × Aa. Qual è la probabilità che un figlio sia AA?`,o:[`1/4`,`1/2`,`3/4`,`1/8`],a:0,e:`Ogni genitore dà A con probabilità 1/2: P(AA) = 1/2 · 1/2 = 1/4.`},
+{id:'bi_gen10',t:'bi_gen',l:2,q:`Un uomo daltonico (XᵈY, daltonismo recessivo legato a X) ha figli con una donna non portatrice (XᴰXᴰ). Come sono i figli?`,o:[`Figlie portatrici sane e figli sani`,`Tutti daltonici`,`Figlie daltoniche e figli sani`,`Metà dei figli daltonici`],a:0,e:`Le figlie ricevono dal padre l'X con l'allele d e dalla madre una Xᴰ: sono XᴰXᵈ, cioè portatrici sane. I figli maschi ricevono dal padre la Y e dalla madre una Xᴰ: sono XᴰY, sani.`},
+{id:'bi_gen11',t:'bi_gen',l:3,q:`Due genitori Aa × Aa hanno due figli. Qual è la probabilità che entrambi siano aa?`,o:[`1/16`,`1/8`,`1/4`,`1/2`],a:0,e:`Per ogni figlio P(aa) = 1/4. I due eventi sono indipendenti, quindi si moltiplicano: 1/4 · 1/4 = 1/16.`},
+{id:'bi_gen12',t:'bi_gen',l:3,q:`Un individuo con fenotipo dominante e genotipo ignoto viene incrociato con un aa. Tutti i figli (numerosi) mostrano il fenotipo dominante. Qual era con più probabilità il suo genotipo?`,o:[`AA`,`Aa`,`aa`,`Non si può stabilire in nessun caso`],a:0,e:`È un incrocio di prova. Se fosse Aa, metà dei figli sarebbero aa e mostrerebbero il fenotipo recessivo. Se tutti i figli sono dominanti, il genitore è con ottima probabilità AA.`},
+{id:'fi_cin7',t:'fi_cin',l:1,q:`Quale di queste è un'unità di misura della velocità nel SI?`,o:[`m/s`,`m/s²`,`km`,`N`],a:0,e:`La velocità è spazio diviso tempo: nel SI si misura in metri al secondo. I m/s² sono l'unità dell'accelerazione.`},
+{id:'fi_cin8',t:'fi_cin',l:1,q:`Un corpo si muove di moto rettilineo uniforme a 5 m/s. Quanta strada percorre in 10 s?`,o:[`50 m`,`2 m`,`15 m`,`0,5 m`],a:0,e:`s = v · t = 5 · 10 = 50 m.`},
+{id:'fi_cin9',t:'fi_cin',l:2,q:`Un corpo parte da fermo con accelerazione costante a = 3 m/s². Quanta strada ha percorso dopo 4 s?`,o:[`24 m`,`12 m`,`48 m`,`6 m`],a:0,e:`s = ½ · a · t² = ½ · 3 · 4² = 24 m. Attenzione al fattore ½ e al quadrato del tempo.`},
+{id:'fi_cin10',t:'fi_cin',l:2,q:`Un'auto passa da 10 m/s a 30 m/s in 5 s con accelerazione costante. Qual è l'accelerazione?`,o:[`4 m/s²`,`6 m/s²`,`2 m/s²`,`8 m/s²`],a:0,e:`a = Δv / Δt = (30 − 10) / 5 = 4 m/s².`},
+{id:'fi_cin11',t:'fi_cin',l:3,q:`Un sasso viene lanciato verso l'alto a 20 m/s (g = 10 m/s², senza attrito dell'aria). Dopo quanto tempo raggiunge il punto più alto?`,o:[`2 s`,`4 s`,`1 s`,`20 s`],a:0,e:`Nel punto più alto la velocità è nulla: 0 = v₀ − g · t, quindi t = 20 / 10 = 2 s. Per tornare a terra serviranno in tutto 4 s.`},
+{id:'fi_cin12',t:'fi_cin',l:3,q:`Un sasso viene lanciato verso l'alto a 20 m/s (g = 10 m/s², senza attrito dell'aria). Quale altezza massima raggiunge?`,o:[`20 m`,`40 m`,`10 m`,`200 m`],a:0,e:`h = v₀² / (2 · g) = 400 / 20 = 20 m. In alternativa: velocità media 10 m/s per 2 s di salita.`},
+{id:'fi_din7',t:'fi_din',l:1,q:`Qual è l'unità di misura della forza nel Sistema Internazionale?`,o:[`Newton`,`Joule`,`Watt`,`Pascal`],a:0,e:`La forza si misura in newton (N): 1 N = 1 kg · m/s². Il joule misura l'energia, il watt la potenza, il pascal la pressione.`},
+{id:'fi_din8',t:'fi_din',l:1,q:`Sulla Luna la massa di un astronauta rispetto alla Terra è…`,o:[`uguale`,`minore`,`maggiore`,`nulla`],a:0,e:`La massa è una proprietà del corpo e non cambia. Cambia il peso, perché l'accelerazione di gravità lunare è circa un sesto di quella terrestre.`},
+{id:'fi_din9',t:'fi_din',l:2,q:`Due forze di 3 N e 4 N agiscono sullo stesso corpo in direzioni perpendicolari. Quanto vale la risultante?`,o:[`5 N`,`7 N`,`1 N`,`12 N`],a:0,e:`Le forze si sommano come vettori: R = √(3² + 4²) = √25 = 5 N (terna pitagorica 3-4-5).`},
+{id:'fi_din10',t:'fi_din',l:2,q:`Una forza risultante di 30 N fa accelerare un corpo a 6 m/s². Qual è la sua massa?`,o:[`5 kg`,`180 kg`,`0,2 kg`,`24 kg`],a:0,e:`Secondo principio: m = F / a = 30 / 6 = 5 kg.`},
+{id:'fi_din11',t:'fi_din',l:3,q:`Un blocco di 10 kg è fermo su un tavolo orizzontale (g = 10 m/s²). Quanto vale la forza normale esercitata dal tavolo?`,o:[`100 N`,`10 N`,`0 N`,`1000 N`],a:0,e:`Il blocco è fermo: la risultante è nulla, quindi la normale equilibra il peso, N = m · g = 10 · 10 = 100 N.`},
+{id:'fi_din12',t:'fi_din',l:3,q:`Un blocco di 4 kg, fermo su un piano orizzontale senza attrito, è tirato da una forza orizzontale di 12 N. Che velocità ha dopo 2 s?`,o:[`6 m/s`,`3 m/s`,`24 m/s`,`1,5 m/s`],a:0,e:`a = F / m = 12 / 4 = 3 m/s². Partendo da fermo, v = a · t = 3 · 2 = 6 m/s.`},
+{id:'fi_en7',t:'fi_en',l:1,q:`Qual è l'unità di misura della potenza nel Sistema Internazionale?`,o:[`Watt`,`Joule`,`Newton`,`Volt`],a:0,e:`La potenza si misura in watt (W): 1 W = 1 J/s.`},
+{id:'fi_en8',t:'fi_en',l:1,q:`Come si chiama l'energia che un corpo possiede perché è in movimento?`,o:[`Energia cinetica`,`Energia potenziale`,`Energia chimica`,`Energia nucleare`],a:0,e:`L'energia cinetica dipende da massa e velocità: Ec = ½ · m · v².`},
+{id:'fi_en9',t:'fi_en',l:2,q:`Se si raddoppia la velocità di un corpo, la sua energia cinetica…`,o:[`diventa 4 volte più grande`,`raddoppia`,`dimezza`,`resta uguale`],a:0,e:`Ec = ½ · m · v² dipende dal quadrato della velocità: con 2v si ottiene ½ · m · (2v)² = 4 volte l'energia di partenza.`},
+{id:'fi_en10',t:'fi_en',l:2,q:`Un operaio solleva un carico di 20 kg all'altezza di 2 m (g = 10 m/s²). Quanto lavoro compie contro la gravità?`,o:[`400 J`,`40 J`,`200 J`,`4000 J`],a:0,e:`Il lavoro è uguale alla variazione di energia potenziale: m · g · h = 20 · 10 · 2 = 400 J.`},
+{id:'fi_en11',t:'fi_en',l:3,q:`Una pallina di 0,5 kg parte da ferma da un'altezza di 2 m su una rampa senza attrito (g = 10 m/s²). Qual è la sua energia cinetica alla base?`,o:[`10 J`,`20 J`,`5 J`,`1 J`],a:0,e:`Senza attrito l'energia potenziale iniziale diventa tutta cinetica: Ec = m · g · h = 0,5 · 10 · 2 = 10 J.`},
+{id:'fi_en12',t:'fi_en',l:3,q:`Una forza di 50 N forma un angolo di 60° con lo spostamento di 4 m. Quanto lavoro compie? (cos 60° = 0,5)`,o:[`100 J`,`200 J`,`173 J`,`50 J`],a:0,e:`L = F · s · cos θ = 50 · 4 · 0,5 = 100 J. Solo la componente della forza lungo lo spostamento compie lavoro.`},
+{id:'fi_el7',t:'fi_el',l:1,q:`Che grandezza si misura in ampere?`,o:[`L'intensità di corrente`,`La tensione`,`La resistenza`,`La potenza`],a:0,e:`L'ampere (A) è l'unità della corrente elettrica. La tensione si misura in volt, la resistenza in ohm, la potenza in watt.`},
+{id:'fi_el8',t:'fi_el',l:1,q:`In un circuito con resistori collegati in serie, la corrente è…`,o:[`la stessa in tutti i resistori`,`maggiore nel resistore più grande`,`divisa tra i resistori`,`nulla`],a:0,e:`In serie c'è un unico percorso, quindi la stessa corrente attraversa tutti i resistori. A cambiare è la tensione, che si divide tra di essi.`},
+{id:'fi_el9',t:'fi_el',l:2,q:`Un resistore da 5 Ω è collegato a una tensione di 10 V. Quanta corrente lo attraversa?`,o:[`2 A`,`50 A`,`0,5 A`,`5 A`],a:0,e:`Dalla legge di Ohm: I = V / R = 10 / 5 = 2 A.`},
+{id:'fi_el10',t:'fi_el',l:2,q:`Due resistori da 4 Ω e 6 Ω sono collegati in serie. Qual è la resistenza equivalente?`,o:[`10 Ω`,`2,4 Ω`,`24 Ω`,`5 Ω`],a:0,e:`In serie le resistenze si sommano: 4 + 6 = 10 Ω. Il valore 2,4 Ω sarebbe quello del parallelo.`},
+{id:'fi_el11',t:'fi_el',l:3,q:`Due resistori da 4 Ω e 12 Ω sono collegati in parallelo. Qual è la resistenza equivalente?`,o:[`3 Ω`,`16 Ω`,`8 Ω`,`6 Ω`],a:0,e:`Per due resistori in parallelo R = (R₁ · R₂) / (R₁ + R₂) = 48 / 16 = 3 Ω, minore della più piccola delle due.`},
+{id:'fi_el12',t:'fi_el',l:3,q:`Un fornello da 2000 W funziona per 30 minuti. Quanta energia elettrica consuma?`,o:[`1 kWh`,`2 kWh`,`60 kWh`,`0,5 kWh`],a:0,e:`E = P · t = 2 kW · 0,5 h = 1 kWh. Attenzione a convertire i minuti in ore e i watt in kilowatt.`},
+{id:'ch_materia1',t:'ch_materia',l:1,q:`Quale stato della materia ha volume proprio ma assume la forma del recipiente che lo contiene?`,o:[`Liquido`,`Solido`,`Aeriforme`,`Nessuno dei tre`],a:0,e:`Il liquido ha volume definito ma non forma propria. Il solido ha forma e volume propri, l'aeriforme non ha né l'una né l'altro.`},
+{id:'ch_materia2',t:'ch_materia',l:1,q:`Come si chiama il passaggio diretto da solido ad aeriforme?`,o:[`Sublimazione`,`Fusione`,`Evaporazione`,`Brinamento`],a:0,e:`Nella sublimazione (per esempio la naftalina o il ghiaccio secco) il solido diventa gas senza passare dal liquido. Il passaggio opposto è il brinamento.`},
+{id:'ch_materia3',t:'ch_materia',l:2,q:`Quale di questi è un miscuglio omogeneo?`,o:[`Acqua con sale sciolto`,`Acqua e olio`,`Acqua e sabbia`,`Ghiaia e sabbia`],a:0,e:`In un miscuglio omogeneo si vede una sola fase: il sale sciolto nell'acqua non si distingue. Negli altri esempi le fasi restano visibili.`},
+{id:'ch_materia4',t:'ch_materia',l:2,q:`Quale metodo permette di ottenere acqua pura da acqua e sale sciolto?`,o:[`Distillazione`,`Filtrazione`,`Decantazione`,`Separazione magnetica`],a:0,e:`Con la distillazione l'acqua evapora e poi si condensa, mentre il sale resta nel recipiente. La filtrazione separa solo solidi non sciolti, la decantazione liquidi non miscibili.`},
+{id:'ch_materia5',t:'ch_materia',l:3,q:`Durante la fusione del ghiaccio a pressione atmosferica, finché è presente ghiaccio la temperatura…`,o:[`resta costante a 0 °C`,`aumenta lentamente`,`diminuisce`,`sale subito a 100 °C`],a:0,e:`Durante un passaggio di stato il calore assorbito serve a rompere i legami tra le molecole (calore latente), non ad aumentare la temperatura.`},
+{id:'ch_materia6',t:'ch_materia',l:3,q:`Quale di queste è un composto?`,o:[`Acqua (H₂O)`,`Aria`,`Ossigeno (O₂)`,`Latte`],a:0,e:`Un composto è una sostanza pura formata da elementi diversi in proporzioni fisse. O₂ è una sostanza pura ma un elemento, mentre aria e latte sono miscugli.`},
+{id:'ch_reaz1',t:'ch_reaz',l:1,q:`Quale legge afferma che in una reazione la massa dei reagenti è uguale alla massa dei prodotti?`,o:[`Conservazione della massa`,`Principio di Pauli`,`Legge di Ohm`,`Legge di Boyle`],a:0,e:`È la legge di conservazione della massa (Lavoisier): gli atomi si riarrangiano ma non si creano né si distruggono.`},
+{id:'ch_reaz2',t:'ch_reaz',l:1,q:`Nell'equazione 2 H₂ + O₂ → 2 H₂O, quali sono i reagenti?`,o:[`H₂ e O₂`,`H₂O`,`Solo O₂`,`H₂O e O₂`],a:0,e:`I reagenti stanno a sinistra della freccia: idrogeno e ossigeno. L'acqua, a destra, è il prodotto.`},
+{id:'ch_reaz3',t:'ch_reaz',l:2,q:`Quale coefficiente va davanti a O₂ per bilanciare CH₄ + ? O₂ → CO₂ + 2 H₂O?`,o:[`2`,`1`,`3`,`4`],a:0,e:`A destra ci sono 4 atomi di ossigeno (2 in CO₂ e 2 nelle due H₂O): servono 2 molecole di O₂.`},
+{id:'ch_reaz4',t:'ch_reaz',l:2,q:`Come si chiama una reazione del tipo A + B → AB?`,o:[`Sintesi`,`Decomposizione`,`Scambio semplice`,`Combustione`],a:0,e:`Due sostanze si uniscono in una sola: è una reazione di sintesi. Nella decomposizione avviene il contrario (AB → A + B).`},
+{id:'ch_reaz5',t:'ch_reaz',l:3,q:`Bilancia Al + O₂ → Al₂O₃. Quali sono i coefficienti, nell'ordine?`,o:[`4, 3, 2`,`2, 3, 1`,`2, 1, 2`,`1, 1, 1`],a:0,e:`4 Al + 3 O₂ → 2 Al₂O₃: a sinistra e a destra ci sono 4 atomi di alluminio e 6 di ossigeno.`},
+{id:'ch_reaz6',t:'ch_reaz',l:3,q:`La quantità teorica di prodotto è 40 g, ma se ne ottengono 30 g. Qual è la resa percentuale?`,o:[`75%`,`133%`,`25%`,`30%`],a:0,e:`Resa = (quantità ottenuta / quantità teorica) · 100 = 30 / 40 · 100 = 75%.`},
+{id:'ch_sol1',t:'ch_sol',l:1,q:`In una soluzione di zucchero in acqua, qual è il solvente?`,o:[`Acqua`,`Zucchero`,`Entrambi`,`Nessuno dei due`],a:0,e:`Il solvente è il componente in quantità maggiore, che scioglie l'altro. Lo zucchero è il soluto.`},
+{id:'ch_sol2',t:'ch_sol',l:1,q:`Quale unità si usa per la molarità?`,o:[`mol/L`,`g/mol`,`mol/kg`,`L/mol`],a:0,e:`La molarità è il numero di moli di soluto per litro di soluzione. Le mol/kg misurano invece la molalità.`},
+{id:'ch_sol3',t:'ch_sol',l:2,q:`Quante moli di soluto sono presenti in 200 mL di una soluzione 0,5 M?`,o:[`0,1 mol`,`0,25 mol`,`100 mol`,`2,5 mol`],a:0,e:`n = M · V = 0,5 mol/L · 0,2 L = 0,1 mol. Il volume va convertito in litri.`},
+{id:'ch_sol4',t:'ch_sol',l:2,q:`Si sciolgono 10 g di sale in 90 g di acqua. Qual è la concentrazione percentuale m/m?`,o:[`10%`,`11%`,`9%`,`90%`],a:0,e:`La massa della soluzione è 10 + 90 = 100 g, quindi % m/m = 10 / 100 · 100 = 10%. Il solvente da solo (90 g) non è il denominatore.`},
+{id:'ch_sol5',t:'ch_sol',l:3,q:`Si diluiscono 50 mL di HCl 2 M portando il volume finale a 500 mL. Qual è la nuova molarità?`,o:[`0,2 M`,`0,02 M`,`2 M`,`20 M`],a:0,e:`M₁V₁ = M₂V₂, quindi M₂ = 2 · 50 / 500 = 0,2 M. Il volume è decuplicato, la concentrazione è diventata un decimo.`},
+{id:'ch_sol6',t:'ch_sol',l:3,q:`Quanti mL di NaOH 2 M servono per preparare 400 mL di soluzione 0,5 M per diluizione?`,o:[`100 mL`,`200 mL`,`50 mL`,`800 mL`],a:0,e:`V₁ = M₂ · V₂ / M₁ = 0,5 · 400 / 2 = 100 mL. Si prelevano 100 mL e si porta a volume con acqua.`},
+{id:'ch_neut1',t:'ch_neut',l:1,q:`Che cosa si ottiene dalla reazione di neutralizzazione tra un acido e una base?`,o:[`Un sale e acqua`,`Solo un sale`,`Un altro acido`,`Un gas e un metallo`],a:0,e:`Per esempio HCl + NaOH → NaCl + H₂O: il sale (NaCl) deriva dal catione della base e dall'anione dell'acido.`},
+{id:'ch_neut2',t:'ch_neut',l:1,q:`Quale ione è responsabile del comportamento acido di una soluzione?`,o:[`H⁺`,`OH⁻`,`Na⁺`,`Cl⁻`],a:0,e:`Gli acidi liberano ioni H⁺ in acqua, le basi liberano ioni OH⁻.`},
+{id:'ch_neut3',t:'ch_neut',l:2,q:`Quanti mL di NaOH 0,1 M servono per neutralizzare 20 mL di HCl 0,1 M?`,o:[`20 mL`,`10 mL`,`40 mL`,`2 mL`],a:0,e:`Acido e base sono monoprotici e hanno la stessa molarità: le moli sono uguali quando i volumi sono uguali.`},
+{id:'ch_neut4',t:'ch_neut',l:2,q:`Qual è il pH al punto di equivalenza tra un acido forte e una base forte a 25 °C?`,o:[`7`,`Maggiore di 7`,`Minore di 7`,`14`],a:0,e:`Il sale formato da acido forte e base forte non reagisce con l'acqua: la soluzione resta neutra, pH 7.`},
+{id:'ch_neut5',t:'ch_neut',l:3,q:`Quanti mL di NaOH 0,2 M servono per neutralizzare 10 mL di H₂SO₄ 0,1 M?`,o:[`10 mL`,`5 mL`,`20 mL`,`1 mL`],a:0,e:`L'H₂SO₄ libera 2 H⁺: 0,010 L · 0,1 M · 2 = 0,002 mol di H⁺. Servono 0,002 mol di OH⁻, cioè 0,002 / 0,2 = 0,010 L = 10 mL.`},
+{id:'ch_neut6',t:'ch_neut',l:3,q:`Per titolare 25 mL di HCl servono 30 mL di NaOH 0,1 M. Qual è la molarità dell'HCl?`,o:[`0,12 M`,`0,083 M`,`0,3 M`,`0,03 M`],a:0,e:`Le moli di NaOH sono 0,030 · 0,1 = 0,003 mol, uguali a quelle di HCl. M = 0,003 / 0,025 = 0,12 M.`},
+{id:'ch_org1',t:'ch_org',l:1,q:`Quanti legami forma di norma un atomo di carbonio?`,o:[`4`,`2`,`3`,`6`],a:0,e:`Il carbonio ha 4 elettroni di valenza e forma 4 legami covalenti.`},
+{id:'ch_org2',t:'ch_org',l:1,q:`Quale gruppo funzionale caratterizza gli alcoli?`,o:[`–OH`,`–COOH`,`–NH₂`,`–CHO`],a:0,e:`Gli alcoli contengono il gruppo ossidrile –OH legato a un carbonio. –COOH è degli acidi carbossilici, –NH₂ delle ammine, –CHO delle aldeidi.`},
+{id:'ch_org3',t:'ch_org',l:2,q:`Qual è la formula generale degli alcani?`,o:[`CₙH₂ₙ₊₂`,`CₙH₂ₙ`,`CₙH₂ₙ₋₂`,`CₙHₙ`],a:0,e:`Gli alcani hanno solo legami singoli: per esempio CH₄ (n = 1) e C₂H₆ (n = 2). Gli alcheni seguono CₙH₂ₙ.`},
+{id:'ch_org4',t:'ch_org',l:2,q:`Quale gruppo funzionale è tipico degli acidi carbossilici?`,o:[`–COOH`,`–CHO`,`–OH`,`–NH₂`],a:0,e:`Il gruppo carbossilico –COOH rilascia H⁺ ed è la causa dell'acidità, per esempio nell'acido acetico.`},
+{id:'ch_org5',t:'ch_org',l:3,q:`Che cosa sono due isomeri?`,o:[`Composti con la stessa formula molecolare ma struttura diversa`,`Composti con la stessa struttura ma formula diversa`,`Atomi dello stesso elemento con diverso numero di neutroni`,`Composti con lo stesso gruppo funzionale`],a:0,e:`Per esempio butano e 2-metilpropano hanno entrambi formula C₄H₁₀ ma atomi disposti diversamente. Gli atomi con diversi neutroni sono isotopi.`},
+{id:'ch_org6',t:'ch_org',l:3,q:`Quale di questi composti è un chetone?`,o:[`CH₃–CO–CH₃ (acetone)`,`CH₃CHO (acetaldeide)`,`CH₃COOH (acido acetico)`,`CH₃CH₂OH (etanolo)`],a:0,e:`In un chetone il gruppo C=O è dentro la catena, legato a due atomi di carbonio. Nell'aldeide il C=O è a un'estremità, con un H.`},
+{id:'bi_ciclo1',t:'bi_ciclo',l:1,q:`Quante cellule figlie, geneticamente identiche alla madre, produce una mitosi?`,o:[`2`,`4`,`1`,`8`],a:0,e:`Una mitosi dà 2 cellule figlie con lo stesso patrimonio genetico della cellula madre. Le 4 cellule sono invece il risultato della meiosi.`},
+{id:'bi_ciclo2',t:'bi_ciclo',l:1,q:`In quale fase dell'interfase viene replicato il DNA?`,o:[`Fase S`,`Fase G1`,`Fase G2`,`Metafase`],a:0,e:`La S sta per sintesi: in questa fase il DNA viene duplicato. La metafase non fa parte dell'interfase.`},
+{id:'bi_ciclo3',t:'bi_ciclo',l:2,q:`In quale fase della mitosi i cromosomi si allineano al centro della cellula?`,o:[`Metafase`,`Profase`,`Anafase`,`Telofase`],a:0,e:`In metafase i cromosomi si dispongono sul piano equatoriale. In anafase le cromatidi fratelle si separano.`},
+{id:'bi_ciclo4',t:'bi_ciclo',l:2,q:`Quante cellule, e di che tipo, si ottengono alla fine della meiosi da una cellula diploide?`,o:[`4 cellule aploidi`,`2 cellule diploidi`,`2 cellule aploidi`,`4 cellule diploidi`],a:0,e:`La meiosi comprende due divisioni dopo una sola replicazione del DNA: 4 cellule con la metà dei cromosomi (n).`},
+{id:'bi_ciclo5',t:'bi_ciclo',l:3,q:`Una cellula somatica umana ha 46 cromosomi. Quanti ne ha un gamete?`,o:[`23`,`46`,`92`,`12`],a:0,e:`I gameti sono aploidi e hanno la metà dei cromosomi della cellula somatica: 46 / 2 = 23. Con la fecondazione si ricostituiscono i 46.`},
+{id:'bi_ciclo6',t:'bi_ciclo',l:3,q:`Quale fenomeno della meiosi I aumenta la variabilità genetica, scambiando tratti tra cromosomi omologhi?`,o:[`Crossing-over`,`Replicazione`,`Citodieresi`,`Trascrizione`],a:0,e:`Nel crossing-over i cromosomi omologhi si scambiano segmenti: i gameti risultanti hanno combinazioni di alleli nuove.`},
+{id:'bi_biomol1',t:'bi_biomol',l:1,q:`Quale biomolecola è la principale fonte di energia immediata per le cellule?`,o:[`Glucosio`,`Colesterolo`,`DNA`,`Cellulosa`],a:0,e:`Il glucosio viene demolito nella respirazione cellulare per produrre ATP. La cellulosa è strutturale, il DNA contiene l'informazione genetica.`},
+{id:'bi_biomol2',t:'bi_biomol',l:1,q:`Di che cosa sono polimeri le proteine?`,o:[`Amminoacidi`,`Nucleotidi`,`Monosaccaridi`,`Acidi grassi`],a:0,e:`Le proteine sono catene di amminoacidi. I nucleotidi formano gli acidi nucleici, i monosaccaridi i polisaccaridi.`},
+{id:'bi_biomol3',t:'bi_biomol',l:2,q:`Quale polisaccaride è la riserva di glucosio negli animali?`,o:[`Glicogeno`,`Amido`,`Cellulosa`,`Chitina`],a:0,e:`Il glicogeno si accumula nel fegato e nei muscoli. L'amido è la riserva delle piante.`},
+{id:'bi_biomol4',t:'bi_biomol',l:2,q:`Quale lipide è il componente principale delle membrane cellulari?`,o:[`Fosfolipidi`,`Trigliceridi`,`Steroidi`,`Cere`],a:0,e:`I fosfolipidi hanno una testa idrofila e due code idrofobiche e formano il doppio strato. I trigliceridi sono riserve di energia.`},
+{id:'bi_biomol5',t:'bi_biomol',l:3,q:`Come si chiama la reazione che unisce due monomeri liberando una molecola d'acqua?`,o:[`Condensazione`,`Idrolisi`,`Ossidazione`,`Neutralizzazione`],a:0,e:`Nella condensazione si forma un legame e si libera acqua. L'idrolisi è la reazione inversa: l'acqua viene consumata per spezzare il legame.`},
+{id:'bi_biomol6',t:'bi_biomol',l:3,q:`Quale legame unisce due amminoacidi in una proteina?`,o:[`Legame peptidico`,`Legame glicosidico`,`Legame estere`,`Legame fosfodiesterico`],a:0,e:`Il legame peptidico unisce il gruppo carbossilico di un amminoacido al gruppo amminico del successivo. Il legame glicosidico lega gli zuccheri, il fosfodiesterico i nucleotidi.`},
+{id:'bi_prot1',t:'bi_prot',l:1,q:`Quanti amminoacidi diversi compongono le proteine?`,o:[`20`,`4`,`64`,`10`],a:0,e:`Le proteine sono costruite combinando 20 amminoacidi. I numeri 4 e 64 ricordano le basi del DNA e i codoni.`},
+{id:'bi_prot2',t:'bi_prot',l:1,q:`Che cosa sono gli enzimi?`,o:[`Catalizzatori biologici`,`Zuccheri di riserva`,`Lipidi di membrana`,`Acidi nucleici`],a:0,e:`Gli enzimi accelerano le reazioni della cellula senza consumarsi; quasi tutti sono proteine.`},
+{id:'bi_prot3',t:'bi_prot',l:2,q:`Che cosa fa un enzima in una reazione?`,o:[`Abbassa l'energia di attivazione`,`Aumenta l'energia dei prodotti`,`Si consuma completamente`,`Sposta l'equilibrio verso i prodotti`],a:0,e:`L'enzima rende la reazione più veloce abbassando l'energia di attivazione. Non si consuma e non cambia l'equilibrio, ma solo la rapidità con cui viene raggiunto.`},
+{id:'bi_prot4',t:'bi_prot',l:2,q:`Che cos'è la struttura primaria di una proteina?`,o:[`La sequenza degli amminoacidi`,`L'α-elica`,`Il ripiegamento tridimensionale`,`L'unione di più catene`],a:0,e:`La struttura primaria è l'ordine degli amminoacidi lungo la catena, e determina tutti i livelli successivi.`},
+{id:'bi_prot5',t:'bi_prot',l:3,q:`Che cosa succede a un enzima se la temperatura supera di molto il suo valore ottimale?`,o:[`Si denatura e perde attività`,`Lavora sempre più velocemente`,`Cambia substrato`,`Si trasforma in un lipide`],a:0,e:`Il calore eccessivo rompe i legami che mantengono la forma tridimensionale: il sito attivo si deforma e l'enzima non funziona più.`},
+{id:'bi_prot6',t:'bi_prot',l:3,q:`Quale livello di struttura delle proteine, stabilizzato da legami a idrogeno, comprende α-elica e foglietto β?`,o:[`Secondaria`,`Primaria`,`Terziaria`,`Quaternaria`],a:0,e:`α-elica e foglietto β sono i motivi della struttura secondaria. La terziaria è il ripiegamento complessivo, la quaternaria l'unione di più catene.`},
+{id:'bi_metab1',t:'bi_metab',l:1,q:`Quale molecola è la «moneta energetica» della cellula?`,o:[`ATP`,`DNA`,`Glucosio`,`Colesterolo`],a:0,e:`L'ATP immagazzina energia nei suoi legami fosfato e la rilascia quando diventa ADP + Pi.`},
+{id:'bi_metab2',t:'bi_metab',l:1,q:`Dove avviene la glicolisi?`,o:[`Nel citoplasma`,`Nel nucleo`,`Nella matrice mitocondriale`,`Nei cloroplasti`],a:0,e:`La glicolisi si svolge nel citoplasma e non richiede ossigeno. Il ciclo di Krebs avviene invece nella matrice mitocondriale.`},
+{id:'bi_metab3',t:'bi_metab',l:2,q:`Quale tappa produce la maggior parte dell'ATP nella respirazione cellulare?`,o:[`La fosforilazione ossidativa`,`La glicolisi`,`La fermentazione`,`Il ciclo di Calvin`],a:0,e:`La fosforilazione ossidativa, sulla membrana mitocondriale interna, produce circa 26-28 dei 30-32 ATP per glucosio. Il ciclo di Calvin appartiene alla fotosintesi.`},
+{id:'bi_metab4',t:'bi_metab',l:2,q:`Quale equazione riassume la respirazione cellulare aerobica?`,o:[`Glucosio + O₂ → CO₂ + H₂O + ATP`,`CO₂ + H₂O + luce → glucosio + O₂`,`Glucosio → lattato`,`ATP → glucosio + O₂`],a:0,e:`Il glucosio viene ossidato dall'ossigeno e produce CO₂, acqua ed energia (ATP). La seconda opzione è la fotosintesi, la terza la fermentazione lattica.`},
+{id:'bi_metab5',t:'bi_metab',l:3,q:`Quanti ATP netti produce la sola glicolisi a partire da una molecola di glucosio?`,o:[`2`,`4`,`30`,`10`],a:0,e:`La glicolisi consuma 2 ATP e ne produce 4: il guadagno netto è 2 ATP. Il resto dell'ATP della respirazione viene prodotto nei mitocondri.`},
+{id:'bi_metab6',t:'bi_metab',l:3,q:`Dove avviene il ciclo di Calvin nelle cellule vegetali?`,o:[`Nello stroma del cloroplasto`,`Nei tilacoidi`,`Nei mitocondri`,`Nel nucleo`],a:0,e:`Il ciclo di Calvin fissa la CO₂ in zuccheri e avviene nello stroma. La fase luminosa si svolge invece sulle membrane dei tilacoidi.`},
+{id:'bi_gapp1',t:'bi_gapp',l:1,q:`Qual è il genotipo di una persona con gruppo sanguigno 0?`,o:[`ii`,`Iᴬi`,`Iᴬ Iᴮ`,`Iᴮi`],a:0,e:`L'allele i è recessivo: il gruppo 0 compare solo nell'omozigote ii. Iᴬi dà il gruppo A, Iᴮi il gruppo B, Iᴬ Iᴮ il gruppo AB.`},
+{id:'bi_gapp2',t:'bi_gapp',l:1,q:`Nella codominanza, un individuo eterozigote…`,o:[`mostra entrambi i caratteri`,`mostra solo il carattere dominante`,`mostra un carattere intermedio`,`non mostra nessuno dei due caratteri`],a:0,e:`Con la codominanza i due alleli si esprimono insieme, come nel gruppo AB. Il carattere intermedio è tipico invece della dominanza incompleta.`},
+{id:'bi_gapp3',t:'bi_gapp',l:2,q:`Un genitore ha gruppo A (Iᴬi) e l'altro gruppo B (Iᴮi). Quali gruppi possono avere i figli?`,o:[`A, B, AB e 0`,`Solo AB`,`Solo A e B`,`Solo 0`],a:0,e:`I gameti sono Iᴬ o i da un genitore, Iᴮ o i dall'altro: le combinazioni Iᴬ Iᴮ, Iᴬi, Iᴮi e ii danno tutti e quattro i gruppi, ciascuno con probabilità 1/4.`},
+{id:'bi_gapp4',t:'bi_gapp',l:2,q:`Nel bocca di leone la dominanza è incompleta. Incrociando una pianta a fiori rossi (RR) con una a fiori bianchi (WW), come sono i fiori dei figli?`,o:[`Rosa`,`Rossi`,`Bianchi`,`Metà rossi e metà bianchi`],a:0,e:`Tutti i figli sono RW. Con dominanza incompleta l'eterozigote ha un fenotipo intermedio: il rosa.`},
+{id:'bi_gapp5',t:'bi_gapp',l:3,q:`L'emofilia è una malattia recessiva legata a X. Una donna portatrice sana (XᴴXʰ) e un uomo sano (XᴴY) hanno un figlio maschio. Qual è la probabilità che sia emofilico?`,o:[`1/2`,`1/4`,`0`,`1`],a:0,e:`Il figlio maschio riceve la Y dal padre e una delle due X dalla madre: con probabilità 1/2 riceve Xʰ ed è malato.`},
+{id:'bi_gapp6',t:'bi_gapp',l:3,q:`Due genitori sani hanno una figlia affetta da una malattia. Quale tipo di trasmissione è più probabile?`,o:[`Autosomica recessiva`,`Autosomica dominante`,`Dominante legata a X`,`Mitocondriale`],a:0,e:`Genitori sani possono generare un figlio malato solo se sono portatori di un allele recessivo. Se fosse recessiva legata a X, una figlia malata richiederebbe un padre malato.`},
+{id:'fi_gran1',t:'fi_gran',l:1,q:`Qual è l'unità di misura della massa nel Sistema Internazionale?`,o:[`Chilogrammo`,`Grammo`,`Newton`,`Libbra`],a:0,e:`Nel SI l'unità di massa è il chilogrammo (kg). Il newton misura la forza.`},
+{id:'fi_gran2',t:'fi_gran',l:1,q:`Quanti metri sono 2,5 km?`,o:[`2500 m`,`250 m`,`25 m`,`25000 m`],a:0,e:`1 km = 1000 m, quindi 2,5 km = 2,5 · 1000 = 2500 m.`},
+{id:'fi_gran3',t:'fi_gran',l:2,q:`A quanti m/s corrispondono 54 km/h?`,o:[`15 m/s`,`54 m/s`,`194 m/s`,`5,4 m/s`],a:0,e:`Si divide per 3,6: 54 / 3,6 = 15 m/s. Il valore 194 si ottiene moltiplicando per 3,6 invece di dividere.`},
+{id:'fi_gran4',t:'fi_gran',l:2,q:`Quanti litri sono contenuti in 2 m³?`,o:[`2000 L`,`200 L`,`20 L`,`0,002 L`],a:0,e:`1 m³ = 1000 dm³ = 1000 L, quindi 2 m³ = 2000 L.`},
+{id:'fi_gran5',t:'fi_gran',l:3,q:`A quanti cm² corrispondono 3 m²?`,o:[`30000 cm²`,`300 cm²`,`3000 cm²`,`300000 cm²`],a:0,e:`1 m = 100 cm, quindi 1 m² = 100² = 10⁴ cm². Allora 3 m² = 3 · 10⁴ = 30000 cm².`},
+{id:'fi_gran6',t:'fi_gran',l:3,q:`Quale unità equivale a kg · m/s²?`,o:[`Newton`,`Joule`,`Watt`,`Pascal`],a:0,e:`Dal secondo principio F = m · a: kg · m/s² = N. Il joule è N · m, il pascal N/m², il watt J/s.`},
+{id:'fi_vet1',t:'fi_vet',l:1,q:`Quale di queste grandezze è un vettore?`,o:[`Velocità`,`Massa`,`Temperatura`,`Tempo`],a:0,e:`La velocità ha modulo, direzione e verso. Massa, temperatura e tempo sono scalari.`},
+{id:'fi_vet2',t:'fi_vet',l:1,q:`Quale di queste grandezze è scalare?`,o:[`Energia`,`Forza`,`Spostamento`,`Accelerazione`],a:0,e:`L'energia è descritta da un solo numero (con unità). Forza, spostamento e accelerazione sono vettori.`},
+{id:'fi_vet3',t:'fi_vet',l:2,q:`Due forze di 5 N e 3 N agiscono sulla stessa retta con versi opposti. Quanto vale la risultante?`,o:[`2 N`,`8 N`,`15 N`,`4 N`],a:0,e:`Con versi opposti i moduli si sottraggono: 5 − 3 = 2 N, nel verso della forza maggiore.`},
+{id:'fi_vet4',t:'fi_vet',l:2,q:`Due vettori perpendicolari hanno moduli 6 e 8. Quanto vale il modulo della loro somma?`,o:[`10`,`14`,`2`,`48`],a:0,e:`Per vettori perpendicolari R = √(6² + 8²) = √100 = 10. Il valore 14 è la somma dei moduli, valida solo per vettori concordi sulla stessa retta.`},
+{id:'fi_vet5',t:'fi_vet',l:3,q:`Un vettore di modulo 10 forma un angolo di 30° con l'asse x. Quanto vale la sua componente lungo y? (sin 30° = 0,5)`,o:[`5`,`8,7`,`10`,`0,5`],a:0,e:`v_y = v · sin θ = 10 · 0,5 = 5. Il valore 8,7 è la componente lungo x (10 · cos 30°).`},
+{id:'fi_vet6',t:'fi_vet',l:3,q:`Se un vettore viene moltiplicato per −2, il risultato è un vettore…`,o:[`con modulo doppio e verso opposto`,`con modulo doppio e stesso verso`,`con modulo dimezzato e verso opposto`,`con lo stesso modulo e verso opposto`],a:0,e:`Il fattore 2 raddoppia il modulo, il segno meno inverte il verso.`},
+{id:'fi_flu1',t:'fi_flu',l:1,q:`Qual è l'unità di misura della pressione nel Sistema Internazionale?`,o:[`Pascal`,`Newton`,`Joule`,`Watt`],a:0,e:`La pressione si misura in pascal (Pa): 1 Pa = 1 N/m².`},
+{id:'fi_flu2',t:'fi_flu',l:1,q:`Quale formula definisce la densità?`,o:[`d = m / V`,`d = V / m`,`d = m · V`,`d = F / S`],a:0,e:`La densità è la massa per unità di volume: d = m / V. F / S è la pressione.`},
+{id:'fi_flu3',t:'fi_flu',l:2,q:`Una forza di 200 N agisce perpendicolarmente su una superficie di 0,5 m². Qual è la pressione?`,o:[`400 Pa`,`100 Pa`,`0,0025 Pa`,`200 Pa`],a:0,e:`p = F / S = 200 / 0,5 = 400 Pa.`},
+{id:'fi_flu4',t:'fi_flu',l:2,q:`Qual è la pressione dovuta alla sola acqua a 5 m di profondità? (d = 1000 kg/m³, g = 10 m/s²)`,o:[`50000 Pa`,`5000 Pa`,`500 Pa`,`500000 Pa`],a:0,e:`Legge di Stevino: p = d · g · h = 1000 · 10 · 5 = 50000 Pa. A questo valore si aggiunge la pressione atmosferica se si vuole la pressione totale.`},
+{id:'fi_flu5',t:'fi_flu',l:3,q:`Un cubo di 1 dm³ è completamente immerso in acqua (d = 1000 kg/m³, g = 10 m/s²). Quanto vale la spinta di Archimede?`,o:[`10 N`,`1 N`,`100 N`,`1000 N`],a:0,e:`1 dm³ = 10⁻³ m³. F = d · V · g = 1000 · 10⁻³ · 10 = 10 N, cioè il peso di 1 kg di acqua.`},
+{id:'fi_flu6',t:'fi_flu',l:3,q:`In un torchio idraulico i pistoni hanno superfici di 20 cm² e 200 cm². Con una forza di 50 N sul pistone piccolo, quale forza si ottiene sul grande?`,o:[`500 N`,`5 N`,`50 N`,`1000 N`],a:0,e:`Per il principio di Pascal la pressione è la stessa: F₂ = F₁ · S₂ / S₁ = 50 · 200 / 20 = 500 N.`},
+{id:'fi_cal1',t:'fi_cal',l:1,q:`A quanti kelvin corrispondono 0 °C?`,o:[`273,15 K`,`0 K`,`100 K`,`−273,15 K`],a:0,e:`T[K] = T[°C] + 273,15, quindi 0 °C = 273,15 K. Lo zero assoluto (0 K) corrisponde a −273,15 °C.`},
+{id:'fi_cal2',t:'fi_cal',l:1,q:`Come arriva il calore del Sole sulla Terra attraverso lo spazio vuoto?`,o:[`Per irraggiamento`,`Per conduzione`,`Per convezione`,`Per evaporazione`],a:0,e:`Conduzione e convezione richiedono un mezzo materiale. L'irraggiamento avviene con onde elettromagnetiche e funziona anche nel vuoto.`},
+{id:'fi_cal3',t:'fi_cal',l:2,q:`Quanto calore serve per scaldare di 10 K una massa di 2 kg di una sostanza con calore specifico 500 J/(kg · K)?`,o:[`10000 J`,`1000 J`,`100 J`,`250 J`],a:0,e:`Q = m · c · ΔT = 2 · 500 · 10 = 10000 J.`},
+{id:'fi_cal4',t:'fi_cal',l:2,q:`Perché durante l'ebollizione la temperatura dell'acqua resta a 100 °C anche se si continua a fornire calore?`,o:[`Il calore fornito serve per il passaggio di stato`,`L'acqua non assorbe più calore`,`Il termometro si blocca`,`Il calore viene disperso del tutto`],a:0,e:`Durante il passaggio di stato il calore (calore latente) serve a separare le molecole del liquido e non ad aumentare la temperatura.`},
+{id:'fi_cal5',t:'fi_cal',l:3,q:`Un sistema assorbe 500 J di calore e compie un lavoro di 200 J. Di quanto varia la sua energia interna?`,o:[`+300 J`,`+700 J`,`−300 J`,`+100 J`],a:0,e:`Primo principio: ΔU = Q − L = 500 − 200 = +300 J.`},
+{id:'fi_cal6',t:'fi_cal',l:3,q:`Si mescolano 1 kg di acqua a 80 °C e 1 kg di acqua a 20 °C, senza dispersioni. Quale temperatura finale si ottiene?`,o:[`50 °C`,`100 °C`,`60 °C`,`40 °C`],a:0,e:`Massa e calore specifico sono uguali, quindi la temperatura finale è la media: (80 + 20) / 2 = 50 °C. Il calore ceduto dall'acqua calda è uguale a quello assorbito dalla fredda.`}
 ];
 
 /* ---------- Materiale di studio ---------- */
@@ -463,7 +682,63 @@ fi_en:{
 fi_el:{
  sum:[`**Corrente** I (ampere), **tensione** V (volt), **resistenza** R (ohm).`,`**Legge di Ohm**: V = R · I.`,`**Serie**: stessa corrente, R = R₁ + R₂; le tensioni si sommano.`,`**Parallelo**: stessa tensione, 1/R = 1/R₁ + 1/R₂; le correnti si sommano.`,`**Potenza** elettrica: P = V · I = R · I². L'energia è P · t.`],
  ex:[{t:`Resistori in serie`,d:`10 Ω + 10 Ω = 20 Ω. Con 20 V la corrente è 1 A.`},{t:`Resistori in parallelo`,d:`Due resistori da 10 Ω in parallelo valgono 5 Ω. Con 10 V la corrente totale è 2 A.`}],
- map:{centro:`Circuiti elettrici`,rami:[{t:`Legge di Ohm`,figli:[`V = R · I`,`Unità: V, A, Ω`]},{t:`Serie`,figli:[`Stessa corrente`,`R = R₁ + R₂`]},{t:`Parallelo`,figli:[`Stessa tensione`,`1/R = 1/R₁ + 1/R₂`]},{t:`Potenza`,figli:[`P = V · I`,`Effetto Joule: calore`]}]}}
+ map:{centro:`Circuiti elettrici`,rami:[{t:`Legge di Ohm`,figli:[`V = R · I`,`Unità: V, A, Ω`]},{t:`Serie`,figli:[`Stessa corrente`,`R = R₁ + R₂`]},{t:`Parallelo`,figli:[`Stessa tensione`,`1/R = 1/R₁ + 1/R₂`]},{t:`Potenza`,figli:[`P = V · I`,`Effetto Joule: calore`]}]}},
+ch_materia:{
+ sum:[`La materia è tutto ciò che ha massa e occupa spazio. Gli stati di aggregazione sono **solido**, **liquido** e **aeriforme**.`,`**Solido**: forma e volume propri. **Liquido**: volume proprio ma forma del recipiente. **Aeriforme**: né forma né volume propri.`,`Passaggi di stato: fusione (solido → liquido), solidificazione, evaporazione ed ebollizione (liquido → aeriforme), condensazione, sublimazione (solido → aeriforme). Durante un passaggio di stato la temperatura resta costante.`,`Una **sostanza pura** ha composizione definita (un elemento o un composto). Un **miscuglio** contiene più sostanze: **omogeneo** se ha una sola fase (acqua e sale sciolto), **eterogeneo** se si vedono più fasi (acqua e sabbia).`,`I miscugli si separano con metodi fisici: filtrazione, decantazione, distillazione, cromatografia. I composti si scindono nei loro elementi solo con reazioni chimiche.`],
+ ex:[{t:`Acqua salata`,d:`È un miscuglio omogeneo. Con la distillazione l'acqua evapora e poi si condensa, mentre il sale resta nel recipiente.`},{t:`Ghiaccio che fonde`,d:`A pressione atmosferica, finché c'è ghiaccio la temperatura resta 0 °C: il calore assorbito serve per la fusione, non per scaldare.`}],
+ map:{centro:`Materia`,rami:[{t:`Stati`,figli:[`Solido, liquido, aeriforme`,`Passaggi di stato`]},{t:`Sostanze pure`,figli:[`Elementi`,`Composti`]},{t:`Miscugli`,figli:[`Omogenei`,`Eterogenei`]},{t:`Separazione`,figli:[`Filtrazione, decantazione`,`Distillazione`]}]}},
+ch_reaz:{
+ sum:[`In una reazione chimica i **reagenti** si trasformano in **prodotti**: gli atomi si riarrangiano ma non si creano né si distruggono (**conservazione della massa**).`,`**Bilanciare** vuol dire scegliere i **coefficienti stechiometrici** in modo che ogni elemento abbia lo stesso numero di atomi a sinistra e a destra. Non si cambiano mai i pedici delle formule.`,`Tipi principali: **sintesi** (A + B → AB), **decomposizione** (AB → A + B), **scambio semplice**, **doppio scambio**, **combustione** (con O₂; per gli idrocarburi dà CO₂ e H₂O).`,`I coefficienti indicano rapporti in **moli**: 2 H₂ + O₂ → 2 H₂O vuol dire 2 mol di H₂ per 1 mol di O₂ per 2 mol di H₂O.`,`Il **reagente limitante** si esaurisce per primo e decide quanto prodotto si ottiene. La **resa** percentuale è (quantità ottenuta / quantità teorica) · 100.`],
+ ex:[{t:`Combustione del metano`,d:`CH₄ + 2 O₂ → CO₂ + 2 H₂O. A sinistra e a destra ci sono 1 C, 4 H e 4 O: l'equazione è bilanciata.`},{t:`Resa`,d:`Se la quantità teorica è 20 g e ne ottieni 15 g, la resa è 15 / 20 · 100 = 75%.`}],
+ map:{centro:`Reazioni chimiche`,rami:[{t:`Reagenti e prodotti`,figli:[`Conservazione della massa`,`Equazione chimica`]},{t:`Bilanciamento`,figli:[`Coefficienti stechiometrici`,`Non cambiare i pedici`]},{t:`Tipi`,figli:[`Sintesi e decomposizione`,`Scambio e combustione`]},{t:`Quantità`,figli:[`Rapporti in moli`,`Reagente limitante e resa`]}]}},
+ch_sol:{
+ sum:[`Una soluzione è formata da **soluto** (in quantità minore) e **solvente** (in quantità maggiore).`,`**Molarità**: M = n / V (mol/L). Per ottenere la massa di soluto: m = M · V · massa molare.`,`**Concentrazione percentuale**: % m/m = (massa di soluto / massa di soluzione) · 100; % m/V = grammi di soluto ogni 100 mL di soluzione.`,`**Diluizione**: aggiungendo solvente le moli di soluto non cambiano, quindi **M₁ · V₁ = M₂ · V₂**.`,`Una soluzione è **satura** quando ha sciolto il massimo di soluto a quella temperatura. In genere la solubilità dei solidi cresce con la temperatura, quella dei gas diminuisce.`],
+ ex:[{t:`Preparare una soluzione`,d:`0,5 L di NaCl 0,2 M (M = 58,5 g/mol): n = 0,2 · 0,5 = 0,1 mol, quindi m = 0,1 · 58,5 = 5,85 g.`},{t:`Diluizione`,d:`Da 20 mL di soluzione 0,5 M a 0,1 M: V₂ = 0,5 · 20 / 0,1 = 100 mL, cioè si aggiungono 80 mL di solvente.`}],
+ map:{centro:`Soluzioni`,rami:[{t:`Componenti`,figli:[`Soluto`,`Solvente`]},{t:`Concentrazione`,figli:[`Molarità n / V`,`Percentuale m/m e m/V`]},{t:`Diluizione`,figli:[`M₁V₁ = M₂V₂`,`Le moli non cambiano`]},{t:`Solubilità`,figli:[`Soluzione satura`,`Dipende dalla temperatura`]}]}},
+ch_neut:{
+ sum:[`La **neutralizzazione** è la reazione tra un acido e una base che produce un **sale** e acqua: HCl + NaOH → NaCl + H₂O.`,`Alla base c'è la reazione H⁺ + OH⁻ → H₂O. Al **punto di equivalenza** le moli di H⁺ e di OH⁻ sono uguali.`,`Per un acido con un solo H⁺ e una base con un solo OH⁻: **M(acido) · V(acido) = M(base) · V(base)**. Con H₂SO₄ o Ca(OH)₂ bisogna moltiplicare per il numero di H⁺ o di OH⁻ liberati.`,`Il pH al punto di equivalenza dipende dalla forza: acido forte + base forte dà pH 7; acido debole + base forte dà pH > 7; acido forte + base debole dà pH < 7.`,`La **titolazione** determina una concentrazione incognita aggiungendo goccia a goccia una soluzione di concentrazione nota, con un indicatore che cambia colore.`],
+ ex:[{t:`Titolazione`,d:`20 mL di HCl sono neutralizzati da 25 mL di NaOH 0,1 M: n(NaOH) = 0,0025 mol = n(HCl), quindi M(HCl) = 0,0025 / 0,020 = 0,125 M.`},{t:`Acido diprotico`,d:`10 mL di H₂SO₄ 0,1 M contengono 0,002 mol di H⁺: servono 20 mL di NaOH 0,1 M.`}],
+ map:{centro:`Neutralizzazione`,rami:[{t:`Reazione`,figli:[`Acido + base`,`Sale + acqua`]},{t:`Equivalenza`,figli:[`mol H⁺ = mol OH⁻`,`Ma · Va = Mb · Vb`]},{t:`pH finale`,figli:[`Forte + forte: 7`,`Con un debole: diverso da 7`]},{t:`Titolazione`,figli:[`Soluzione di concentrazione nota`,`Indicatore di colore`]}]}},
+ch_org:{
+ sum:[`La chimica organica studia i composti del **carbonio**, che forma 4 legami e può concatenarsi in catene e anelli.`,`**Idrocarburi**: solo C e H. **Alcani** (legami singoli, CₙH₂ₙ₊₂, per esempio il metano CH₄), **alcheni** (almeno un doppio legame, CₙH₂ₙ), **alchini** (triplo legame), **aromatici** (con l'anello del benzene).`,`**Gruppi funzionali**: alcoli (–OH), aldeidi (–CHO), chetoni (C=O dentro la catena), acidi carbossilici (–COOH), ammine (–NH₂), eteri (–O–), esteri (–COO–), ammidi (–CONH–).`,`**Isomeri**: composti con la stessa formula molecolare ma struttura diversa (per esempio butano e 2-metilpropano, entrambi C₄H₁₀).`,`Il gruppo funzionale determina le proprietà: l'–OH forma legami a idrogeno (punti di ebollizione più alti), il –COOH è acido, l'–NH₂ è basico.`],
+ ex:[{t:`Un alcol`,d:`CH₃CH₂OH è l'etanolo: una catena di 2 atomi di carbonio con un gruppo –OH.`},{t:`Isomeri`,d:`C₄H₁₀ può essere butano (catena lineare) oppure 2-metilpropano (catena ramificata): stessa formula, proprietà diverse.`}],
+ map:{centro:`Chimica organica`,rami:[{t:`Idrocarburi`,figli:[`Alcani, alcheni, alchini`,`Aromatici`]},{t:`Gruppi funzionali`,figli:[`–OH, –CHO, C=O`,`–COOH, –NH₂, esteri`]},{t:`Isomeria`,figli:[`Stessa formula`,`Struttura diversa`]},{t:`Proprietà`,figli:[`Legami a idrogeno`,`Acidità e basicità`]}]}},
+bi_ciclo:{
+ sum:[`Il **ciclo cellulare** comprende l'**interfase** (G1, S, G2) e la **divisione** (mitosi e citodieresi). Nella fase S il DNA viene replicato.`,`**Mitosi**: da una cellula madre nascono 2 cellule figlie identiche, con lo stesso numero di cromosomi. Fasi: profase, metafase, anafase, telofase.`,`**Meiosi**: due divisioni consecutive che da una cellula diploide (2n) producono 4 cellule **aploidi** (n), cioè i gameti. Avviene solo nelle cellule germinali.`,`Nella meiosi I si separano i cromosomi omologhi e avviene il **crossing-over**, lo scambio di tratti tra omologhi che crea variabilità genetica. Nella meiosi II si separano le cromatidi fratelle.`,`Il ciclo è controllato da punti di controllo. Se non funzionano, le cellule possono dividersi in modo incontrollato, come nei tumori.`],
+ ex:[{t:`Numero di cromosomi`,d:`Nell'uomo 2n = 46. Dopo la mitosi ogni cellula figlia ha 46 cromosomi, dopo la meiosi ogni gamete ne ha 23.`},{t:`Le fasi della mitosi`,d:`In metafase i cromosomi si allineano all'equatore della cellula; in anafase le cromatidi fratelle si separano e migrano ai poli opposti.`}],
+ map:{centro:`Ciclo cellulare`,rami:[{t:`Interfase`,figli:[`G1, S, G2`,`Replicazione del DNA in S`]},{t:`Mitosi`,figli:[`2 cellule identiche`,`Profase, metafase, anafase, telofase`]},{t:`Meiosi`,figli:[`4 cellule aploidi`,`Crossing-over`]},{t:`Controllo`,figli:[`Punti di controllo`,`Tumori se falliscono`]}]}},
+bi_biomol:{
+ sum:[`Le quattro grandi classi di biomolecole sono **carboidrati**, **lipidi**, **proteine** e **acidi nucleici**.`,`**Carboidrati**: monosaccaridi (glucosio, fruttosio), disaccaridi (saccarosio, lattosio), polisaccaridi (amido, glicogeno, cellulosa). Hanno funzione energetica e strutturale.`,`**Lipidi**: trigliceridi (riserva di energia), fosfolipidi (membrane), steroidi (colesterolo, ormoni). Sono poco solubili in acqua, cioè idrofobici.`,`**Proteine**: polimeri di amminoacidi uniti da legami peptidici. **Acidi nucleici**: DNA e RNA, polimeri di nucleotidi.`,`I polimeri si formano per **condensazione** (si libera una molecola d'acqua) e si scindono per **idrolisi** (si consuma acqua).`],
+ ex:[{t:`Condensazione`,d:`Due molecole di glucosio si uniscono formando maltosio e liberando una molecola di acqua.`},{t:`Riserve di glucosio`,d:`Gli animali lo accumulano come glicogeno (fegato e muscoli), le piante come amido. La cellulosa invece è strutturale e forma la parete cellulare vegetale.`}],
+ map:{centro:`Biomolecole`,rami:[{t:`Carboidrati`,figli:[`Glucosio, saccarosio`,`Amido, glicogeno, cellulosa`]},{t:`Lipidi`,figli:[`Trigliceridi`,`Fosfolipidi, steroidi`]},{t:`Proteine`,figli:[`Amminoacidi`,`Legame peptidico`]},{t:`Acidi nucleici`,figli:[`DNA e RNA`,`Nucleotidi`]}]}},
+bi_prot:{
+ sum:[`Le proteine sono formate da **20 amminoacidi** diversi uniti da legami peptidici. L'ordine degli amminoacidi è la **struttura primaria**.`,`**Struttura secondaria**: α-elica e foglietto β, stabilizzati da legami a idrogeno. **Terziaria**: ripiegamento tridimensionale della catena. **Quaternaria**: unione di più catene (per esempio l'emoglobina).`,`La forma tridimensionale determina la funzione. La **denaturazione** (calore, pH estremi) distrugge la forma e quindi la funzione.`,`Gli **enzimi** sono catalizzatori biologici (quasi tutti proteine): abbassano l'energia di attivazione e accelerano la reazione senza consumarsi. Sono **specifici** per il proprio substrato, che si lega al sito attivo.`,`L'attività di un enzima dipende da temperatura, pH e concentrazione del substrato. Un **inibitore** ne riduce l'attività.`],
+ ex:[{t:`Amilasi`,d:`Scinde l'amido in zuccheri più semplici. Nella saliva funziona al meglio a pH vicino alla neutralità.`},{t:`Denaturazione`,d:`Quando si cuoce un uovo l'albume coagula: il calore fa perdere alle proteine la forma nativa.`}],
+ map:{centro:`Proteine ed enzimi`,rami:[{t:`Struttura`,figli:[`Primaria: sequenza`,`Terziaria e quaternaria: forma 3D`]},{t:`Funzioni`,figli:[`Strutturali e di trasporto`,`Enzimi e anticorpi`]},{t:`Enzimi`,figli:[`Abbassano l'energia di attivazione`,`Specifici per il substrato`]},{t:`Fattori`,figli:[`Temperatura e pH`,`Denaturazione`]}]}},
+bi_metab:{
+ sum:[`Il **metabolismo** è l'insieme delle reazioni della cellula: l'**anabolismo** costruisce molecole complesse e richiede energia, il **catabolismo** le demolisce e libera energia.`,`La moneta energetica della cellula è l'**ATP**: l'idrolisi ATP → ADP + Pi libera energia utilizzabile.`,`**Respirazione cellulare**: glucosio + O₂ → CO₂ + H₂O + ATP. Tappe: **glicolisi** (citoplasma, 2 ATP netti), **ciclo di Krebs** (matrice mitocondriale), **fosforilazione ossidativa** (membrana mitocondriale interna, la maggior parte dell'ATP: circa 30-32 per glucosio).`,`Senza ossigeno si ha la **fermentazione** (lattica o alcolica): rigenera NAD⁺ ma rende solo i 2 ATP della glicolisi.`,`**Fotosintesi**: CO₂ + H₂O + luce → glucosio + O₂. La fase luminosa avviene nei tilacoidi, il ciclo di Calvin nello stroma del cloroplasto.`],
+ ex:[{t:`Bilancio energetico`,d:`La glicolisi rende 2 ATP netti per glucosio; con l'ossigeno, tra Krebs e fosforilazione ossidativa, si arriva a circa 30-32 ATP in tutto.`},{t:`Fermentazione lattica`,d:`Nei muscoli sotto sforzo intenso, quando manca ossigeno, il piruvato diventa lattato e la glicolisi può continuare.`}],
+ map:{centro:`Metabolismo`,rami:[{t:`Anabolismo e catabolismo`,figli:[`Anabolismo: costruisce`,`Catabolismo: demolisce`]},{t:`ATP`,figli:[`Moneta energetica`,`ATP → ADP + Pi`]},{t:`Respirazione`,figli:[`Glicolisi e Krebs`,`Fosforilazione ossidativa`]},{t:`Senza O₂ e nelle piante`,figli:[`Fermentazione`,`Fotosintesi`]}]}},
+bi_gapp:{
+ sum:[`**Dominanza incompleta**: l'eterozigote ha un fenotipo intermedio (fiori rosa da rosso × bianco). **Codominanza**: l'eterozigote mostra entrambi i caratteri (gruppo sanguigno AB).`,`**Gruppi sanguigni ABO**: gli alleli Iᴬ e Iᴮ sono codominanti, i è recessivo. Fenotipi: A, B, AB e 0 (genotipo ii). Il fattore Rh (+ dominante su −) è indipendente.`,`**Eredità legata al sesso**: geni sul cromosoma X. I maschi (XY) hanno una sola copia, quindi le malattie recessive legate a X (daltonismo, emofilia) colpiscono più spesso i maschi.`,`**Alberi genealogici**: aiutano a capire il tipo di trasmissione. Una malattia presente in un figlio di due genitori sani è tipicamente **autosomica recessiva**.`,`**Assortimento indipendente**: geni su cromosomi diversi si trasmettono indipendentemente. In AaBb × AaBb il rapporto fenotipico è 9 : 3 : 3 : 1. Il **testcross** con un omozigote recessivo rivela il genotipo.`],
+ ex:[{t:`Gruppi sanguigni`,d:`Genitori A (Iᴬi) e B (Iᴮi) possono avere figli di gruppo A, B, AB o 0, ciascuno con probabilità 1/4.`},{t:`Diibrido`,d:`AaBb × AaBb: la probabilità di un figlio aabb è 1/4 · 1/4 = 1/16.`}],
+ map:{centro:`Genetica applicata`,rami:[{t:`Oltre Mendel`,figli:[`Dominanza incompleta`,`Codominanza`]},{t:`Gruppi sanguigni`,figli:[`Alleli Iᴬ, Iᴮ, i`,`Fattore Rh`]},{t:`Legata al sesso`,figli:[`Geni sul cromosoma X`,`Più frequente nei maschi`]},{t:`Strumenti`,figli:[`Alberi genealogici`,`Testcross`]}]}},
+fi_gran:{
+ sum:[`Una **grandezza fisica** è una proprietà misurabile e si esprime con un numero e un'**unità di misura**. Nel **Sistema Internazionale** le unità fondamentali sono metro (m), chilogrammo (kg), secondo (s), ampere (A), kelvin (K), mole (mol) e candela (cd).`,`**Prefissi**: kilo (10³), mega (10⁶), giga (10⁹); centi (10⁻²), milli (10⁻³), micro (10⁻⁶), nano (10⁻⁹).`,`**Conversioni utili**: 1 km/h = 1 / 3,6 m/s; 1 L = 1 dm³ = 10⁻³ m³; 1 h = 3600 s; 1 g/cm³ = 1000 kg/m³.`,`Le **grandezze derivate** si ottengono da quelle fondamentali: velocità (m/s), forza (N = kg · m/s²), energia (J = N · m), potenza (W = J/s), pressione (Pa = N/m²).`,`Si usa la **notazione scientifica** (a · 10ⁿ). Controlla sempre le unità: in una formula devono tornare da entrambi i lati.`],
+ ex:[{t:`Da km/h a m/s`,d:`54 km/h = 54 / 3,6 = 15 m/s.`},{t:`Superfici`,d:`1 m² = 10⁴ cm², quindi 3 m² = 3 · 10⁴ cm²: il fattore di conversione va elevato al quadrato.`}],
+ map:{centro:`Grandezze e unità`,rami:[{t:`Sistema Internazionale`,figli:[`m, kg, s, A, K, mol, cd`,`Unità fondamentali`]},{t:`Prefissi`,figli:[`kilo, mega, giga`,`milli, micro, nano`]},{t:`Grandezze derivate`,figli:[`N, J, W, Pa`,`Dalle unità fondamentali`]},{t:`Conversioni`,figli:[`km/h ↔ m/s`,`L, dm³, m³`]}]}},
+fi_vet:{
+ sum:[`Una grandezza **scalare** ha solo un valore (massa, tempo, temperatura, energia). Una grandezza **vettoriale** ha anche direzione e verso (spostamento, velocità, accelerazione, forza).`,`**Somma di vettori**: metodo punta-coda o del parallelogramma. Se i vettori sono sulla stessa retta e concordi i moduli si sommano, se sono opposti si sottraggono.`,`Per due vettori **perpendicolari** il modulo della somma si ricava con Pitagora: R = √(a² + b²).`,`**Componenti**: un vettore di modulo v che forma un angolo θ con l'asse x ha componenti vₓ = v · cos θ e v_y = v · sin θ.`,`Moltiplicare un vettore per uno scalare cambia il modulo (e il verso, se lo scalare è negativo). Il vettore **opposto** ha lo stesso modulo e verso contrario.`],
+ ex:[{t:`Somma di forze perpendicolari`,d:`6 N verso est e 8 N verso nord: R = √(6² + 8²) = √100 = 10 N.`},{t:`Scomposizione`,d:`v = 10 m/s a 30° sull'orizzontale: vₓ = 10 · cos 30° ≈ 8,7 m/s e v_y = 10 · sin 30° = 5 m/s.`}],
+ map:{centro:`Vettori`,rami:[{t:`Scalari e vettori`,figli:[`Scalare: solo il valore`,`Vettore: modulo, direzione, verso`]},{t:`Somma`,figli:[`Punta-coda`,`Parallelogramma`]},{t:`Perpendicolari`,figli:[`R = √(a² + b²)`,`Teorema di Pitagora`]},{t:`Componenti`,figli:[`vₓ = v · cos θ`,`v_y = v · sin θ`]}]}},
+fi_flu:{
+ sum:[`**Pressione**: p = F / S (pascal, 1 Pa = 1 N/m²). A parità di forza, minore è la superficie e maggiore è la pressione. 1 atm ≈ 101 325 Pa ≈ 760 mmHg.`,`**Densità**: d = m / V (kg/m³). Per l'acqua d = 1000 kg/m³ = 1 g/cm³.`,`**Legge di Stevino**: in un liquido a profondità h la pressione è p = p₀ + d · g · h.`,`**Principio di Pascal**: la pressione applicata a un fluido chiuso si trasmette inalterata in ogni punto. Nel torchio idraulico F₁ / S₁ = F₂ / S₂.`,`**Principio di Archimede**: un corpo immerso riceve una spinta verso l'alto pari al peso del fluido spostato, F = d_fluido · V_immerso · g. Galleggia se la sua densità è minore di quella del fluido.`,`**Portata**: Q = S · v. In un condotto, per l'equazione di continuità, S₁ · v₁ = S₂ · v₂: dove la sezione è più stretta il fluido va più veloce.`],
+ ex:[{t:`Pressione sott'acqua`,d:`A 10 m di profondità la pressione dovuta all'acqua è 1000 · 10 · 10 = 1 · 10⁵ Pa, circa 1 atm in più rispetto alla superficie.`},{t:`Torchio idraulico`,d:`Con S₁ = 10 cm² e S₂ = 100 cm², una forza di 20 N sul pistone piccolo produce 200 N sul grande.`}],
+ map:{centro:`Fluidi`,rami:[{t:`Pressione`,figli:[`p = F / S`,`Pascal, atm, mmHg`]},{t:`Stevino`,figli:[`p = p₀ + d · g · h`,`Cresce con la profondità`]},{t:`Pascal`,figli:[`Trasmissione della pressione`,`Torchio idraulico`]},{t:`Archimede`,figli:[`Spinta = peso del fluido spostato`,`Galleggiamento`]}]}},
+fi_cal:{
+ sum:[`**Temperatura** e **calore** sono diversi: la temperatura misura lo stato termico (K, °C; T[K] = T[°C] + 273,15), il calore è l'energia che passa da un corpo più caldo a uno più freddo (joule).`,`**Calore specifico**: Q = m · c · ΔT. L'acqua ha c ≈ 4186 J/(kg · K): si scalda e si raffredda lentamente.`,`**Passaggi di stato**: Q = m · L (calore latente), a temperatura costante.`,`**Propagazione del calore**: per conduzione (contatto), convezione (movimento di fluido) e irraggiamento (onde elettromagnetiche, anche nel vuoto).`,`**Primo principio della termodinamica**: ΔU = Q − L, cioè la variazione di energia interna è il calore assorbito meno il lavoro compiuto dal sistema. **Secondo principio**: il calore passa spontaneamente dal corpo caldo al freddo e nessuna macchina termica ha rendimento del 100%.`,`**Gas perfetti**: p · V = n · R · T. A temperatura costante p · V resta costante (legge di Boyle).`],
+ ex:[{t:`Scaldare l'acqua`,d:`2 kg di acqua da 20 °C a 70 °C: Q = 2 · 4186 · 50 ≈ 4,2 · 10⁵ J.`},{t:`Equilibrio termico`,d:`1 kg di acqua a 80 °C mescolato con 1 kg di acqua a 20 °C, senza dispersioni, raggiunge 50 °C (la media, perché massa e calore specifico sono uguali).`}],
+ map:{centro:`Calore e termodinamica`,rami:[{t:`Temperatura e calore`,figli:[`K e °C`,`Calore: energia in transito`]},{t:`Calore specifico`,figli:[`Q = m · c · ΔT`,`Acqua: c elevato`]},{t:`Propagazione`,figli:[`Conduzione`,`Convezione e irraggiamento`]},{t:`Principi`,figli:[`ΔU = Q − L`,`Il calore va dal caldo al freddo`]}]}}
 };
 
 /* ---------- Stato e salvataggio ---------- */
@@ -660,9 +935,9 @@ var ICON={
   errors:'M12 8v5M12 16.5v.5M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z'
 };
 function navHTML(){
-  if(view==='play'||view==='playcards')return '';
+  if(view==='play'||view==='playcards'||view==='pick')return '';
   var items=[['home','Oggi'],['study','Argomenti'],['errors','Errori']];
-  var act={result:'home',lesson:'home',lessonDone:'home',topic:'study'}[view]||view,nErr=unresolved().length;
+  var act={result:'home',lesson:'home',lessonDone:'home',topic:'study',pick:'study'}[view]||view,nErr=unresolved().length;
   return '<nav class="tabbar" aria-label="Sezioni">'+items.map(function(it){
     return '<button data-act="go" data-v="'+it[0]+'"'+(act===it[0]?' aria-current="page"':'')+'><svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICON[it[0]]+'"/></svg>'+it[1]+(it[0]==='errors'&&nErr?'<span class="badge">'+nErr+'</span>':'')+'</button>';
   }).join('')+'</nav>';
@@ -683,7 +958,7 @@ function vHome(){
   var h='<h1>Oggi</h1>'+(ui.msg?'<p class="panel">'+esc(ui.msg)+'</p>':'')+helpBlock();
   var none=TOPICS.every(function(t){return !known(t.id);});
   if(none){
-    h+='<section class="panel hero"><p class="kicker">Per cominciare</p><h2>Test di livello</h2><p>2 o 3 domande per ognuno dei 12 argomenti. Si fa una volta sola e serve a capire da dove partire.</p><button class="btn block" data-act="placeStart" data-arg="all">Inizia il test</button><p class="center"><button class="linkbtn" data-act="lessonStart">Salta e inizia subito a studiare</button></p></section>';
+    h+='<section class="panel hero"><p class="kicker">Per cominciare</p><h2>Test di livello</h2><p>2 o 3 domande per ognuno dei '+TOPICS.length+' argomenti. Si fa una volta sola e serve a capire da dove partire.</p><button class="btn block" data-act="placeStart" data-arg="all">Inizia il test</button><p class="center"><button class="linkbtn" data-act="lessonStart">Salta e inizia subito a studiare</button></p></section>';
   }else{
     var L=S.lesson,cont=L&&L.step<4,tid=cont?L.tid:pickLessonTopic(),t=topicOf(tid);
     h+='<section class="panel hero" style="--sc:var('+SUBJ[t.s].v+')"><p class="kicker">'+(cont?'Lezione in corso':'La tua lezione di oggi')+'</p><div class="tag">'+SUBJ[t.s].n+'</div><h2>'+esc(t.n)+'</h2><p class="muted" style="margin:0">'+(cont?'':'È l\'argomento dove sei più debole. ')+'Livello: '+esc(levelLabel(tid).toLowerCase())+'</p>'+stepsList(cont?L.step:0)+
@@ -692,9 +967,10 @@ function vHome(){
   }
   var due=dueCount(),nE=unresolved().length;
   h+='<div class="quick"><button class="qc" data-act="startCards" data-arg="due"'+(due?'':' disabled')+'><b>'+due+'</b>flashcard da ripassare</button><button class="qc" data-act="quizErrTopic"'+(nE?'':' disabled')+'><b>'+nE+'</b>errori da recuperare</button></div>';
+  h+='<section class="panel"><div class="between" style="margin:0"><div><h3 style="margin:0">Quiz su misura</h3><span class="muted">Scegli tu gli argomenti</span></div><button class="btn ghost sm" data-act="go" data-v="pick">Scegli</button></div></section><p class="center" style="margin:0 0 14px"><button class="linkbtn" data-act="go" data-v="study">Vedi tutti i '+TOPICS.length+' argomenti</button></p>';
   var rec=S.log.slice(-30),acc=rec.length?Math.round(rec.filter(function(x){return x.ok;}).length/rec.length*100):null;
   if(S.log.length)h+='<p class="muted">Lezioni completate: <strong>'+(S.lessonsDone||0)+'</strong>'+(acc!==null?' · Risposte esatte di recente: <strong>'+acc+'%</strong>':'')+'</p>';
-  h+=backupBlock()+'<p class="foot"><button class="linkbtn" data-act="helpOpen">Come funziona</button> · <button class="linkbtn" data-act="backupOpen">Trasferisci i progressi</button> · <button class="linkbtn" data-act="reset">'+(ui.confirmReset?'Tocca di nuovo per azzerare tutto':'Azzera i progressi')+'</button></p>';
+  h+=backupBlock()+'<p class="foot"><button class="linkbtn" data-act="helpOpen">Come funziona</button> · <button class="linkbtn" data-act="backupOpen">Trasferisci i progressi</button> · <button class="linkbtn" data-act="reset">'+(ui.confirmReset?'Tocca di nuovo per azzerare tutto':'Azzera i progressi')+'</button></p</button></p><p class="note center">Versione 5 ottobre · quiz su misura</p>';
   return h;
 }
 
@@ -703,7 +979,7 @@ function vPlay(){
   var pct=place?Math.round(sess.done/sess.total*100):Math.round(sess.i/sess.items.length*100);
   var label=place?'Test di livello · argomento '+(sess.done+1)+' di '+sess.total:'Domanda '+(sess.i+1)+' di '+sess.items.length;
   var last=!place&&sess.i+1>=sess.items.length;
-  var h=(sess.lesson?lessonBar(2):'')+'<div class="between"><span class="muted">'+esc(label)+'</span>'+(sess.lesson?'':'<button class="btn ghost sm" data-act="quit">Esci</button>')+'</div><div class="prog"><b style="width:'+pct+'%"></b></div>';
+  var h=(sess.lesson?lessonBar(2):'')+'<div class="between"><span class="muted">'+esc(label)+'</span>'+(sess.lesson?'':'<button class="btn ghost sm" data-act="quit">Esci</button>')+'</div><div class="prog"><b style="width:'+(ui.lp||0)+'%" data-w="'+pct+'"></b></div>';ui.lp=pct;
   h+='<div class="tag" style="--sc:var('+SUBJ[t.s].v+')">'+esc(t.n)+'</div><h2 class="qt">'+esc(q.q)+'</h2>';
   sess.order.forEach(function(orig,j){
     var cls='',dis=sess.shown?' disabled':'';
@@ -713,6 +989,7 @@ function vPlay(){
   if(sess.shown){
     var ok=sess.ok,chosenOrig=sess.order[sess.chosen];
     h+='<div class="panel fb'+(ok?'':' bad')+(fx?' fx':'')+'"><h3>'+(ok?'Esatto':'Non è questa')+'</h3>'+(sess.lvUp?'<div class="lvup">Sei salito di livello: ora sei <strong>'+sess.lvUp+'</strong>.</div>':'')+(ok?'':'<p>La risposta corretta è <strong>'+esc(q.o[q.a])+'</strong>.</p>')+'<p>'+esc(q.e)+'</p>'+
+      (ok&&!place?'<div class="rev"><p class="muted" style="margin:0 0 8px">Vuoi ripassarla più tardi?</p><div class="two"><button class="btn ghost sm" data-act="rev" data-v="1" aria-pressed="'+(sess.rev===1)+'">Sì, ripassala</button><button class="btn ghost sm" data-act="rev" data-v="0" aria-pressed="'+(sess.rev===0)+'">No, la so</button></div>'+(sess.rev===1?'<p class="note" style="margin:8px 0 0">Tornerà tra le flashcard da ripassare.</p>':'')+'</div>':'')+
       (!ok&&claudeOk()?'<button class="btn ghost sm" data-act="explain" data-q="'+q.id+'" data-c="'+chosenOrig+'">Spiegami meglio</button>':'')+
       '<div class="xp" id="xp-'+q.id+'" hidden></div><button class="btn block" style="margin-top:14px" data-act="next">'+(last?'Vedi il risultato':'Avanti')+'</button></div>';
   }
@@ -721,20 +998,26 @@ function vPlay(){
 
 function vResult(){
   if(sess.mode==='place')return vPlaceResult();
-  var a=sess.answers,ok=a.filter(function(x){return x.ok;}).length,nw=a.length-ok;
+  var a=sess.answers,ok=a.filter(function(x){return x.ok;}).length,nw=a.length-ok,mk=a.filter(function(x){return x.ok&&x.rev===1;}).length;
   if(sess.lesson){
-    return lessonBar(2)+'<section class="panel center"><div class="stat">'+ok+' su '+a.length+'</div><p class="muted">risposte esatte</p><p>'+(nw?'Ora ripassiamo '+(nw===1?'la domanda che hai sbagliato':'le '+nw+' domande che hai sbagliato')+'.':'Nessun errore, ottimo.')+'</p><button class="btn block" data-act="lessonNext">'+(nw?'Vai al ripasso':'Concludi la lezione')+'</button></section>';
+    var tot=nw+mk,msg;
+    if(!tot)msg='Nessun errore, ottimo.';
+    else if(!mk)msg='Ora ripassiamo '+(nw===1?'la domanda che hai sbagliato':'le '+nw+' domande che hai sbagliato')+'.';
+    else if(!nw)msg='Ora ripassiamo '+(mk===1?'la domanda':'le '+mk+' domande')+' che hai scelto di rivedere.';
+    else msg='Ora ripassiamo '+tot+' domande: '+nw+(nw===1?' sbagliata':' sbagliate')+' e '+mk+(mk===1?' scelta':' scelte')+' da te.';
+    return lessonBar(2)+'<section class="panel center"><div class="stat"><span class="cnt" data-n="'+ok+'">'+ok+'</span> su '+a.length+'</div><p class="muted">risposte esatte</p><p>'+msg+'</p><button class="btn block" data-act="lessonNext">'+(tot?'Vai al ripasso':'Concludi la lezione')+'</button></section>';
   }
   var by={};
   a.forEach(function(x){var b=by[x.t]||(by[x.t]={ok:0,n:0});b.n++;if(x.ok)b.ok++;});
   var wrongT=Object.keys(by).filter(function(t){return by[t].ok<by[t].n;});
-  var h='<h1>Risultato</h1><section class="panel center"><div class="stat">'+ok+' su '+a.length+'</div><p class="muted" style="margin:0">risposte esatte</p></section>';
+  var h='<h1>Risultato</h1><section class="panel center"><div class="stat"><span class="cnt" data-n="'+ok+'">'+ok+'</span> su '+a.length+'</div><p class="muted" style="margin:0">risposte esatte</p>'+(mk?'<p class="note" style="margin:10px 0 0">'+mk+(mk===1?' risposta esatta tornerà':' risposte esatte torneranno')+' tra le flashcard da ripassare.</p>':'')+'</section>';
   if(wrongT.length){
     h+='<section class="panel"><h2>Da ripassare</h2><ul class="plain">';
     wrongT.forEach(function(t){h+='<li><button class="trow" data-act="openTopic" data-t="'+t+'"><span>'+esc(topicOf(t).n)+'<span class="lab">'+by[t].ok+' su '+by[t].n+' esatte</span></span><span class="go">Ripassa ›</span></button></li>';});
     h+='</ul></section>';
   }
-  return h+'<button class="btn block" data-act="go" data-v="home">Torna a Oggi</button>';
+  if(sess.sub==='multi')h+='<button class="btn block" style="margin-bottom:10px" data-act="pickGo">Un altro quiz con questi argomenti</button><button class="btn ghost block" style="margin-bottom:10px" data-act="go" data-v="pick">Cambia argomenti</button>';
+  return h+'<button class="btn '+(sess.sub==='multi'?'ghost ':'')+'block" data-act="go" data-v="home">Torna a Oggi</button>';
 }
 function vPlaceResult(){
   var ids=Object.keys(sess.lv);
@@ -784,11 +1067,30 @@ function vErrors(){
   return h;
 }
 
+
+function selTopics(){var a=Array.isArray(S.sel)?S.sel:[];return a.filter(function(id){return !!topicOf(id);});}
+function qCount(ids){return bank().filter(function(q){return ids.indexOf(q.t)>-1;}).length;}
+function vPick(){
+  var sel=selTopics(),nq=qCount(sel),N=ui.pickN===undefined?10:ui.pickN;
+  var h='<div class="pick"><h1>Quiz su misura</h1><p class="muted">Scegli gli argomenti che vuoi allenare. Le domande escono mischiate, con più peso a quelle che ti servono di più.</p>';
+  h+='<div class="pickrow"><button class="sbtn" data-act="pickAll">Seleziona tutti</button><button class="sbtn" data-act="pickNone">Nessuno</button><button class="sbtn" data-act="pickWeak">Solo i più deboli</button></div>';
+  h+='<div class="cols">'+Object.keys(SUBJ).map(function(sid){
+    var ts=TOPICS.filter(function(t){return t.s===sid;}),allOn=ts.every(function(t){return sel.indexOf(t.id)>-1;});
+    return '<section class="panel subj" style="--sc:var('+SUBJ[sid].v+')"><div class="shead"><h2>'+SUBJ[sid].n+'</h2><button class="sbtn" data-act="pickS" data-v="'+sid+'">'+(allOn?'Togli tutti':'Tutta la materia')+'</button></div><ul>'+ts.map(function(t){
+      var on=sel.indexOf(t.id)>-1;
+      return '<li><button class="trow pk" role="checkbox" aria-checked="'+on+'" data-act="pickT" data-t="'+t.id+'"><span class="cb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="nm">'+esc(t.n)+'<span class="lab">'+qCount([t.id])+' domande · '+esc(levelLabel(t.id))+'</span></span></button></li>';
+    }).join('')+'</ul></section>';
+  }).join('')+'</div></div>';
+  var opts=[[5,'5'],[10,'10'],[20,'20'],[0,'Tutte']];
+  h+='<div class="pickbar"><p class="sum">'+sel.length+(sel.length===1?' argomento':' argomenti')+' <span>· '+nq+' domande disponibili</span></p><div class="chips" role="group" aria-label="Numero di domande">'+opts.map(function(o){return '<button class="chip" style="--sc:var(--ink)" data-act="pickN" data-v="'+o[0]+'" aria-pressed="'+(N===o[0])+'">'+o[1]+(o[0]?' domande':' le domande')+'</button>';}).join('')+'</div><div class="go2"><button class="btn ghost" data-act="go" data-v="study">Indietro</button><button class="btn" data-act="pickGo"'+(sel.length&&nq?'':' disabled')+'>Inizia il quiz</button></div></div>';
+  return h;
+}
+function pickFocus(sel){ui.focusSel=sel;}
 function vStudy(){
-  var h='<h1>Argomenti</h1><div class="cols">'+Object.keys(SUBJ).map(function(sid){
+  var h='<h1>Argomenti</h1><p class="muted">'+TOPICS.length+' argomenti · '+bank().length+' domande</p><section class="panel"><h2>Quiz su misura</h2><p class="muted">Scegli tu quali argomenti allenare, anche di materie diverse.</p><button class="btn block" data-act="go" data-v="pick">Scegli gli argomenti</button></section><div class="cols">'+Object.keys(SUBJ).map(function(sid){
     return '<section class="panel subj" style="--sc:var('+SUBJ[sid].v+')"><h2>'+SUBJ[sid].n+'</h2><ul>'+TOPICS.filter(function(t){return t.s===sid;}).map(function(t){
       var n=unresolved(t.id).length;
-      return '<li><button class="trow" data-act="openTopic" data-t="'+t.id+'"><span>'+esc(t.n)+(n?' <span class="badge">'+n+'</span>':'')+'<span class="lab">'+esc(levelLabel(t.id))+'</span></span>'+meter(t.id)+'</button></li>';
+      return '<li><button class="trow" data-act="openTopic" data-t="'+t.id+'"><span>'+esc(t.n)+(n?' <span class="badge">'+n+'</span>':'')+'<span class="lab">'+qCount([t.id])+' domande · '+esc(levelLabel(t.id))+'</span></span>'+meter(t.id)+'</button></li>';
     }).join('')+'</ul></section>';
   }).join('')+'</div>';
   return h+'<section class="panel"><h2>Allenamento libero</h2><div class="row"><button class="btn ghost sm" data-act="startQuiz" data-mode="smart">Quiz misto</button><button class="btn ghost sm" data-act="startCards" data-arg="all">Flashcard</button><button class="btn ghost sm" data-act="placeStart" data-arg="all">Rifai il test di livello</button></div></section>';
@@ -804,7 +1106,7 @@ function renderMat(d,sv){
 }
 function topicBody(t){
   var C=CONTENT[t.id],sv=SUBJ[t.s].v,mine=S.mat[t.id],h='';
-  h+='<section class="panel"><h2>Guarda come funziona</h2><p class="muted">'+esc(HINT[t.id]||'')+'</p><div class="anim" id="anim" style="--sc:var('+sv+')"></div></section>';
+  if(ANIM[t.id])h+='<section class="panel"><h2>Guarda come funziona</h2><p class="muted">'+esc(HINT[t.id]||'')+'</p><div class="anim" id="anim" style="--sc:var('+sv+')"></div></section>';
   h+='<section class="panel"><h2>In breve</h2><ul>'+C.sum.map(function(x){return '<li>'+rich(x)+'</li>';}).join('')+'</ul></section>';
   h+='<details class="panel more"><summary>Esempi svolti</summary>'+C.ex.map(function(x){return '<div class="ex-item"><strong>'+esc(x.t)+'</strong><br>'+esc(x.d)+'</div>';}).join('')+'</details>';
   h+='<details class="panel more"><summary>Mappa concettuale</summary>'+mapSVG(C.map,sv)+'</details>';
@@ -867,28 +1169,34 @@ function render(){
   else if(view==='playcards'&&sess)body=vPlayCards();
   else if(view==='errors')body=vErrors();
   else if(view==='study')body=vStudy();
+  else if(view==='pick')body=vPick();
   else if(view==='topic'&&ui.topic)body=vTopic();
   else{view='home';body=vHome();}
   var key=view+'|'+(view==='play'&&sess&&sess.q?sess.q.id:'')+(view==='topic'?ui.topic:'')+(view==='playcards'&&sess?sess.i:''),cls=key!==lastKey?' class="enter"':'';
   lastKey=key;
   app.innerHTML='<main'+cls+'>'+body+'</main>'+navHTML();
   if(view==='topic'||view==='lesson')initAnim();
+  var pb=app.querySelector('.prog>b[data-w]');if(pb){if(RM)pb.style.width=pb.dataset.w+'%';else requestAnimationFrame(function(){requestAnimationFrame(function(){pb.style.width=pb.dataset.w+'%';});});}
+  if(!RM)[].forEach.call(app.querySelectorAll('.cnt'),function(e){var n=+e.dataset.n,t0=null;if(!n)return;e.textContent='0';(function f(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/700);e.textContent=Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f);})(performance.now());});
+  if(ui.focusSel){var fe=app.querySelector(ui.focusSel);ui.focusSel=null;if(fe){try{fe.focus({preventScroll:true});}catch(e){}}}
 }
 function go(v){view=v;if(v!=='play'&&v!=='playcards'&&v!=='result')sess=null;ui.msg='';ui.confirmReset=false;render();scrollTop();}
 
 /* ---------- Sessioni ---------- */
-function setQ(q){sess.lvUp=null;sess.q=q;sess.order=shuffle([0,1,2,3]);sess.chosen=null;sess.shown=false;sess.ok=null;}
+function setQ(q){sess.lvUp=null;sess.rev=null;sess.prev=null;sess.q=q;sess.order=shuffle([0,1,2,3]);sess.chosen=null;sess.shown=false;sess.ok=null;}
 function startQuiz(mode,arg,opt){
   opt=opt||{};var pool=bank(),n=10;
   if(mode==='subj')pool=pool.filter(function(q){return topicOf(q.t).s===arg;});
   else if(mode==='topic'){pool=pool.filter(function(q){return q.t===arg;});n=8;}
+  else if(mode==='multi'){var ids=arg||[];pool=pool.filter(function(q){return ids.indexOf(q.t)>-1;});n=opt.n===0?pool.length:(opt.n||10);}
   else if(mode==='errors'){pool=pool.filter(function(q){return S.errors[q.id]&&S.errors[q.id].ok<2&&(!arg||q.t===arg);});n=12;}
   if(!pool.length){ui.msg='Non ci sono domande disponibili per questa scelta.';view='home';sess=null;render();scrollTop();return;}
-  if(opt.n)n=opt.n;
+  if(opt.n&&mode!=='multi')n=opt.n;
   var items=pickQuestions(pool,Math.min(n,pool.length));
-  sess={mode:'quiz',items:items,i:0,answers:[],lesson:!!opt.lesson};setQ(items[0]);view='play';render();scrollTop();
+  ui.lp=0;sess={mode:'quiz',sub:mode==='multi'?'multi':'',items:items,i:0,answers:[],lesson:!!opt.lesson};setQ(items[0]);view='play';render();scrollTop();
 }
 function startPlace(arg){
+  ui.lp=0;
   var topics=TOPICS.filter(function(t){return arg==='all'||t.s===arg;}).map(function(t){return t.id;});
   sess={mode:'place',queue:topics,total:topics.length,done:0,cur:null,stage:2,answers:[],subjects:arg==='all'?Object.keys(SUBJ):[arg],lv:{}};
   view='play';placeAdvance();render();scrollTop();
@@ -914,10 +1222,19 @@ function answer(j){
   if(!sess||sess.shown)return;
   var q=sess.q,orig=sess.order[j],ok=orig===q.a;
   sess.chosen=j;sess.shown=true;sess.ok=ok;
+  sess.prev=S.cards[q.id]?JSON.parse(JSON.stringify(S.cards[q.id])):null;
   var up=record(q,orig,ok,sess.mode==='place');sess.lvUp=up?LV[T(q.t).level]:null;ui.fx=true;
   sess.answers.push({q:q.id,t:q.t,ok:ok,orig:orig});
   render();
   var f=document.querySelector('.fb');if(f){try{f.scrollIntoView({behavior:RM?'auto':'smooth',block:'nearest'});}catch(e){}}
+}
+function setReview(v){
+  if(!sess||sess.mode==='place'||!sess.shown||!sess.ok)return;
+  var q=sess.q,last=sess.answers[sess.answers.length-1];
+  if(v==='1'){S.cards[q.id]={box:1,due:Date.now()};sess.rev=1;}
+  else{if(sess.prev)S.cards[q.id]=sess.prev;else delete S.cards[q.id];sess.rev=0;}
+  if(last&&last.q===q.id)last.rev=sess.rev;
+  save();render();
 }
 function next(){
   if(!sess)return;
@@ -1406,12 +1723,20 @@ document.addEventListener('click',function(ev){
   var a=el.dataset.act,d=el.dataset;
   switch(a){
     case 'go':go(d.v);break;
+    case 'pickT':{var a=selTopics(),i=a.indexOf(d.t);if(i>-1)a.splice(i,1);else a.push(d.t);S.sel=a;save();ui.focusSel='[data-t="'+d.t+'"]';render();break;}
+    case 'pickS':{var ids=TOPICS.filter(function(t){return t.s===d.v;}).map(function(t){return t.id;}),cur=selTopics(),all=ids.every(function(x){return cur.indexOf(x)>-1;});S.sel=all?cur.filter(function(x){return ids.indexOf(x)<0;}):cur.concat(ids.filter(function(x){return cur.indexOf(x)<0;}));save();ui.focusSel='[data-v="'+d.v+'"]';render();break;}
+    case 'pickAll':S.sel=TOPICS.map(function(t){return t.id;});save();render();break;
+    case 'pickNone':S.sel=[];save();render();break;
+    case 'pickWeak':S.sel=rankTopics().slice(0,5);save();render();break;
+    case 'pickN':ui.pickN=+d.v;ui.focusSel='[data-v="'+d.v+'"][data-act="pickN"]';render();break;
+    case 'pickGo':startQuiz('multi',selTopics(),{n:ui.pickN===undefined?10:ui.pickN});break;
     case 'placeStart':startPlace(d.arg);break;
     case 'startQuiz':startQuiz(d.mode,d.arg);break;
     case 'quizTopic':startQuiz('topic',d.t);break;
     case 'quizErrTopic':startQuiz('errors',d.t);break;
     case 'ans':answer(+d.i);break;
     case 'next':next();break;
+    case 'rev':setReview(d.v);break;
     case 'quit':go('home');break;
     case 'lessonStart':lessonStart();break;
     case 'lessonNext':lessonNext();break;
@@ -1452,7 +1777,7 @@ getSample().then(function(){render();});
 })();
 </script>
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+if('serviceWorker' in navigator){var hadSW=!!navigator.serviceWorker.controller,reloaded=false;navigator.serviceWorker.addEventListener('controllerchange',function(){if(hadSW&&!reloaded){reloaded=true;location.reload();}});window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').then(function(r){try{r.update();}catch(e){}}).catch(function(){});});}
 </script>
 </body>
 </html>
