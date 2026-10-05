@@ -401,6 +401,37 @@ ul.plain{list-style:none;padding:0;margin:0}
 .ordl li{counter-increment:o;display:flex;gap:12px;align-items:flex-start;padding:10px 12px;margin:0 0 6px;border:2px solid var(--ok);border-radius:12px;background:color-mix(in srgb,var(--ok) 11%,var(--surface))}
 .ordl li::before{content:counter(o);flex:none;width:26px;height:26px;border-radius:50%;background:var(--ok);color:var(--bg);font-weight:700;font-size:.85rem;display:grid;place-items:center}
 @media (max-width:420px){.ring{width:96px;height:96px}.goalp{gap:14px}}
+/* arcade */
+.hearts{letter-spacing:2px;font-size:1.05rem}
+.tbar{height:8px;background:var(--soft);border-radius:99px;overflow:hidden;margin:0 0 14px}
+.tbar b{display:block;height:100%;width:100%;background:var(--fis);border-radius:99px;transform-origin:left;animation:tbar linear forwards}
+.tbar b.stop{animation:none;opacity:.35}
+@keyframes tbar{from{transform:scaleX(1);background:var(--ok)}60%{background:var(--fis)}to{transform:scaleX(0);background:var(--bad)}}
+.balloons{display:grid;grid-template-columns:1fr 1fr;gap:26px 14px;margin:16px 0 22px}
+.bl{appearance:none;border:0;font:inherit;font-weight:700;font-size:.98rem;line-height:1.2;color:var(--on-sub);min-height:104px;padding:16px 12px;border-radius:50% 50% 48% 48%/58% 58% 42% 42%;background:var(--bc);position:relative;cursor:pointer;display:grid;place-items:center;text-align:center;animation:bob 3.2s ease-in-out infinite;animation-delay:calc(var(--k) * -.8s);box-shadow:inset -8px -10px 0 rgba(0,0,0,.14),inset 8px 8px 0 rgba(255,255,255,.2);transition:transform .15s,opacity .25s}
+.bl::after{content:"";position:absolute;left:50%;bottom:-16px;width:2px;height:16px;background:var(--muted);opacity:.5}
+.bl:active:not(:disabled){transform:scale(.92)}
+.bl.off{opacity:.3;animation:none;cursor:default}
+.bl.rightb{animation:popb .5s ease-out both;outline:4px solid var(--ok);outline-offset:3px}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
+@keyframes popb{0%{transform:scale(1)}35%{transform:scale(1.14)}100%{transform:scale(1)}}
+.word{display:flex;flex-wrap:wrap;gap:6px 5px;margin:14px 0 18px}
+.word .ch{display:grid;place-items:center;min-width:28px;height:38px;padding:0 4px;border-bottom:3px solid var(--ink);font-family:var(--font-display);font-weight:700;font-size:1.3rem}
+.word .ch.on{animation:tick .3s ease-out both;color:var(--ink)}
+.word .ch.fix{border-bottom-color:transparent;min-width:12px;padding:0 1px}
+.word .sp{width:14px}
+.kb{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:0 0 10px}
+.key{appearance:none;font:inherit;font-weight:700;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.key:active:not(:disabled){transform:scale(.92)}
+.key.ok{background:color-mix(in srgb,var(--ok) 20%,var(--surface));border-color:var(--ok)}
+.key.no{background:color-mix(in srgb,var(--bad) 14%,var(--surface));border-color:var(--bad);opacity:.6}
+.monster{text-align:center;margin:4px 0 16px}
+.monster .mem{font-size:4.4rem;line-height:1.1;display:block;width:max-content;margin:0 auto 4px;animation:bob 2.6s ease-in-out infinite}
+.monster>strong{display:block}
+.monster.hit .mem{animation:shk .4s ease-in-out}
+.monster.beat .mem{animation:popb .6s ease-out}
+.monster .meter2{max-width:260px;margin:8px auto 0}
+.monster .meter2 b{transition:width .35s}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
 @media (max-width:640px){.mole-grid,.ions{grid-template-columns:1fr}}
 
@@ -1627,6 +1658,7 @@ function buildItem(g,x,pool){
   return {def:x.def,term:x.term,opts:shuffle(shuffle(oth).slice(0,3).map(function(y){return y.term;}).concat([x.term])),t:x.t};
 }
 function startGame(g){
+  if(g==='pop'||g==='hang'||g==='boss')return startGame2(g);
   var sc=gScope(),pool=defPool(sc),idx=function(n){var a=[];for(var i=0;i<n;i++)a.push(i);return a;};
   if(g==='match'){
     var seen={},pairs=[];
@@ -1652,7 +1684,10 @@ function vGames(){
    ['tf','Vero o falso','Dieci affermazioni: la definizione è giusta o no?',gs.tf?'Record: '+gs.tf+' su 10':''],
    ['guess','Indovina il termine','Leggi la definizione e scegli il termine giusto.',gs.gu?'Record: '+gs.gu+' su 10':''],
    ['order','Metti in ordine','Rimetti nell\'ordine giusto le fasi di un processo.',gs.o?'Sequenze completate: '+gs.o:'']];
+  games.push(['pop','🎈 Palloncini','Scoppia il palloncino con il termine giusto prima che scada il tempo.',gs.pop?'Record: '+gs.pop+' punti':''],['hang','🔤 Impiccato','Indovina il termine lettera per lettera, partendo dalla definizione.',gs.hang?'Record: '+gs.hang+' su 5':''],['boss','👾 Battaglia col mostro','Rispondi alle domande per sconfiggere mostri sempre più forti.',gs.boss?'Record: '+gs.boss+(gs.boss===1?' mostro':' mostri'):'']);
   games.forEach(function(g){
+    if(g[0]==='match')h+='<p class="kicker">Per ripassare</p>';
+    if(g[0]==='pop')h+='<p class="kicker" style="margin-top:22px">Arcade</p>';
     h+='<section class="panel gcard"><div class="between" style="margin:0"><div><h3 style="margin:0">'+g[1]+'</h3><span class="muted">'+g[2]+'</span>'+(g[3]?'<span class="note" style="display:block;margin-top:4px">'+g[3]+'</span>':'')+'</div><button class="btn sm" data-act="gStart" data-g="'+g[0]+'">Gioca</button></div></section>';
   });
   return h+'<p class="note">Le definizioni sono quelle standard dei manuali: più giochi, più ti restano in mente.</p>';
@@ -1663,6 +1698,7 @@ function gEnd(title,big,sub,againLabel){
 }
 function vGame(){
   var m=gm;
+  if(m.g==='pop'||m.g==='hang'||m.g==='boss')return vGame2();
   if(m.g==='match'){
     if(m.nd===m.pairs.length)return gEnd('Abbina',m.miss===0?'Perfetto':m.miss+(m.miss===1?' errore':' errori'),'Tempo '+fmtTime(m.sec)+' · '+m.pairs.length+' coppie','Un altro round');
     var h=gHead('Abbina · '+m.nd+' su '+m.pairs.length)+'<p class="muted">Tocca un termine, poi la sua definizione.</p><div class="mterms">'+
@@ -1698,6 +1734,7 @@ function vGame(){
 }
 function gameAct(a,d){
   if(!gm)return;
+  if(gameAct2(a,d))return;
   if(a==='gmT'&&gm.g==='match'){gm.sel=+d.i;render();}
   else if(a==='gmD'&&gm.g==='match'){
     var j=+d.i;if(gm.sel===null)return;
@@ -1938,6 +1975,145 @@ var SEQS=[
  {t:`Fotosintesi: le due fasi`,s:`bio`,i:[`Fase luminosa nei tilacoidi`,`Produzione di ATP e NADPH`,`Ciclo di Calvin nello stroma`,`Sintesi degli zuccheri`]},
  {t:`Ordine di acidità, dal più acido al più basico`,s:`chim`,i:[`Succo di limone (pH circa 2)`,`Caffè (pH circa 5)`,`Acqua pura (pH 7)`,`Bicarbonato (pH circa 8)`,`Candeggina (pH circa 12)`]}
 ];
+
+/* ---------- Giochi arcade ---------- */
+var POP_MS=10000,MONS=[['👾','Blob Atomico'],['🐲','Drago Enzima'],['👹','Orco Ossidante'],['🦖','Rex Reazione'],['🐙','Piovra Proteina'],['🧟','Zombie Zigote'],['🦑','Calamaro Catalizzatore']];
+function hearts(n,max){var s='';for(var i=0;i<max;i++)s+=i<n?'❤️':'🖤';return '<span class="hearts" role="img" aria-label="'+n+' vite su '+max+'">'+s+'</span>';}
+function normL(c){return c.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase();}
+function isL(c){var n=normL(c);return n.length===1&&/^[A-Z]$/.test(n);}
+function bestUp(k,v){S.gs=S.gs||{};if(v>(S.gs[k]||0))S.gs[k]=v;save();}
+
+function startGame2(g){
+  var sc=gScope(),pool=defPool(sc);
+  if(g==='pop'){
+    gm={g:g,items:shuffle(pool).slice(0,10).map(function(x){return buildItem('guess',x,pool);}),i:0,score:0,right:0,lives:3,shown:null,wrong:{},last:0,end:false,tok:0,t0:0};
+    popTimer();
+  }else if(g==='hang'){
+    var ws=shuffle(pool.filter(function(x){var n=x.term.split('').filter(isL).length;return n>=3&&n<=22;})).slice(0,5);
+    gm={g:g,words:ws,i:0,score:0,used:{},wrong:0,max:6,res:null,end:false};
+  }else{
+    var bp=shuffle(bank().filter(function(q){var t=topicOf(q.t);return t&&(sc==='all'||t.s===sc)&&q.o&&q.o.length===4;}));
+    gm={g:g,pool:bp,pi:0,q:null,order:[],mi:0,monsters:0,hpMax:5,hp:5,lives:3,score:0,shown:null,chosen:null,hit:false,beat:false,end:false,tok:0};
+    bossQ();
+  }
+  view='game';render();scrollTop();
+}
+function popTimer(){
+  gm.tok++;gm.t0=Date.now();var tk=gm.tok;
+  setTimeout(function(){if(gm&&gm.g==='pop'&&gm.tok===tk&&gm.shown===null&&view==='game')gameAct('gTime',{});},POP_MS);
+}
+function bossQ(){
+  if(gm.pi>=gm.pool.length){gm.pool=shuffle(gm.pool);gm.pi=0;}
+  gm.q=gm.pool[gm.pi++];gm.order=shuffle([0,1,2,3]);gm.shown=null;gm.chosen=null;
+}
+function vGame2(){
+  var m=gm;
+  if(m.g==='pop'){
+    if(m.end)return gEnd('Palloncini',m.score+' punti','Definizioni indovinate: '+m.right+(S.gs&&S.gs.pop?' · Record: '+S.gs.pop:''));
+    var it=m.items[m.i],t=topicOf(it.t),el=Math.min(POP_MS/1000,(Date.now()-m.t0)/1000);
+    var h=gHead('Palloncini · '+(m.i+1)+' di '+m.items.length)+'<div class="between" style="margin:0 0 8px"><span class="muted">Punti: <strong>'+m.score+'</strong></span>'+hearts(m.lives,3)+'</div>';
+    h+='<div class="tbar" aria-hidden="true"><b'+(m.shown===null?' style="animation-duration:'+(POP_MS/1000)+'s;animation-delay:-'+el.toFixed(2)+'s"':' class="stop"')+'></b></div>';
+    h+='<div class="tag" style="--sc:var('+SUBJ[t.s].v+')">'+esc(t.n)+'</div><h2 class="qt">'+esc(it.def)+'</h2><p class="muted" style="margin:0">Scoppia il palloncino con il termine giusto.</p><div class="balloons">';
+    var cols=['--chim','--bio','--fis','--bad'];
+    it.opts.forEach(function(o,j){
+      var cls='bl';if(m.shown!==null&&o===it.term)cls+=' rightb';else if(m.wrong[j]||m.shown!==null)cls+=' off';
+      h+='<button class="'+cls+'" style="--bc:var('+cols[j]+');--k:'+j+'" data-act="gPop" data-i="'+j+'"'+(m.shown!==null||m.wrong[j]?' disabled':'')+'><span>'+esc(o)+'</span></button>';
+    });
+    h+='</div>';
+    if(m.shown!==null){
+      var ok=m.shown==='ok';
+      h+='<div class="panel fb'+(ok?'':' bad')+'"><h3>'+(ok?'Scoppiato! +'+m.last+' punti':m.shown==='time'?'Tempo scaduto':'Vite finite')+'</h3><p><strong>'+esc(it.term)+'</strong>: '+esc(it.def)+'</p><button class="btn block" data-act="gNext">'+(m.lives<=0||m.i+1>=m.items.length?'Vedi il risultato':'Avanti')+'</button></div>';
+    }
+    return h;
+  }
+  if(m.g==='hang'){
+    if(m.end)return gEnd('Impiccato',m.score+' su '+m.words.length,m.score===m.words.length?'Hai indovinato tutti i termini':'Ogni termine che non hai indovinato si ripassa meglio al prossimo giro');
+    var w=m.words[m.i],tt=topicOf(w.t),done=m.res!==null;
+    var h2=gHead('Impiccato · parola '+(m.i+1)+' di '+m.words.length)+'<div class="between" style="margin:0 0 8px"><span class="muted">Indovinate: <strong>'+m.score+'</strong></span>'+hearts(m.max-m.wrong,m.max)+'</div>';
+    h2+='<div class="tag" style="--sc:var('+SUBJ[tt.s].v+')">'+esc(tt.n)+'</div><p class="stmt">'+esc(w.def)+'</p><div class="word" aria-label="Termine da indovinare">';
+    w.term.split('').forEach(function(c){
+      if(c===' ')h2+='<span class="sp"></span>';
+      else if(!isL(c))h2+='<span class="ch fix">'+esc(c)+'</span>';
+      else h2+='<span class="ch'+(m.used[normL(c)]||done?' on':'')+'">'+((m.used[normL(c)]||done)?esc(c.toUpperCase()):'')+'</span>';
+    });
+    h2+='</div>';
+    if(!done){
+      var wn=w.term.split('').map(normL).join('');
+      h2+='<div class="kb" role="group" aria-label="Lettere">'+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(function(l){var u=m.used[l];return '<button class="key'+(u?(wn.indexOf(l)>-1?' ok':' no'):'')+'" data-act="gKey" data-l="'+l+'"'+(u?' disabled':'')+'>'+l+'</button>';}).join('')+'</div>';
+    }else{
+      h2+='<div class="panel fb'+(m.res==='win'?'':' bad')+'"><h3>'+(m.res==='win'?'Bravo, indovinato':'Non ce l\'hai fatta')+'</h3><p>Il termine è <strong>'+esc(w.term)+'</strong>.</p><button class="btn block" data-act="gNext">'+(m.i+1>=m.words.length?'Vedi il risultato':'Prossimo termine')+'</button></div>';
+    }
+    return h2;
+  }
+  /* boss */
+  if(m.end)return gEnd('Battaglia col mostro',m.monsters+(m.monsters===1?' mostro':' mostri'),m.score+' risposte esatte'+(S.gs&&S.gs.boss?' · Record: '+S.gs.boss+(S.gs.boss===1?' mostro':' mostri'):''),'Combatti ancora');
+  var mo=MONS[m.mi%MONS.length],q=m.q;
+  var h3=gHead('Battaglia col mostro')+'<div class="between" style="margin:0 0 6px"><span class="muted">Sconfitti: <strong>'+m.monsters+'</strong></span>'+hearts(m.lives,3)+'</div>';
+  h3+='<div class="monster'+(m.hit?' hit':'')+(m.beat?' beat':'')+'"><div class="mem" aria-hidden="true">'+mo[0]+'</div><strong>'+esc(mo[1])+'</strong><div class="meter2" style="--sc:var(--bad)" role="img" aria-label="Vita del mostro '+m.hp+' su '+m.hpMax+'"><b style="width:'+Math.round(m.hp/m.hpMax*100)+'%;animation:none"></b></div></div>';
+  m.hit=false;m.beat=false;
+  h3+='<h2 class="qt">'+esc(q.q)+'</h2>';
+  m.order.forEach(function(orig,j){
+    var cls='';if(m.shown!==null){if(orig===q.a)cls=' ok';else if(j===m.chosen)cls=' bad';}
+    h3+='<button class="opt'+cls+'" data-act="gBoss" data-i="'+j+'"'+(m.shown!==null?' disabled':'')+'><span class="k">'+'ABCD'[j]+'</span><span>'+esc(q.o[orig])+'</span></button>';
+  });
+  if(m.shown==='bad')h3+='<div class="panel fb bad"><h3>Il mostro ti ha colpito</h3><p>La risposta corretta è <strong>'+esc(q.o[q.a])+'</strong>.</p><p>'+esc(q.e)+'</p><button class="btn block" data-act="gNext">'+(m.lives<=0?'Vedi il risultato':'Avanti')+'</button></div>';
+  return h3;
+}
+function gameAct2(a,d){
+  var m=gm;
+  if(m.g==='pop'){
+    if(a==='gPop'&&m.shown===null){
+      var it=m.items[m.i],j=+d.i;
+      if(it.opts[j]===it.term){var left=Math.max(0,Math.ceil((POP_MS-(Date.now()-m.t0))/1000));m.last=10+left;m.score+=m.last;m.shown='ok';m.right++;m.tok++;}
+      else{m.lives--;m.wrong[j]=true;if(m.lives<=0){m.shown='bad';m.tok++;}}
+      render();return true;
+    }
+    if(a==='gTime'&&m.shown===null){m.lives--;m.shown='time';m.tok++;render();return true;}
+    if(a==='gNext'){
+      if(m.lives<=0||m.i+1>=m.items.length){m.end=true;bestUp('pop',m.score);}
+      else{m.i++;m.shown=null;m.wrong={};popTimer();}
+      render();scrollTop();return true;
+    }
+    return false;
+  }
+  if(m.g==='hang'){
+    if(a==='gKey'&&m.res===null){
+      var l=d.l,w=m.words[m.i];if(m.used[l])return true;
+      m.used[l]=true;
+      var wn=w.term.split('').map(normL);
+      if(wn.indexOf(l)<0)m.wrong++;
+      var all=w.term.split('').every(function(c){return !isL(c)||m.used[normL(c)];});
+      if(all){m.res='win';m.score++;}else if(m.wrong>=m.max)m.res='lose';
+      render();return true;
+    }
+    if(a==='gNext'){
+      if(m.i+1>=m.words.length){m.end=true;bestUp('hang',m.score);}
+      else{m.i++;m.used={};m.wrong=0;m.res=null;}
+      render();scrollTop();return true;
+    }
+    return false;
+  }
+  if(m.g==='boss'){
+    if(a==='gBoss'&&m.shown===null){
+      var q=m.q,orig=m.order[+d.i],ok=orig===q.a;
+      record(q,orig,ok,false,null);
+      m.chosen=+d.i;m.shown=ok?'ok':'bad';
+      if(ok){
+        m.score++;m.hp--;m.hit=true;
+        if(m.hp<=0){m.monsters++;m.beat=true;m.mi++;m.hpMax=Math.min(12,5+m.monsters);m.hp=m.hpMax;bestUp('boss',m.monsters);}
+        m.tok++;var tk=m.tok;
+        setTimeout(function(){if(gm&&gm.g==='boss'&&gm.tok===tk&&view==='game'&&gm.shown==='ok'){bossQ();render();}},m.beat?1100:750);
+      }else{m.lives--;}
+      render();return true;
+    }
+    if(a==='gNext'){
+      if(m.lives<=0){m.end=true;bestUp('boss',m.monsters);}else bossQ();
+      render();scrollTop();return true;
+    }
+    return false;
+  }
+  return false;
+}
 
 function vResult(){
   if(sess.mode==='place')return vPlaceResult();
@@ -2699,7 +2875,7 @@ document.addEventListener('click',function(ev){
     case 'gStart':startGame(d.g);break;
     case 'gAgain':if(gm)startGame(gm.g);break;
     case 'gExit':go('games');break;
-    case 'gmT':case 'gmD':case 'gTF':case 'gGu':case 'gNext':case 'gOrd':gameAct(a,d);break;
+    case 'gPop':case 'gTime':case 'gKey':case 'gBoss':case 'gmT':case 'gmD':case 'gTF':case 'gGu':case 'gNext':case 'gOrd':gameAct(a,d);break;
     case 'next':next();break;
     case 'rev':setReview(d.v);break;
     case 'quit':go('home');break;
