@@ -343,6 +343,64 @@ main.enter .quick>*:nth-child(2){animation-delay:.06s}
 .sbtn{appearance:none;font:inherit;font-size:.85rem;font-weight:700;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:99px;padding:6px 12px;min-height:36px;cursor:pointer}
 .sbtn:active{transform:scale(.96)}
 .cnt-q{font-size:.8rem;color:var(--muted);font-weight:400}
+/* dashboard, sicurezza, simulazione, giochi */
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin:0 0 14px;align-items:start}
+.dash>.panel{margin:0}
+.goalp{display:flex;gap:18px;align-items:center}
+.gtxt{flex:1;min-width:0}
+.ring{flex:none;width:112px;height:112px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .tr{fill:none;stroke:var(--soft);stroke-width:10}
+.ring .pr{fill:none;stroke:var(--fis);stroke-width:10;stroke-linecap:round;stroke-dasharray:var(--c);stroke-dashoffset:var(--o);animation:ringin .9s cubic-bezier(.2,.7,.2,1) both}
+.ring.met .pr{stroke:var(--ok)}
+.ring .rt{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font-family:var(--font-display);font-weight:700;font-size:1.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.ring .rt small{display:block;font-size:.75rem;font-weight:400;color:var(--muted);font-family:var(--font-body);margin-top:3px}
+@keyframes ringin{from{stroke-dashoffset:var(--c)}}
+@keyframes grow{from{transform:scaleY(0)}}
+@keyframes shk{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.big{font-family:var(--font-display);font-weight:700;font-size:1.3rem;line-height:1.2;margin:0 0 4px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.pill{appearance:none;font:inherit;font-size:.88rem;font-weight:700;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:99px;padding:6px 14px;min-height:40px;cursor:pointer}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;margin-top:6px}
+.wd{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;min-width:0}
+.wd .v{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.wd .b{display:block;width:100%;max-width:34px;height:calc(var(--h) * 1px);border-radius:6px 6px 2px 2px;background:var(--line);transform-origin:bottom;animation:grow .6s cubic-bezier(.2,.7,.2,1) both}
+.wd.met .b{background:var(--ok)}
+.wd.part .b{background:var(--muted)}
+.wd .l{font-size:.8rem;color:var(--muted);font-weight:700}
+.wd.today .l{color:var(--ink);text-decoration:underline}
+.sb{margin:0 0 14px}
+.sb .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.sb .top span{color:var(--muted);font-size:.9rem}
+.meter2{height:10px;border-radius:99px;background:var(--soft);overflow:hidden;margin-top:6px}
+.meter2 b{display:block;height:100%;background:var(--sc);border-radius:99px;transform-origin:left;animation:barin .7s cubic-bezier(.2,.7,.2,1) both}
+.pct{font-weight:700;font-variant-numeric:tabular-nums}
+ul.plain{list-style:none;padding:0;margin:0}
+.cfg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cfg .btn{padding:12px 6px}
+.tagS{display:inline-block;font-size:.72rem;font-weight:700;color:var(--bad);border:1px solid var(--bad);border-radius:99px;padding:0 8px;margin-right:8px;vertical-align:1px}
+.opt.sel{border-color:var(--ink);background:color-mix(in srgb,var(--ink) 9%,var(--surface))}
+.xgrid{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.xn{appearance:none;font:inherit;font-weight:700;font-size:.9rem;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-variant-numeric:tabular-nums}
+.xn.done{background:color-mix(in srgb,var(--ink) 12%,var(--surface))}
+.xn.cur{border:2px solid var(--ink)}
+.timer{font-family:var(--font-display);font-weight:700;font-size:1.3rem;font-variant-numeric:tabular-nums}
+.timer.low{color:var(--bad)}
+.mterms{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.mt{appearance:none;font:inherit;font-weight:700;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:8px 14px;min-height:46px;cursor:pointer}
+.mt.sel{border-color:var(--ink);background:color-mix(in srgb,var(--ink) 10%,var(--surface))}
+.mt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 13%,var(--surface));opacity:.65;cursor:default}
+.mdefs{display:grid;gap:8px;margin:0 0 10px}
+.md{appearance:none;font:inherit;font-size:.95rem;text-align:left;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:12px 14px;min-height:52px;cursor:pointer}
+.md.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 13%,var(--surface));cursor:default}
+.md .who{display:block;font-weight:700;color:var(--ok);font-size:.85rem;margin-top:4px}
+.shake{animation:shk .35s ease-in-out;border-color:var(--bad)!important}
+.stmt{font-size:1.15rem;margin:0}
+.ordl{list-style:none;counter-reset:o;padding:0;margin:0 0 12px}
+.ordl li{counter-increment:o;display:flex;gap:12px;align-items:flex-start;padding:10px 12px;margin:0 0 6px;border:2px solid var(--ok);border-radius:12px;background:color-mix(in srgb,var(--ok) 11%,var(--surface))}
+.ordl li::before{content:counter(o);flex:none;width:26px;height:26px;border-radius:50%;background:var(--ok);color:var(--bg);font-weight:700;font-size:.85rem;display:grid;place-items:center}
+@media (max-width:420px){.ring{width:96px;height:96px}.goalp{gap:14px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
 @media (max-width:640px){.mole-grid,.ions{grid-template-columns:1fr}}
 
@@ -1165,7 +1223,7 @@ fi_cal:{
 
 /* ---------- Stato e salvataggio ---------- */
 var KEY='filtro-studio-v1';
-function blank(){return {topics:{},placed:{},log:[],errors:{},custom:[],expl:{},cards:{},mat:{}};}
+function blank(){return {topics:{},placed:{},log:[],errors:{},custom:[],expl:{},cards:{},mat:{},days:{},exams:[],goal:20,hide:true,gs:{}};}
 var S=blank();
 try{var raw=localStorage.getItem(KEY);if(raw){S=Object.assign(blank(),JSON.parse(raw));}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
@@ -1190,6 +1248,34 @@ function lastAns(qid){for(var i=S.log.length-1;i>=0;i--){if(S.log[i].q===qid)ret
 function levelLabel(tid){var t=T(tid);if(!known(tid))return 'Da valutare';return t.fragile?'Da costruire':LV[t.level];}
 function meter(tid){var t=T(tid),k=known(tid);return '<span class="meter" role="img" aria-label="'+esc(levelLabel(tid))+'" style="--sc:var('+SUBJ[topicOf(tid).s].v+')">'+[1,2,3].map(function(i){return '<i style="--i:'+(i-1)+'" class="'+(k&&i<=t.level&&!(t.fragile&&i===1)?'on':'')+'"></i>';}).join('')+'</span>';}
 function scrollTop(){try{window.scrollTo(0,0);}catch(e){}}
+/* ---------- Giorni, obiettivo, statistiche ---------- */
+function dayKey(t){var d=new Date(t===undefined?Date.now():t);return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+function bump(n){var k=dayKey();S.days=S.days||{};S.days[k]=(S.days[k]||0)+(n||1);var ks=Object.keys(S.days);if(ks.length>400){ks.sort();ks.slice(0,ks.length-400).forEach(function(x){delete S.days[x];});}}
+function goal(){return S.goal>0?S.goal:20;}
+function todayCount(){return (S.days&&S.days[dayKey()])||0;}
+function streakInfo(){
+  var g=goal(),n=0,d=new Date();d.setHours(12,0,0,0);
+  if(((S.days||{})[dayKey(d.getTime())]||0)<g)d.setDate(d.getDate()-1);
+  while(((S.days||{})[dayKey(d.getTime())]||0)>=g&&n<400){n++;d.setDate(d.getDate()-1);}
+  return n;
+}
+function weekData(){
+  var out=[],d=new Date(),nm=['D','L','M','M','G','V','S'];d.setHours(12,0,0,0);
+  for(var i=6;i>=0;i--){var x=new Date(d.getTime());x.setDate(x.getDate()-i);out.push({n:nm[x.getDay()],c:(S.days||{})[dayKey(x.getTime())]||0,today:i===0});}
+  return out;
+}
+function mastery(tid){return known(tid)?Math.round((1-Math.min(weakness(tid),1))*100):null;}
+function subjMastery(s){
+  var ids=TOPICS.filter(function(t){return t.s===s;}).map(function(t){return t.id;}),k=ids.filter(known);
+  var sum=k.reduce(function(a,id){return a+mastery(id);},0);
+  return {n:ids.length,k:k.length,pct:k.length?Math.round(sum/k.length):null};
+}
+function calib(){
+  var r=S.log.slice(-200).filter(function(x){return x.c;}),s=r.filter(function(x){return x.c==='s';}),u=r.filter(function(x){return x.c!=='s';});
+  function a(l){return l.length?Math.round(l.filter(function(x){return x.ok;}).length/l.length*100):null;}
+  return {ns:s.length,as:a(s),nu:u.length,au:a(u)};
+}
+function fmtTime(sec){sec=Math.max(0,Math.round(sec));return ('0'+Math.floor(sec/60)).slice(-2)+':'+('0'+sec%60).slice(-2);}
 
 /* ---------- Claude (capability "sample") ---------- */
 var sampleFn,sampleP=null;
@@ -1228,13 +1314,17 @@ function pickQuestions(pool,n){
   }
   return out;
 }
-function record(q,orig,ok,place){
-  var up=false;
-  S.log.push({q:q.id,t:q.t,ok:ok,ts:Date.now()});
+function record(q,orig,ok,place,conf){
+  var up=false,now=Date.now();
+  S.log.push({q:q.id,t:q.t,ok:ok,ts:now,c:conf||undefined});
   if(S.log.length>600)S.log.splice(0,S.log.length-600);
-  var e=S.errors[q.id];
-  if(!ok){S.errors[q.id]={n:(e?e.n:0)+1,ok:0,last:orig,ts:Date.now()};S.cards[q.id]={box:1,due:Date.now()};}
-  else if(e){e.ok=(e.ok||0)+1;}
+  var e=S.errors[q.id],c0=S.cards[q.id];
+  if(!ok){S.errors[q.id]={n:(e?e.n:0)+1,ok:0,last:orig,ts:now,sure:conf==='s'};S.cards[q.id]={box:0,due:now};}
+  else{
+    if(e)e.ok=(e.ok||0)+1;
+    if(!place&&c0&&c0.due<=now){c0.box=Math.min(4,(c0.box||0)+1);c0.due=now+INT[c0.box]*864e5;}
+  }
+  bump(1);
   if(!place){
     var t=T(q.t);
     if(ok){if(q.l>=t.level){t.streak++;if(t.streak>=2&&t.level<3){t.level++;t.streak=0;t.fragile=false;up=true;}}}
@@ -1354,12 +1444,13 @@ function extraName(kind){return kind==='ph'?'Scala del pH':kind==='punnett'?'Qua
 var ICON={
   home:'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
   study:'M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13z',
+  games:'M6 12h4M8 10v4M15 13h.01M18 11h.01M17.3 5H6.7a4 4 0 0 0-3.9 3.1l-1.4 6.5a2.6 2.6 0 0 0 4.4 2.4L8 15h8l2.2 2a2.6 2.6 0 0 0 4.4-2.4l-1.4-6.5A4 4 0 0 0 17.3 5z',
   errors:'M12 8v5M12 16.5v.5M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z'
 };
 function navHTML(){
-  if(view==='play'||view==='playcards'||view==='pick')return '';
-  var items=[['home','Oggi'],['study','Argomenti'],['errors','Errori']];
-  var act={result:'home',lesson:'home',lessonDone:'home',topic:'study',pick:'study'}[view]||view,nErr=unresolved().length;
+  if(view==='play'||view==='playcards'||view==='pick'||view==='exam'||view==='game')return '';
+  var items=[['home','Oggi'],['study','Argomenti'],['games','Giochi'],['errors','Errori']];
+  var act={result:'home',examResult:'home',lesson:'home',lessonDone:'home',topic:'study',pick:'study',game:'games'}[view]||view,nErr=unresolved().length;
   return '<nav class="tabbar" aria-label="Sezioni">'+items.map(function(it){
     return '<button data-act="go" data-v="'+it[0]+'"'+(act===it[0]?' aria-current="page"':'')+'><svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICON[it[0]]+'"/></svg>'+it[1]+(it[0]==='errors'&&nErr?'<span class="badge">'+nErr+'</span>':'')+'</button>';
   }).join('')+'</nav>';
@@ -1379,6 +1470,13 @@ function btn(b){return '<button class="btn'+(b.g?' ghost':'')+'" data-act="'+b.a
 function vHome(){
   var h='<h1>Oggi</h1>'+(ui.msg?'<p class="panel">'+esc(ui.msg)+'</p>':'')+helpBlock();
   var none=TOPICS.every(function(t){return !known(t.id);});
+  var g=goal(),today=todayCount(),p=Math.min(today/g,1),C=2*Math.PI*45,st=streakInfo(),met=today>=g;
+  var left=g-today;
+  /* obiettivo e serie */
+  h+='<section class="panel"><div class="goalp"><div class="ring'+(met?' met':'')+'" style="--c:'+C.toFixed(1)+';--o:'+((1-p)*C).toFixed(1)+'" role="img" aria-label="'+today+' risposte su '+g+' oggi"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="tr" cx="50" cy="50" r="45"/><circle class="pr" cx="50" cy="50" r="45"/></svg><div class="rt">'+today+'<small>su '+g+'</small></div></div>'+
+    '<div class="gtxt"><p class="kicker">Obiettivo di oggi</p><p class="big">'+(met?'Obiettivo raggiunto':'Ancora '+left+(left===1?' domanda':' domande'))+'</p><p class="muted" style="margin:0">'+(st>0?'<strong>'+st+'</strong> '+(st===1?'giorno':'giorni')+' di fila'+(met?'':' · completa oggi per continuare'):'Raggiungi l\'obiettivo per iniziare una serie')+'</p>'+
+    '<div class="pills" role="group" aria-label="Obiettivo giornaliero">'+[10,20,30,50].map(function(n){return '<button class="pill" data-act="goalSet" data-v="'+n+'" aria-pressed="'+(g===n)+'">'+n+'</button>';}).join('')+'</div></div></div></section>';
+  /* lezione */
   if(none){
     h+='<section class="panel hero"><p class="kicker">Per cominciare</p><h2>Test di livello</h2><p>2 o 3 domande per ognuno dei '+TOPICS.length+' argomenti. Si fa una volta sola e serve a capire da dove partire.</p><button class="btn block" data-act="placeStart" data-arg="all">Inizia il test</button><p class="center"><button class="linkbtn" data-act="lessonStart">Salta e inizia subito a studiare</button></p></section>';
   }else{
@@ -1389,10 +1487,40 @@ function vHome(){
   }
   var due=dueCount(),nE=unresolved().length;
   h+='<div class="quick"><button class="qc" data-act="startCards" data-arg="due"'+(due?'':' disabled')+'><b>'+due+'</b>flashcard da ripassare</button><button class="qc" data-act="quizErrTopic"'+(nE?'':' disabled')+'><b>'+nE+'</b>errori da recuperare</button></div>';
+  /* ultimi 7 giorni + materie */
+  var wk=weekData(),mx=Math.max(g,Math.max.apply(null,wk.map(function(x){return x.c;})));
+  var week='<section class="panel"><h3>Ultimi 7 giorni</h3><div class="week">'+wk.map(function(x){
+    var cls=x.c>=g?' met':x.c>0?' part':'';
+    return '<div class="wd'+cls+(x.today?' today':'')+'"><span class="v">'+x.c+'</span><span class="b" style="--h:'+Math.max(4,Math.round(x.c/mx*80))+'"></span><span class="l">'+x.n+'</span></div>';
+  }).join('')+'</div><p class="note" style="margin:10px 0 0">Le colonne verdi sono i giorni in cui hai raggiunto l\'obiettivo.</p></section>';
+  var subj='<section class="panel"><h3>Padronanza per materia</h3>'+Object.keys(SUBJ).map(function(s){
+    var m=subjMastery(s);
+    return '<div class="sb" style="--sc:var('+SUBJ[s].v+')"><div class="top"><strong>'+SUBJ[s].n+'</strong><span>'+(m.pct===null?'da valutare':m.pct+'%')+' · '+m.k+' di '+m.n+' argomenti</span></div><div class="meter2" role="img" aria-label="'+SUBJ[s].n+': '+(m.pct===null?'da valutare':m.pct+'%')+'"><b style="width:'+(m.pct||0)+'%"></b></div></div>';
+  }).join('')+'<p class="note" style="margin:0">Stima basata su livello, risposte recenti ed errori ancora aperti.</p></section>';
+  h+='<div class="dash">'+week+subj+'</div>';
+  /* punti deboli + sicurezza */
+  var blocks='';
+  if(!none){
+    var wk4=rankTopics().filter(known).slice(0,4);
+    if(wk4.length)blocks+='<section class="panel"><h3>Da rafforzare</h3><ul class="plain">'+wk4.map(function(id){var tt=topicOf(id),m=mastery(id);return '<li><button class="trow" data-act="openTopic" data-t="'+id+'"><span>'+esc(tt.n)+'<span class="lab">'+SUBJ[tt.s].n+' · '+esc(levelLabel(id).toLowerCase())+'</span></span><span class="pct">'+m+'%</span></button></li>';}).join('')+'</ul></section>';
+  }
+  var cb=calib(),sureErr=unresolved().filter(function(id){return S.errors[id].sure;}).length;
+  if(cb.ns+cb.nu>=6||sureErr){
+    var tx='';
+    if(cb.as!==null)tx+='Quando ti senti sicuro hai ragione nel <strong>'+cb.as+'%</strong> dei casi ('+cb.ns+' risposte). ';
+    if(cb.au!==null)tx+='Quando sei incerto o tiri a caso, nel <strong>'+cb.au+'%</strong> ('+cb.nu+' risposte). ';
+    if(cb.as!==null&&cb.au!==null&&cb.ns>=4&&cb.nu>=4)tx+=(cb.as-cb.au<15?'La sicurezza non distingue ancora bene ciò che sai da ciò che non sai: ripassa anche gli argomenti che ti sembrano facili.':'La tua sicurezza è un buon segnale di quello che sai.');
+    blocks+='<section class="panel"><h3>Quanto ti puoi fidare</h3>'+(tx?'<p>'+tx+'</p>':'')+(sureErr?'<p style="margin:0"><strong>'+sureErr+'</strong> '+(sureErr===1?'errore fatto':'errori fatti')+' con sicurezza da recuperare: sono i più utili da correggere.</p>':'')+'</section>';
+  }
+  var ex=S.exams||[],le=ex.length?ex[ex.length-1]:null;
+  blocks+='<section class="panel"><h3>Simulazione d\'esame</h3><p class="muted">Domande miste di chimica, biologia e fisica, con cronometro (1 minuto a domanda) e correzione solo alla fine.</p>'+
+    (le?'<p>Ultima: <strong>'+le.ok+' su '+le.n+'</strong> ('+Math.round(le.ok/le.n*100)+'%)'+(ex.length>1?' · precedenti: '+ex.slice(-4,-1).reverse().map(function(x){return Math.round(x.ok/x.n*100)+'%';}).join(', '):'')+'</p>':'')+
+    '<div class="two"><button class="btn ghost" data-act="examStart" data-n="15">15 domande</button><button class="btn" data-act="examStart" data-n="30">30 domande</button></div></section>';
+  h+='<div class="dash">'+blocks+'</div>';
   h+='<section class="panel"><div class="between" style="margin:0"><div><h3 style="margin:0">Quiz su misura</h3><span class="muted">Scegli tu gli argomenti</span></div><button class="btn ghost sm" data-act="go" data-v="pick">Scegli</button></div></section><p class="center" style="margin:0 0 14px"><button class="linkbtn" data-act="go" data-v="study">Vedi tutti i '+TOPICS.length+' argomenti</button></p>';
   var rec=S.log.slice(-30),acc=rec.length?Math.round(rec.filter(function(x){return x.ok;}).length/rec.length*100):null;
   if(S.log.length)h+='<p class="muted">Lezioni completate: <strong>'+(S.lessonsDone||0)+'</strong>'+(acc!==null?' · Risposte esatte di recente: <strong>'+acc+'%</strong>':'')+'</p>';
-  h+=backupBlock()+'<p class="foot"><button class="linkbtn" data-act="helpOpen">Come funziona</button> · <button class="linkbtn" data-act="backupOpen">Trasferisci i progressi</button> · <button class="linkbtn" data-act="reset">'+(ui.confirmReset?'Tocca di nuovo per azzerare tutto':'Azzera i progressi')+'</button></p</button></p><p class="note center">Versione 5 ottobre · quiz su misura</p>';
+  h+=backupBlock()+'<p class="foot"><button class="linkbtn" data-act="helpOpen">Come funziona</button> · <button class="linkbtn" data-act="backupOpen">Trasferisci i progressi</button> · <button class="linkbtn" data-act="hideToggle">Opzioni nascoste prima di rispondere: '+(S.hide===false?'no':'sì')+'</button> · <button class="linkbtn" data-act="reset">'+(ui.confirmReset?'Tocca di nuovo per azzerare tutto':'Azzera i progressi')+'</button></p><p class="note center">Versione 5 ottobre · dashboard, giochi e ripasso spaziato</p>';
   return h;
 }
 
@@ -1403,6 +1531,9 @@ function vPlay(){
   var last=!place&&sess.i+1>=sess.items.length;
   var h=(sess.lesson?lessonBar(2):'')+'<div class="between"><span class="muted">'+esc(label)+'</span>'+(sess.lesson?'':'<button class="btn ghost sm" data-act="quit">Esci</button>')+'</div><div class="prog"><b style="width:'+(ui.lp||0)+'%" data-w="'+pct+'"></b></div>';ui.lp=pct;
   h+='<div class="tag" style="--sc:var('+SUBJ[t.s].v+')">'+esc(t.n)+'</div><h2 class="qt">'+esc(q.q)+'</h2>';
+  if(!sess.reveal){
+    return h+'<section class="panel conf"><p style="margin:0 0 12px">Pensa alla risposta senza guardare le opzioni. Poi dimmi quanto sei sicuro: le opzioni compaiono subito dopo.</p><div class="cfg"><button class="btn" data-act="conf" data-c="s">Sicuro</button><button class="btn ghost" data-act="conf" data-c="i">Incerto</button><button class="btn ghost" data-act="conf" data-c="c">A caso</button></div><p class="center" style="margin:6px 0 0"><button class="linkbtn" data-act="conf" data-c="n">Mostra subito le opzioni</button></p></section>';
+  }
   sess.order.forEach(function(orig,j){
     var cls='',dis=sess.shown?' disabled':'';
     if(sess.shown){if(orig===q.a)cls=' ok';else if(j===sess.chosen)cls=' bad';if(cls&&fx)cls+=' fx';}
@@ -1410,13 +1541,403 @@ function vPlay(){
   });
   if(sess.shown){
     var ok=sess.ok,chosenOrig=sess.order[sess.chosen];
-    h+='<div class="panel fb'+(ok?'':' bad')+(fx?' fx':'')+'"><h3>'+(ok?'Esatto':'Non è questa')+'</h3>'+(sess.lvUp?'<div class="lvup">Sei salito di livello: ora sei <strong>'+sess.lvUp+'</strong>.</div>':'')+(ok?'':'<p>La risposta corretta è <strong>'+esc(q.o[q.a])+'</strong>.</p>')+'<p>'+esc(q.e)+'</p>'+
-      (ok&&!place?'<div class="rev"><p class="muted" style="margin:0 0 8px">Vuoi ripassarla più tardi?</p><div class="two"><button class="btn ghost sm" data-act="rev" data-v="1" aria-pressed="'+(sess.rev===1)+'">Sì, ripassala</button><button class="btn ghost sm" data-act="rev" data-v="0" aria-pressed="'+(sess.rev===0)+'">No, la so</button></div>'+(sess.rev===1?'<p class="note" style="margin:8px 0 0">Tornerà tra le flashcard da ripassare.</p>':'')+'</div>':'')+
+    var cm=(!ok&&!place&&sess.conf==='s')?'<p class="note">Eri sicuro, ma era sbagliata: è un errore utile da correggere, perché ti sembrava giusta.</p>':'';
+    h+='<div class="panel fb'+(ok?'':' bad')+(fx?' fx':'')+'"><h3>'+(ok?'Esatto':'Non è questa')+'</h3>'+(sess.lvUp?'<div class="lvup">Sei salito di livello: ora sei <strong>'+sess.lvUp+'</strong>.</div>':'')+(ok?'':'<p>La risposta corretta è <strong>'+esc(q.o[q.a])+'</strong>.</p>')+cm+'<p>'+esc(q.e)+'</p>'+
+      (ok&&!place?'<div class="rev"><p class="muted" style="margin:0 0 8px">'+(sess.conf&&sess.conf!=='s'?'Eri incerto: la rivedrai. Vuoi toglierla dal ripasso?':'Vuoi ripassarla più tardi?')+'</p><div class="two"><button class="btn ghost sm" data-act="rev" data-v="1" aria-pressed="'+(sess.rev===1)+'">Sì, ripassala</button><button class="btn ghost sm" data-act="rev" data-v="0" aria-pressed="'+(sess.rev===0)+'">No, la so</button></div>'+(sess.rev===1?'<p class="note" style="margin:8px 0 0">Tornerà tra le flashcard da ripassare.</p>':'')+'</div>':'')+
       (!ok&&claudeOk()?'<button class="btn ghost sm" data-act="explain" data-q="'+q.id+'" data-c="'+chosenOrig+'">Spiegami meglio</button>':'')+
       '<div class="xp" id="xp-'+q.id+'" hidden></div><button class="btn block" style="margin-top:14px" data-act="next">'+(last?'Vedi il risultato':'Avanti')+'</button></div>';
   }
   return h;
 }
+
+/* ---------- Simulazione d'esame ---------- */
+var xTimer=null;
+function vExam(){
+  var i=sess.i,q=sess.items[i],ord=sess.orders[i],n=sess.items.length,blank=sess.ans.filter(function(x){return x===null;}).length;
+  var left=Math.max(0,Math.round((sess.end-Date.now())/1000));
+  var h='<div class="between"><span class="muted">Simulazione · domanda '+(i+1)+' di '+n+'</span><span class="timer'+(left<=60?' low':'')+'" id="xt" role="timer" aria-label="Tempo rimasto">'+fmtTime(left)+'</span></div>';
+  h+='<div class="xgrid" role="group" aria-label="Elenco domande">'+sess.items.map(function(_,k){var a=sess.ans[k]!==null;return '<button class="xn'+(k===i?' cur':'')+(a?' done':'')+'" data-act="examGo" data-i="'+k+'" aria-label="Domanda '+(k+1)+(a?', risposta data':', senza risposta')+'"'+(k===i?' aria-current="true"':'')+'>'+(k+1)+'</button>';}).join('')+'</div>';
+  h+='<h2 class="qt">'+esc(q.q)+'</h2>';
+  ord.forEach(function(orig,j){var on=sess.ans[i]===j;h+='<button class="opt'+(on?' sel':'')+'" data-act="examAns" data-j="'+j+'" aria-pressed="'+on+'"><span class="k">'+'ABCD'[j]+'</span><span>'+esc(q.o[orig])+'</span></button>';});
+  h+='<div class="two" style="margin-top:14px"><button class="btn ghost" data-act="examStep" data-v="-1"'+(i===0?' disabled':'')+'>Indietro</button><button class="btn ghost" data-act="examStep" data-v="1"'+(i===n-1?' disabled':'')+'>Avanti</button></div>';
+  if(ui.exConf){
+    h+='<section class="panel" style="margin-top:14px"><p style="margin:0 0 10px">'+(blank?'Hai ancora <strong>'+blank+'</strong> '+(blank===1?'domanda senza risposta':'domande senza risposta')+'. ':'')+'Vuoi consegnare adesso?</p><div class="two"><button class="btn ghost" data-act="examCancel">Continua</button><button class="btn" data-act="examSubmit" data-f="1">Consegna</button></div></section>';
+  }else{
+    h+='<button class="btn block" style="margin-top:14px" data-act="examSubmit">Consegna</button><p class="center" style="margin:6px 0 0"><button class="linkbtn" data-act="examQuit">'+(ui.exQuit?'Tocca di nuovo per abbandonare (si perde tutto)':'Abbandona la simulazione')+'</button></p>';
+  }
+  return h;
+}
+function startExam(n){
+  var per=Math.floor(n/3),items=[];
+  Object.keys(SUBJ).forEach(function(s){items=items.concat(shuffle(bank().filter(function(q){var t=topicOf(q.t);return t&&t.s===s;})).slice(0,per));});
+  items=shuffle(items);
+  sess={mode:'exam',items:items,orders:items.map(function(){return shuffle([0,1,2,3]);}),ans:items.map(function(){return null;}),i:0,start:Date.now(),end:Date.now()+items.length*60000,done:false};
+  ui.exConf=false;ui.exQuit=false;view='exam';render();scrollTop();
+}
+function examTick(){
+  if(!sess||sess.mode!=='exam'||view!=='exam'){clearInterval(xTimer);xTimer=null;return;}
+  var left=Math.max(0,Math.round((sess.end-Date.now())/1000)),e=$('xt');
+  if(e){e.textContent=fmtTime(left);e.classList.toggle('low',left<=60);}
+  if(left<=0)examSubmit(true);
+}
+function examSubmit(force){
+  if(!sess||sess.mode!=='exam')return;
+  var blank=sess.ans.filter(function(x){return x===null;}).length;
+  if(!force&&blank&&!ui.exConf){ui.exConf=true;render();return;}
+  var by={},ok=0,rows=[];
+  sess.items.forEach(function(q,k){
+    var s=topicOf(q.t).s,b=by[s]||(by[s]=[0,0]),j=sess.ans[k],good=false;b[1]++;
+    if(j!==null){var orig=sess.orders[k][j];good=orig===q.a;record(q,orig,good,false,null);}
+    if(good){ok++;b[0]++;}
+    rows.push({q:q,j:j,ok:good});
+  });
+  var sec=Math.min(Math.round((Date.now()-sess.start)/1000),sess.items.length*60);
+  S.exams=(S.exams||[]).concat([{ts:Date.now(),n:sess.items.length,ok:ok,sec:sec,by:by}]).slice(-20);save();
+  sess.done=true;sess.res={ok:ok,by:by,sec:sec,rows:rows};ui.exConf=false;view='examResult';render();scrollTop();
+}
+function vExamResult(){
+  var r=sess.res,n=sess.items.length,pct=Math.round(r.ok/n*100),ex=S.exams||[],pv=ex.length>1?ex[ex.length-2]:null,cmp='';
+  if(pv){var d=pct-Math.round(pv.ok/pv.n*100);cmp='<p>'+(d>0?'<strong>+'+d+'</strong> punti percentuali rispetto alla simulazione precedente.':d<0?'<strong>'+d+'</strong> punti percentuali rispetto alla simulazione precedente.':'Come la simulazione precedente.')+'</p>';}
+  var h='<h1>Simulazione conclusa</h1><section class="panel center"><div class="stat"><span class="cnt" data-n="'+r.ok+'">'+r.ok+'</span> su '+n+'</div><p class="muted" style="margin:0">risposte esatte · '+pct+'% · tempo '+fmtTime(r.sec)+'</p>'+cmp+'</section>';
+  h+='<section class="panel"><h3>Per materia</h3>'+Object.keys(SUBJ).filter(function(s){return r.by[s];}).map(function(s){var b=r.by[s],pp=Math.round(b[0]/b[1]*100);return '<div class="sb" style="--sc:var('+SUBJ[s].v+')"><div class="top"><strong>'+SUBJ[s].n+'</strong><span>'+b[0]+' su '+b[1]+'</span></div><div class="meter2"><b style="width:'+pp+'%"></b></div></div>';}).join('')+'</section>';
+  var bad=r.rows.filter(function(x){return !x.ok;});
+  if(bad.length){
+    h+='<section class="panel"><h3>Da rivedere ('+bad.length+')</h3>'+bad.map(function(x){var q=x.q,orig=x.j===null?null:sess.orders[sess.items.indexOf(q)][x.j];return '<details class="errq"><summary>'+esc(q.q)+'</summary><p>Hai risposto: <span class="mine">'+(orig===null?'nessuna risposta':esc(q.o[orig]))+'</span><br>Corretta: <span class="good">'+esc(q.o[q.a])+'</span></p><p>'+esc(q.e)+'</p></details>';}).join('')+'<p class="note" style="margin:10px 0 0">Gli errori sono nella sezione Errori e torneranno nelle flashcard.</p></section>';
+  }
+  return h+'<button class="btn block" style="margin-bottom:10px" data-act="examStart" data-n="'+n+'">Un\'altra simulazione</button><button class="btn ghost block" data-act="go" data-v="home">Torna a Oggi</button>';
+}
+
+/* ---------- Giochi ---------- */
+var gm=null;
+function defPool(scope){
+  var out=[];
+  TOPICS.forEach(function(t){if(scope!=='all'&&t.s!==scope)return;(DEFS[t.id]||[]).forEach(function(d){out.push({t:t.id,s:t.s,term:d[0],def:d[1]});});});
+  return out;
+}
+function gScope(){return ui.gscope||'all';}
+function othersOf(x,pool){
+  var same=pool.filter(function(y){return y.t===x.t&&y.term!==x.term;});
+  if(same.length>=3)return same;
+  var ss=pool.filter(function(y){return y.s===x.s&&y.term!==x.term;});
+  return ss.length>=3?ss:pool.filter(function(y){return y.term!==x.term;});
+}
+function buildItem(g,x,pool){
+  var oth=othersOf(x,pool);
+  if(g==='tf'){var truth=Math.random()<0.5,w=shuffle(oth)[0];return {term:x.term,def:truth?x.def:w.def,right:x.def,truth:truth,t:x.t};}
+  return {def:x.def,term:x.term,opts:shuffle(shuffle(oth).slice(0,3).map(function(y){return y.term;}).concat([x.term])),t:x.t};
+}
+function startGame(g){
+  var sc=gScope(),pool=defPool(sc),idx=function(n){var a=[];for(var i=0;i<n;i++)a.push(i);return a;};
+  if(g==='match'){
+    var seen={},pairs=[];
+    shuffle(pool).forEach(function(x){if(pairs.length<6&&!seen[x.t]){seen[x.t]=1;pairs.push(x);}});
+    gm={g:g,pairs:pairs,tOrder:shuffle(idx(pairs.length)),dOrder:shuffle(idx(pairs.length)),sel:null,done:{},nd:0,miss:0,start:Date.now(),sec:null,shake:null};
+  }else if(g==='tf'||g==='guess'){
+    gm={g:g,items:shuffle(pool).slice(0,10).map(function(x){return buildItem(g,x,pool);}),i:0,score:0,shown:null,pick:null,streak:0,end:false};
+  }else{
+    var list=SEQS.filter(function(s){return sc==='all'||s.s===sc;});if(list.length<2)list=SEQS;
+    var prev=gm&&gm.g==='order'?gm.seq:null,cand=list.filter(function(s){return s!==prev;});
+    var seq=shuffle(cand.length?cand:list)[0],n=seq.i.length,ord;
+    do{ord=shuffle(idx(n));}while(ord.every(function(v,k){return v===k;}));
+    gm={g:g,seq:seq,order:ord,p:0,miss:0,shake:null};
+  }
+  view='game';render();scrollTop();
+}
+function vGames(){
+  var sc=gScope(),gs=S.gs||{};
+  var h='<h1>Giochi</h1><p class="muted">Per fissare definizioni e sequenze giocando. Scegli la materia e il gioco.</p>';
+  h+='<div class="pills" role="group" aria-label="Materia" style="margin:0 0 16px">'+[['all','Tutte']].concat(Object.keys(SUBJ).map(function(s){return [s,SUBJ[s].n];})).map(function(x){return '<button class="pill" data-act="gScope" data-v="'+x[0]+'" aria-pressed="'+(sc===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>';
+  var games=[
+   ['match','Abbina','Collega sei termini alle loro definizioni.',gs.m?'Round completati: '+gs.m:''],
+   ['tf','Vero o falso','Dieci affermazioni: la definizione è giusta o no?',gs.tf?'Record: '+gs.tf+' su 10':''],
+   ['guess','Indovina il termine','Leggi la definizione e scegli il termine giusto.',gs.gu?'Record: '+gs.gu+' su 10':''],
+   ['order','Metti in ordine','Rimetti nell\'ordine giusto le fasi di un processo.',gs.o?'Sequenze completate: '+gs.o:'']];
+  games.forEach(function(g){
+    h+='<section class="panel gcard"><div class="between" style="margin:0"><div><h3 style="margin:0">'+g[1]+'</h3><span class="muted">'+g[2]+'</span>'+(g[3]?'<span class="note" style="display:block;margin-top:4px">'+g[3]+'</span>':'')+'</div><button class="btn sm" data-act="gStart" data-g="'+g[0]+'">Gioca</button></div></section>';
+  });
+  return h+'<p class="note">Le definizioni sono quelle standard dei manuali: più giochi, più ti restano in mente.</p>';
+}
+function gHead(title){return '<div class="between"><span class="muted">'+esc(title)+'</span><button class="btn ghost sm" data-act="gExit">Esci</button></div>';}
+function gEnd(title,big,sub,againLabel){
+  return gHead(title)+'<section class="panel center hero" style="--sc:var(--ok)"><div class="stat">'+big+'</div><p class="muted" style="margin:6px 0 14px">'+sub+'</p><button class="btn block" data-act="gAgain">'+(againLabel||'Gioca ancora')+'</button><p class="center"><button class="linkbtn" data-act="gExit">Torna ai giochi</button></p></section>';
+}
+function vGame(){
+  var m=gm;
+  if(m.g==='match'){
+    if(m.nd===m.pairs.length)return gEnd('Abbina',m.miss===0?'Perfetto':m.miss+(m.miss===1?' errore':' errori'),'Tempo '+fmtTime(m.sec)+' · '+m.pairs.length+' coppie','Un altro round');
+    var h=gHead('Abbina · '+m.nd+' su '+m.pairs.length)+'<p class="muted">Tocca un termine, poi la sua definizione.</p><div class="mterms">'+
+      m.tOrder.map(function(i){var d=m.done[i];return '<button class="mt'+(m.sel===i?' sel':'')+(d?' ok':'')+'" data-act="gmT" data-i="'+i+'"'+(d?' disabled':'')+' aria-pressed="'+(m.sel===i)+'">'+esc(m.pairs[i].term)+'</button>';}).join('')+'</div><div class="mdefs">'+
+      m.dOrder.map(function(i){var d=m.done[i];return '<button class="md'+(d?' ok':'')+(m.shake===i?' shake':'')+'" data-act="gmD" data-i="'+i+'"'+(d?' disabled':'')+'>'+esc(m.pairs[i].def)+(d?'<span class="who">'+esc(m.pairs[i].term)+'</span>':'')+'</button>';}).join('')+'</div><p class="note">Errori: '+m.miss+'</p>';
+    m.shake=null;return h;
+  }
+  if(m.g==='tf'||m.g==='guess'){
+    var nm=m.g==='tf'?'Vero o falso':'Indovina il termine';
+    if(m.end)return gEnd(nm,m.score+' su '+m.items.length,m.score===m.items.length?'Tutte giuste':m.score>=7?'Ottimo, continua così':'Riprova: le definizioni si fissano con la ripetizione');
+    var it=m.items[m.i],t=topicOf(it.t),pct=Math.round(m.i/m.items.length*100);
+    var h2=gHead(nm+' · '+(m.i+1)+' di '+m.items.length)+'<div class="prog"><b style="width:'+pct+'%"></b></div><div class="tag" style="--sc:var('+SUBJ[t.s].v+')">'+esc(t.n)+'</div>';
+    if(m.g==='tf'){
+      h2+='<div class="panel"><p class="stmt"><strong>'+esc(it.term)+'</strong>: '+esc(it.def)+'</p></div>';
+      if(m.shown===null)return h2+'<div class="two"><button class="btn ghost" data-act="gTF" data-v="1">Vero</button><button class="btn ghost" data-act="gTF" data-v="0">Falso</button></div>';
+      var ok=m.shown==='ok';
+      return h2+'<div class="panel fb'+(ok?'':' bad')+'"><h3>'+(ok?'Esatto':'Sbagliato')+'</h3><p>'+(it.truth?'La definizione era corretta.':'La definizione giusta di <strong>'+esc(it.term)+'</strong> è: '+esc(it.right))+'</p><button class="btn block" data-act="gNext">'+(m.i+1>=m.items.length?'Vedi il risultato':'Avanti')+'</button></div>';
+    }
+    h2+='<h2 class="qt">'+esc(it.def)+'</h2>';
+    it.opts.forEach(function(o,j){var cls='';if(m.shown!==null){if(o===it.term)cls=' ok';else if(j===m.pick)cls=' bad';}h2+='<button class="opt'+cls+'" data-act="gGu" data-i="'+j+'"'+(m.shown!==null?' disabled':'')+'><span class="k">'+'ABCD'[j]+'</span><span>'+esc(o)+'</span></button>';});
+    if(m.shown!==null)h2+='<div class="panel fb'+(m.shown==='ok'?'':' bad')+'"><h3>'+(m.shown==='ok'?'Esatto':'Non è questo')+'</h3><p><strong>'+esc(it.term)+'</strong>: '+esc(it.def)+'</p><button class="btn block" data-act="gNext">'+(m.i+1>=m.items.length?'Vedi il risultato':'Avanti')+'</button></div>';
+    return h2+'<p class="note">Serie di risposte esatte: '+m.streak+'</p>';
+  }
+  /* order */
+  var n=m.seq.i.length;
+  if(m.p>=n)return gHead('Metti in ordine')+'<section class="panel center hero" style="--sc:var(--ok)"><div class="stat" style="font-size:2rem">'+(m.miss===0?'Ordine perfetto':m.miss+(m.miss===1?' errore':' errori'))+'</div><h3 style="margin:10px 0">'+esc(m.seq.t)+'</h3><ol class="ordl" style="text-align:left">'+m.seq.i.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')+'</ol><button class="btn block" data-act="gAgain">Un\'altra sequenza</button><p class="center"><button class="linkbtn" data-act="gExit">Torna ai giochi</button></p></section>';
+  var rem=m.order.filter(function(i){return i>=m.p;});
+  var h3=gHead('Metti in ordine')+'<h2 class="qt">'+esc(m.seq.t)+'</h2><p class="muted">Tocca gli elementi uno alla volta, dal primo all\'ultimo.</p>';
+  if(m.p)h3+='<ol class="ordl">'+m.seq.i.slice(0,m.p).map(function(s){return '<li>'+esc(s)+'</li>';}).join('')+'</ol>';
+  rem.forEach(function(i){h3+='<button class="opt'+(m.shake===i?' shake':'')+'" data-act="gOrd" data-i="'+i+'"><span>'+esc(m.seq.i[i])+'</span></button>';});
+  m.shake=null;
+  return h3+'<p class="note">Errori: '+m.miss+'</p>';
+}
+function gameAct(a,d){
+  if(!gm)return;
+  if(a==='gmT'&&gm.g==='match'){gm.sel=+d.i;render();}
+  else if(a==='gmD'&&gm.g==='match'){
+    var j=+d.i;if(gm.sel===null)return;
+    if(gm.sel===j){gm.done[j]=true;gm.nd++;gm.sel=null;if(gm.nd===gm.pairs.length){gm.sec=Math.round((Date.now()-gm.start)/1000);S.gs=S.gs||{};S.gs.m=(S.gs.m||0)+1;save();}}
+    else{gm.miss++;gm.shake=j;}
+    render();
+  }
+  else if(a==='gTF'&&gm.g==='tf'&&gm.shown===null){var it=gm.items[gm.i],ok=(d.v==='1')===it.truth;gm.shown=ok?'ok':'bad';if(ok)gm.score++;render();}
+  else if(a==='gGu'&&gm.g==='guess'&&gm.shown===null){var it2=gm.items[gm.i],ok2=it2.opts[+d.i]===it2.term;gm.pick=+d.i;gm.shown=ok2?'ok':'bad';if(ok2){gm.score++;gm.streak++;}else gm.streak=0;render();}
+  else if(a==='gNext'){
+    if(gm.i+1>=gm.items.length){gm.end=true;S.gs=S.gs||{};var key=gm.g==='tf'?'tf':'gu';S.gs[key]=Math.max(S.gs[key]||0,gm.score);save();}
+    else{gm.i++;gm.shown=null;gm.pick=null;}
+    render();scrollTop();
+  }
+  else if(a==='gOrd'&&gm.g==='order'){
+    var i=+d.i;
+    if(i===gm.p){gm.p++;if(gm.p>=gm.seq.i.length){S.gs=S.gs||{};S.gs.o=(S.gs.o||0)+1;save();}}
+    else{gm.miss++;gm.shake=i;}
+    render();
+  }
+}
+var DEFS={
+ch_atomo:[
+ [`Numero atomico (Z)`,`Numero di protoni presenti nel nucleo di un atomo`],
+ [`Numero di massa (A)`,`Somma di protoni e neutroni di un nucleo`],
+ [`Isotopi`,`Atomi con lo stesso numero di protoni ma diverso numero di neutroni`],
+ [`Elettroni di valenza`,`Elettroni del livello energetico più esterno, che partecipano ai legami`],
+ [`Elettronegatività`,`Tendenza di un atomo ad attrarre a sé gli elettroni di un legame`],
+ [`Orbitale`,`Regione di spazio in cui è molto probabile trovare un elettrone`],
+ [`Gruppo`,`Colonna verticale della tavola periodica, i cui elementi hanno proprietà simili`]],
+ch_legami:[
+ [`Legame ionico`,`Attrazione elettrostatica tra ioni di carica opposta`],
+ [`Legame covalente`,`Legame in cui due atomi condividono una o più coppie di elettroni`],
+ [`Legame covalente polare`,`Legame con elettroni condivisi in modo non uguale, per la diversa elettronegatività degli atomi`],
+ [`Legame a idrogeno`,`Attrazione tra un idrogeno legato a O, N o F e una coppia di elettroni di un altro atomo elettronegativo`],
+ [`Legame metallico`,`Legame in cui gli elettroni di valenza sono delocalizzati tra i cationi del metallo`],
+ [`Molecola apolare`,`Molecola in cui la distribuzione della carica è simmetrica e non c'è un dipolo complessivo`],
+ [`Ibridazione`,`Combinazione di orbitali atomici che dà orbitali equivalenti, utile a spiegare la geometria di una molecola`]],
+ch_mole:[
+ [`Mole`,`Quantità di sostanza che contiene 6,022 × 10²³ particelle`],
+ [`Numero di Avogadro`,`Numero di particelle contenute in una mole, circa 6,022 × 10²³`],
+ [`Massa molare`,`Massa di una mole di sostanza, espressa in g/mol`],
+ [`Reagente limitante`,`Reagente che si esaurisce per primo e determina la quantità di prodotto`],
+ [`Resa percentuale`,`Rapporto tra la quantità di prodotto ottenuta e quella teorica, per cento`],
+ [`Volume molare`,`Volume occupato da una mole di gas: circa 22,4 L a 0 °C e 1 atm`]],
+ch_ph:[
+ [`pH`,`Valore uguale a −log₁₀ della concentrazione di ioni H⁺`],
+ [`Acido (Brønsted-Lowry)`,`Sostanza che cede ioni H⁺`],
+ [`Base (Brønsted-Lowry)`,`Sostanza che accetta ioni H⁺`],
+ [`Acido forte`,`Acido che in acqua si dissocia quasi completamente`],
+ [`Soluzione tampone`,`Soluzione che resiste alle variazioni di pH quando si aggiungono piccole quantità di acido o base`],
+ [`Prodotto ionico dell'acqua`,`Kw = [H⁺][OH⁻] = 10⁻¹⁴ a 25 °C`],
+ [`Anfotero`,`Sostanza che può comportarsi sia da acido sia da base, come l'acqua`]],
+bi_cell:[
+ [`Mitocondrio`,`Organello in cui avviene gran parte della produzione di ATP per respirazione cellulare`],
+ [`Ribosoma`,`Struttura che traduce l'mRNA e sintetizza le proteine`],
+ [`Reticolo endoplasmatico rugoso`,`Rete di membrane con ribosomi, coinvolta nella sintesi di proteine`],
+ [`Apparato di Golgi`,`Organello che modifica, smista e impacchetta proteine e lipidi`],
+ [`Lisosoma`,`Organello con enzimi digestivi che demoliscono molecole e materiali da eliminare`],
+ [`Cloroplasto`,`Organello delle cellule vegetali in cui avviene la fotosintesi`],
+ [`Cellula procariote`,`Cellula senza nucleo delimitato da membrana`],
+ [`Citoscheletro`,`Rete di filamenti proteici che dà forma alla cellula e permette il movimento interno`]],
+bi_memb:[
+ [`Diffusione semplice`,`Passaggio di molecole a favore di gradiente di concentrazione, senza energia e senza proteine`],
+ [`Osmosi`,`Diffusione dell'acqua attraverso una membrana semipermeabile`],
+ [`Diffusione facilitata`,`Passaggio a favore di gradiente tramite proteine di membrana, senza consumo di ATP`],
+ [`Trasporto attivo`,`Passaggio contro gradiente che richiede energia`],
+ [`Pompa sodio-potassio`,`Proteina che con ATP porta 3 Na⁺ fuori e 2 K⁺ dentro la cellula`],
+ [`Soluzione ipotonica`,`Soluzione con concentrazione di soluti minore rispetto all'interno della cellula`],
+ [`Endocitosi`,`Processo con cui la cellula introduce materiale inglobandolo in una vescicola di membrana`]],
+bi_dna:[
+ [`Replicazione`,`Processo che produce due copie identiche del DNA`],
+ [`Trascrizione`,`Sintesi di una molecola di RNA a partire da uno stampo di DNA`],
+ [`Traduzione`,`Sintesi di una proteina a partire da una sequenza di mRNA, sui ribosomi`],
+ [`Codone`,`Tripletta di nucleotidi dell'mRNA che codifica per un amminoacido`],
+ [`Anticodone`,`Tripletta del tRNA complementare a un codone dell'mRNA`],
+ [`RNA polimerasi`,`Enzima che sintetizza RNA durante la trascrizione`],
+ [`Mutazione`,`Cambiamento permanente nella sequenza di nucleotidi del DNA`],
+ [`Splicing`,`Rimozione degli introni e unione degli esoni nel pre-mRNA`]],
+bi_gen:[
+ [`Allele`,`Una delle forme alternative di uno stesso gene`],
+ [`Genotipo`,`Insieme degli alleli posseduti da un individuo per un carattere`],
+ [`Fenotipo`,`Caratteristica osservabile di un individuo`],
+ [`Omozigote`,`Individuo con due alleli uguali per un gene`],
+ [`Eterozigote`,`Individuo con due alleli diversi per un gene`],
+ [`Allele dominante`,`Allele che si manifesta nel fenotipo anche in un eterozigote`],
+ [`Incrocio test`,`Incrocio con un omozigote recessivo per scoprire il genotipo di un individuo a fenotipo dominante`]],
+fi_cin:[
+ [`Velocità media`,`Rapporto tra lo spazio percorso e il tempo impiegato`],
+ [`Accelerazione`,`Variazione della velocità nell'unità di tempo`],
+ [`Moto rettilineo uniforme`,`Moto in linea retta a velocità costante`],
+ [`Moto uniformemente accelerato`,`Moto con accelerazione costante`],
+ [`Caduta libera`,`Moto sotto la sola azione della forza di gravità, senza attrito`],
+ [`Moto circolare uniforme`,`Moto su una circonferenza con velocità di modulo costante`]],
+fi_din:[
+ [`Primo principio della dinamica`,`Un corpo con forza totale nulla resta fermo o in moto rettilineo uniforme`],
+ [`Secondo principio della dinamica`,`La forza totale su un corpo è uguale a massa per accelerazione`],
+ [`Terzo principio della dinamica`,`A ogni azione corrisponde una reazione uguale e opposta, su corpi diversi`],
+ [`Forza peso`,`Forza con cui la Terra attrae un corpo: massa per accelerazione di gravità`],
+ [`Attrito`,`Forza che si oppone al moto relativo tra due superfici a contatto`],
+ [`Massa`,`Grandezza che misura l'inerzia di un corpo, cioè la sua resistenza a cambiare velocità`]],
+fi_en:[
+ [`Lavoro`,`Prodotto della forza per lo spostamento nella direzione della forza`],
+ [`Energia cinetica`,`Energia di un corpo dovuta al suo moto: metà della massa per il quadrato della velocità`],
+ [`Energia potenziale gravitazionale`,`Energia dovuta alla posizione in altezza: massa per g per altezza`],
+ [`Potenza`,`Lavoro compiuto nell'unità di tempo`],
+ [`Conservazione dell'energia meccanica`,`In assenza di attriti la somma di energia cinetica e potenziale resta costante`],
+ [`Joule`,`Unità di misura SI di lavoro ed energia`]],
+fi_el:[
+ [`Corrente elettrica`,`Quantità di carica che attraversa una sezione del conduttore nell'unità di tempo`],
+ [`Differenza di potenziale`,`Lavoro per unità di carica necessario a spostare una carica tra due punti`],
+ [`Resistenza`,`Grandezza che misura l'opposizione di un conduttore al passaggio della corrente`],
+ [`Prima legge di Ohm`,`La differenza di potenziale è uguale al prodotto di resistenza e corrente`],
+ [`Resistenze in serie`,`Resistenze percorse dalla stessa corrente, la cui resistenza totale è la somma`],
+ [`Resistenze in parallelo`,`Resistenze con la stessa differenza di potenziale ai capi, in cui si sommano gli inversi`],
+ [`Effetto Joule`,`Trasformazione in calore dell'energia elettrica dissipata in un conduttore`]],
+ch_materia:[
+ [`Miscuglio omogeneo`,`Miscuglio con composizione uniforme in cui i componenti non si distinguono, come una soluzione`],
+ [`Miscuglio eterogeneo`,`Miscuglio in cui si distinguono fasi diverse`],
+ [`Sostanza pura`,`Materia con composizione e proprietà definite e costanti`],
+ [`Elemento`,`Sostanza pura formata da atomi con lo stesso numero atomico`],
+ [`Composto`,`Sostanza pura formata da elementi diversi legati in proporzioni fisse`],
+ [`Sublimazione`,`Passaggio diretto dallo stato solido a quello aeriforme`],
+ [`Decantazione`,`Tecnica di separazione che sfrutta la diversa densità per separare un solido o un liquido da un altro liquido`]],
+ch_reaz:[
+ [`Reagenti`,`Sostanze di partenza di una reazione chimica`],
+ [`Prodotti`,`Sostanze che si formano in una reazione chimica`],
+ [`Legge di Lavoisier`,`In una reazione la massa totale dei reagenti è uguale a quella dei prodotti`],
+ [`Coefficiente stechiometrico`,`Numero davanti a una formula, che bilancia gli atomi nell'equazione`],
+ [`Ossidazione`,`Perdita di elettroni da parte di una specie chimica`],
+ [`Riduzione`,`Acquisto di elettroni da parte di una specie chimica`],
+ [`Reazione esotermica`,`Reazione che libera calore nell'ambiente`],
+ [`Catalizzatore`,`Sostanza che aumenta la velocità di una reazione senza essere consumata`]],
+ch_sol:[
+ [`Soluto`,`Componente presente in quantità minore in una soluzione`],
+ [`Solvente`,`Componente presente in quantità maggiore in una soluzione`],
+ [`Molarità`,`Moli di soluto per litro di soluzione`],
+ [`Percentuale massa su massa`,`Grammi di soluto contenuti in 100 g di soluzione`],
+ [`Soluzione satura`,`Soluzione che non può sciogliere altro soluto a quella temperatura`],
+ [`Diluizione`,`Aggiunta di solvente: le moli di soluto restano le stesse e la concentrazione diminuisce`],
+ [`Solubilità`,`Massima quantità di soluto che si scioglie in una data quantità di solvente a una data temperatura`]],
+ch_neut:[
+ [`Neutralizzazione`,`Reazione tra un acido e una base che produce un sale e acqua`],
+ [`Sale`,`Composto ionico che si forma dalla reazione tra un acido e una base`],
+ [`Titolazione`,`Tecnica per determinare la concentrazione di una soluzione tramite una soluzione a concentrazione nota`],
+ [`Punto di equivalenza`,`Momento in cui le moli di acido e di base si trovano in rapporto stechiometrico`],
+ [`Indicatore`,`Sostanza che cambia colore a seconda del pH`],
+ [`Idrolisi salina`,`Reazione di uno ione di un sale con l'acqua, che può rendere la soluzione acida o basica`]],
+ch_org:[
+ [`Alcano`,`Idrocarburo con soli legami singoli carbonio-carbonio`],
+ [`Alchene`,`Idrocarburo con almeno un doppio legame carbonio-carbonio`],
+ [`Alcol`,`Composto con un gruppo ossidrile −OH legato a un carbonio saturo`],
+ [`Aldeide`,`Composto con un gruppo carbonilico all'estremità della catena, −CHO`],
+ [`Chetone`,`Composto con un gruppo carbonilico legato a due atomi di carbonio`],
+ [`Acido carbossilico`,`Composto con il gruppo funzionale −COOH`],
+ [`Isomeri`,`Composti con la stessa formula molecolare ma diversa struttura`],
+ [`Ammina`,`Composto organico derivato dall'ammoniaca per sostituzione di idrogeni con gruppi di carbonio`]],
+bi_ciclo:[
+ [`Mitosi`,`Divisione cellulare che produce due cellule figlie con lo stesso numero di cromosomi della cellula madre`],
+ [`Meiosi`,`Divisione che produce quattro cellule con la metà dei cromosomi, i gameti`],
+ [`Interfase`,`Fase del ciclo cellulare tra due divisioni, che comprende G1, S e G2`],
+ [`Fase S`,`Fase del ciclo cellulare in cui il DNA viene replicato`],
+ [`Crossing-over`,`Scambio di segmenti tra cromosomi omologhi nella profase I della meiosi`],
+ [`Cromatidi fratelli`,`Le due copie identiche di un cromosoma replicato, unite al centromero`],
+ [`Citodieresi`,`Divisione del citoplasma che separa le due cellule figlie`]],
+bi_biomol:[
+ [`Monosaccaride`,`Zucchero semplice che non può essere idrolizzato in zuccheri più piccoli, come il glucosio`],
+ [`Amido`,`Polisaccaride di riserva delle piante`],
+ [`Glicogeno`,`Polisaccaride di riserva degli animali, immagazzinato soprattutto in fegato e muscoli`],
+ [`Trigliceride`,`Lipide formato da glicerolo legato a tre acidi grassi`],
+ [`Fosfolipide`,`Lipide anfipatico che costituisce il doppio strato delle membrane`],
+ [`Nucleotide`,`Unità degli acidi nucleici: zucchero, gruppo fosfato e base azotata`],
+ [`Cellulosa`,`Polisaccaride strutturale delle pareti delle cellule vegetali`]],
+bi_prot:[
+ [`Amminoacido`,`Molecola con un gruppo amminico, un gruppo carbossilico e una catena laterale`],
+ [`Legame peptidico`,`Legame covalente tra il gruppo carbossilico di un amminoacido e il gruppo amminico del successivo`],
+ [`Struttura primaria`,`Sequenza di amminoacidi di una proteina`],
+ [`Enzima`,`Proteina che agisce da catalizzatore biologico`],
+ [`Sito attivo`,`Regione dell'enzima a cui si lega il substrato`],
+ [`Denaturazione`,`Perdita della struttura tridimensionale di una proteina, causata ad esempio da calore o pH estremo`],
+ [`Inibitore competitivo`,`Molecola che compete con il substrato per il sito attivo`]],
+bi_metab:[
+ [`Glicolisi`,`Via metabolica citoplasmatica che scinde il glucosio in due molecole di piruvato`],
+ [`Ciclo di Krebs`,`Serie di reazioni nella matrice mitocondriale che ossidano l'acetil-CoA producendo CO₂ e coenzimi ridotti`],
+ [`Fosforilazione ossidativa`,`Produzione di ATP sfruttando il gradiente protonico creato dalla catena di trasporto degli elettroni`],
+ [`Fermentazione`,`Processo anaerobio che rigenera NAD⁺ a partire dal piruvato senza usare ossigeno`],
+ [`ATP`,`Molecola che trasferisce energia chimica nelle reazioni della cellula`],
+ [`Fase luminosa`,`Fase della fotosintesi che avviene nei tilacoidi e produce ATP, NADPH e ossigeno`],
+ [`Ciclo di Calvin`,`Fase della fotosintesi che fissa la CO₂ negli zuccheri, nello stroma del cloroplasto`]],
+bi_gapp:[
+ [`PCR`,`Tecnica che amplifica in vitro un frammento di DNA`],
+ [`Elettroforesi su gel`,`Tecnica che separa frammenti di DNA in base alla loro lunghezza`],
+ [`Enzima di restrizione`,`Enzima che taglia il DNA in corrispondenza di sequenze specifiche`],
+ [`Plasmide`,`Piccola molecola circolare di DNA dei batteri, usata come vettore di clonazione`],
+ [`OGM`,`Organismo il cui DNA è stato modificato con tecniche di ingegneria genetica`],
+ [`Cellule staminali`,`Cellule non specializzate capaci di autorinnovarsi e di differenziarsi`],
+ [`DNA ricombinante`,`DNA ottenuto unendo frammenti provenienti da organismi diversi`]],
+fi_gran:[
+ [`Grandezza fondamentale`,`Grandezza scelta come base del Sistema Internazionale, come lunghezza, massa o tempo`],
+ [`Grandezza derivata`,`Grandezza che si ottiene combinando quelle fondamentali, come velocità o densità`],
+ [`Densità`,`Rapporto tra la massa di un corpo e il suo volume`],
+ [`Notazione scientifica`,`Scrittura di un numero come prodotto di un numero tra 1 e 10 per una potenza di 10`],
+ [`Cifre significative`,`Cifre di una misura che hanno un significato, cioè quelle certe più la prima incerta`],
+ [`Equivalenza`,`Uguaglianza tra la stessa grandezza espressa in unità diverse, come 1 km = 1000 m`]],
+fi_vet:[
+ [`Vettore`,`Grandezza con modulo, direzione e verso`],
+ [`Scalare`,`Grandezza descritta solo da un numero e da un'unità di misura`],
+ [`Risultante`,`Vettore somma di due o più vettori`],
+ [`Componente di un vettore`,`Proiezione del vettore lungo un asse`],
+ [`Prodotto scalare`,`Operazione tra due vettori il cui risultato è un numero`],
+ [`Versore`,`Vettore di modulo 1 usato per indicare una direzione e un verso`]],
+fi_flu:[
+ [`Pressione`,`Rapporto tra la forza perpendicolare a una superficie e l'area della superficie`],
+ [`Legge di Stevino`,`La pressione in un liquido aumenta con la profondità: densità per g per profondità`],
+ [`Principio di Pascal`,`Una pressione applicata a un fluido in quiete si trasmette uguale in tutte le direzioni`],
+ [`Principio di Archimede`,`Un corpo immerso riceve una spinta pari al peso del fluido spostato`],
+ [`Portata`,`Volume di fluido che attraversa una sezione nell'unità di tempo`],
+ [`Pascal`,`Unità di misura SI della pressione, uguale a un newton su metro quadrato`]],
+fi_cal:[
+ [`Calore`,`Energia che passa da un corpo più caldo a uno più freddo`],
+ [`Temperatura`,`Grandezza che misura lo stato termico di un corpo`],
+ [`Calore specifico`,`Calore necessario per innalzare di un kelvin la temperatura di un kilogrammo di sostanza`],
+ [`Calore latente`,`Calore scambiato durante un passaggio di stato, a temperatura costante`],
+ [`Conduzione`,`Propagazione del calore per contatto, senza spostamento di materia`],
+ [`Convezione`,`Propagazione del calore per movimento di un fluido`],
+ [`Primo principio della termodinamica`,`La variazione di energia interna è uguale al calore assorbito meno il lavoro compiuto`]]
+};
+var SEQS=[
+ {t:`Le fasi della mitosi`,s:`bio`,i:[`Profase`,`Prometafase`,`Metafase`,`Anafase`,`Telofase`]},
+ {t:`Il ciclo cellulare`,s:`bio`,i:[`Fase G1`,`Fase S`,`Fase G2`,`Mitosi`,`Citodieresi`]},
+ {t:`Le fasi della meiosi`,s:`bio`,i:[`Profase I, con il crossing-over`,`Metafase I`,`Anafase I: si separano gli omologhi`,`Telofase I`,`Meiosi II: si separano i cromatidi fratelli`]},
+ {t:`Dal gene alla proteina (eucarioti)`,s:`bio`,i:[`Trascrizione del DNA in pre-mRNA`,`Splicing del pre-mRNA`,`L'mRNA esce dal nucleo`,`Il ribosoma traduce l'mRNA`,`La catena di amminoacidi si ripiega`]},
+ {t:`La respirazione cellulare`,s:`bio`,i:[`Glicolisi`,`Formazione dell'acetil-CoA`,`Ciclo di Krebs`,`Catena di trasporto degli elettroni`]},
+ {t:`Le strutture di una proteina`,s:`bio`,i:[`Struttura primaria`,`Struttura secondaria`,`Struttura terziaria`,`Struttura quaternaria`]},
+ {t:`Replicazione del DNA`,s:`bio`,i:[`L'elicasi apre la doppia elica`,`La primasi sintetizza il primer`,`La DNA polimerasi allunga il filamento`,`La DNA ligasi unisce i frammenti`]},
+ {t:`Livelli di organizzazione`,s:`bio`,i:[`Molecola`,`Organello`,`Cellula`,`Tessuto`,`Organo`,`Apparato`]},
+ {t:`Prefissi del SI, dal più piccolo al più grande`,s:`fis`,i:[`nano (10⁻⁹)`,`micro (10⁻⁶)`,`milli (10⁻³)`,`kilo (10³)`,`mega (10⁶)`,`giga (10⁹)`]},
+ {t:`Fotosintesi: le due fasi`,s:`bio`,i:[`Fase luminosa nei tilacoidi`,`Produzione di ATP e NADPH`,`Ciclo di Calvin nello stroma`,`Sintesi degli zuccheri`]},
+ {t:`Ordine di acidità, dal più acido al più basico`,s:`chim`,i:[`Succo di limone (pH circa 2)`,`Caffè (pH circa 5)`,`Acqua pura (pH 7)`,`Bicarbonato (pH circa 8)`,`Candeggina (pH circa 12)`]}
+];
 
 function vResult(){
   if(sess.mode==='place')return vPlaceResult();
@@ -1480,7 +2001,7 @@ function vErrors(){
     h+='<section class="panel subj" style="--sc:var('+SUBJ[t.s].v+')"><div class="between"><h2 style="margin:0">'+esc(t.n)+'</h2><span class="badge">'+by[tid].length+'</span></div><div class="two" style="margin:10px 0 6px"><button class="btn sm" data-act="quizErrTopic" data-t="'+tid+'">Rifai</button><button class="btn ghost sm" data-act="openTopic" data-t="'+tid+'">Ripassa</button></div>';
     by[tid].forEach(function(q){
       var e=S.errors[q.id],cached=S.expl[q.id+':'+e.last];
-      h+='<details class="errq"><summary>'+esc(q.q)+'</summary><p>Hai risposto: <span class="mine">'+esc(q.o[e.last])+'</span><br>Corretta: <span class="good">'+esc(q.o[q.a])+'</span></p><p>'+esc(q.e)+'</p>'+
+      h+='<details class="errq"><summary>'+(e.sure?'<span class="tagS">Eri sicuro</span>':'')+esc(q.q)+'</summary><p>Hai risposto: <span class="mine">'+esc(q.o[e.last])+'</span><br>Corretta: <span class="good">'+esc(q.o[q.a])+'</span></p><p>'+esc(q.e)+'</p>'+
         (claudeOk()?'<button class="btn ghost sm" data-act="explain" data-q="'+q.id+'" data-c="'+e.last+'">Spiegami meglio</button>':'')+
         '<div class="xp" id="xp-'+q.id+'"'+(cached?'':' hidden')+'>'+(cached?fmt(cached):'')+'</div></details>';
     });
@@ -1587,6 +2108,10 @@ function render(){
   if(view==='lesson'&&S.lesson){ui.topic=S.lesson.tid;body=vLesson();}
   else if(view==='lessonDone'&&S.lesson)body=vLessonDone();
   else if(view==='play'&&sess)body=vPlay();
+  else if(view==='exam'&&sess)body=vExam();
+  else if(view==='examResult'&&sess)body=vExamResult();
+  else if(view==='games')body=vGames();
+  else if(view==='game'&&gm)body=vGame();
   else if(view==='result'&&sess)body=vResult();
   else if(view==='playcards'&&sess)body=vPlayCards();
   else if(view==='errors')body=vErrors();
@@ -1597,15 +2122,16 @@ function render(){
   var key=view+'|'+(view==='play'&&sess&&sess.q?sess.q.id:'')+(view==='topic'?ui.topic:'')+(view==='playcards'&&sess?sess.i:''),cls=key!==lastKey?' class="enter"':'';
   lastKey=key;
   app.innerHTML='<main'+cls+'>'+body+'</main>'+navHTML();
+  clearInterval(xTimer);xTimer=null;if(view==='exam'&&sess&&sess.mode==='exam')xTimer=setInterval(examTick,1000);
   if(view==='topic'||view==='lesson')initAnim();
   var pb=app.querySelector('.prog>b[data-w]');if(pb){if(RM)pb.style.width=pb.dataset.w+'%';else requestAnimationFrame(function(){requestAnimationFrame(function(){pb.style.width=pb.dataset.w+'%';});});}
   if(!RM)[].forEach.call(app.querySelectorAll('.cnt'),function(e){var n=+e.dataset.n,t0=null;if(!n)return;e.textContent='0';(function f(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/700);e.textContent=Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f);})(performance.now());});
   if(ui.focusSel){var fe=app.querySelector(ui.focusSel);ui.focusSel=null;if(fe){try{fe.focus({preventScroll:true});}catch(e){}}}
 }
-function go(v){view=v;if(v!=='play'&&v!=='playcards'&&v!=='result')sess=null;ui.msg='';ui.confirmReset=false;render();scrollTop();}
+function go(v){view=v;if(v!=='play'&&v!=='playcards'&&v!=='result'&&v!=='exam'&&v!=='examResult')sess=null;ui.exConf=false;ui.exQuit=false;ui.msg='';ui.confirmReset=false;render();scrollTop();}
 
 /* ---------- Sessioni ---------- */
-function setQ(q){sess.lvUp=null;sess.rev=null;sess.prev=null;sess.q=q;sess.order=shuffle([0,1,2,3]);sess.chosen=null;sess.shown=false;sess.ok=null;}
+function setQ(q){sess.conf=null;sess.reveal=sess.mode==='place'||S.hide===false;sess.lvUp=null;sess.rev=null;sess.prev=null;sess.q=q;sess.order=shuffle([0,1,2,3]);sess.chosen=null;sess.shown=false;sess.ok=null;}
 function startQuiz(mode,arg,opt){
   opt=opt||{};var pool=bank(),n=10;
   if(mode==='subj')pool=pool.filter(function(q){return topicOf(q.t).s===arg;});
@@ -1644,8 +2170,10 @@ function answer(j){
   if(!sess||sess.shown)return;
   var q=sess.q,orig=sess.order[j],ok=orig===q.a;
   sess.chosen=j;sess.shown=true;sess.ok=ok;
+  var conf=sess.conf||null,up=record(q,orig,ok,sess.mode==='place',conf);
   sess.prev=S.cards[q.id]?JSON.parse(JSON.stringify(S.cards[q.id])):null;
-  var up=record(q,orig,ok,sess.mode==='place');sess.lvUp=up?LV[T(q.t).level]:null;ui.fx=true;
+  if(ok&&sess.mode!=='place'&&conf&&conf!=='s'&&!S.cards[q.id]){S.cards[q.id]={box:0,due:Date.now()};sess.rev=1;save();}
+  sess.lvUp=up?LV[T(q.t).level]:null;ui.fx=true;
   sess.answers.push({q:q.id,t:q.t,ok:ok,orig:orig});
   render();
   var f=document.querySelector('.fb');if(f){try{f.scrollIntoView({behavior:RM?'auto':'smooth',block:'nearest'});}catch(e){}}
@@ -1653,7 +2181,7 @@ function answer(j){
 function setReview(v){
   if(!sess||sess.mode==='place'||!sess.shown||!sess.ok)return;
   var q=sess.q,last=sess.answers[sess.answers.length-1];
-  if(v==='1'){S.cards[q.id]={box:1,due:Date.now()};sess.rev=1;}
+  if(v==='1'){S.cards[q.id]={box:0,due:Date.now()};sess.rev=1;}
   else{if(sess.prev)S.cards[q.id]=sess.prev;else delete S.cards[q.id];sess.rev=0;}
   if(last&&last.q===q.id)last.rev=sess.rev;
   save();render();
@@ -1665,7 +2193,7 @@ function next(){
   else{sess.i++;setQ(sess.items[sess.i]);}
   render();scrollTop();
 }
-var INT=[0,1,3,7,14];
+var INT=[0,1,3,7,21];
 function startCards(arg){
   var now=Date.now(),pool=cardsPool(arg);
   var due=pool.filter(function(q){return S.cards[q.id]&&S.cards[q.id].due<=now;}).sort(function(a,b){return S.cards[a.id].due-S.cards[b.id].due;});
@@ -1679,8 +2207,8 @@ function rate(r){
   if(!sess||sess.mode!=='cards')return;
   var q=sess.items[sess.i],c=S.cards[q.id]||(S.cards[q.id]={box:0,due:0});
   if(r==='known'){c.box=Math.min(4,(c.box||0)+1);c.due=Date.now()+INT[c.box]*864e5;sess.known++;}
-  else{c.box=1;c.due=Date.now()+6e5;sess.review++;}
-  save();sess.i++;sess.flipped=false;if(sess.i>=sess.items.length){sess.done=true;if(sess.lesson){finishLesson();view='lessonDone';sess=null;}}
+  else{c.box=0;c.due=Date.now()+6e5;sess.review++;}
+  bump(1);save();sess.i++;sess.flipped=false;if(sess.i>=sess.items.length){sess.done=true;if(sess.lesson){finishLesson();view='lessonDone';sess=null;}}
   render();scrollTop();
 }
 
@@ -2157,6 +2685,21 @@ document.addEventListener('click',function(ev){
     case 'quizTopic':startQuiz('topic',d.t);break;
     case 'quizErrTopic':startQuiz('errors',d.t);break;
     case 'ans':answer(+d.i);break;
+    case 'conf':if(sess&&!sess.reveal){sess.conf=d.c==='n'?null:d.c;sess.reveal=true;render();}break;
+    case 'goalSet':S.goal=+d.v;save();render();break;
+    case 'hideToggle':S.hide=(S.hide===false);save();render();break;
+    case 'examStart':startExam(+d.n);break;
+    case 'examGo':if(sess&&sess.mode==='exam'){sess.i=+d.i;ui.exConf=false;render();scrollTop();}break;
+    case 'examAns':if(sess&&sess.mode==='exam'){sess.ans[sess.i]=+d.j;ui.exConf=false;render();}break;
+    case 'examStep':if(sess&&sess.mode==='exam'){sess.i=Math.max(0,Math.min(sess.items.length-1,sess.i+(+d.v)));render();scrollTop();}break;
+    case 'examSubmit':examSubmit(false);break;
+    case 'examCancel':ui.exConf=false;render();break;
+    case 'examQuit':if(ui.exQuit){go('home');}else{ui.exQuit=true;render();}break;
+    case 'gScope':ui.gscope=d.v;render();break;
+    case 'gStart':startGame(d.g);break;
+    case 'gAgain':if(gm)startGame(gm.g);break;
+    case 'gExit':go('games');break;
+    case 'gmT':case 'gmD':case 'gTF':case 'gGu':case 'gNext':case 'gOrd':gameAct(a,d);break;
     case 'next':next();break;
     case 'rev':setReview(d.v);break;
     case 'quit':go('home');break;
