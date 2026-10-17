@@ -1527,14 +1527,21 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){retur
 function fmt(t){return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').split(/\n{2,}/).map(function(p){return '<p>'+p.replace(/\n/g,'<br>')+'</p>';}).join('');}
 function rich(t){return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;}return a;}
-function topicOf(id){return TOPICS.find(function(t){return t.id===id;});}
-function bank(){return QB.concat(S.custom);}
-function qById(id){return bank().find(function(q){return q.id===id;});}
+var _tm={};TOPICS.forEach(function(t){_tm[t.id]=t;});
+function topicOf(id){return _tm[id];}
+var _bk=null,_bkC=null,_bkN=-1,_qm={},_rm={},_rin=false;
+function bank(){if(!_bk||_bkC!==S.custom||_bkN!==S.custom.length){_bk=QB.concat(S.custom);_bkC=S.custom;_bkN=S.custom.length;_qm={};_bk.forEach(function(q){_qm[q.id]=q;});}return _bk;}
+function qById(id){bank();return _qm[id];}
 function T(id){return S.topics[id]||(S.topics[id]={level:1,streak:0,fragile:false,placed:false});}
 function recent(tid,n){var r=[];for(var i=S.log.length-1;i>=0&&r.length<n;i--){if(S.log[i].t===tid&&S.log[i].l!==4)r.push(S.log[i]);}return r;}
-function known(tid){return T(tid).placed||recent(tid,1).length>0;}
-function unresolved(tid){return Object.keys(S.errors).filter(function(id){var q=qById(id);return q&&(!tid||q.t===tid)&&S.errors[id].ok<2;});}
-function weakness(tid){var t=T(tid),r=recent(tid,10);if(!r.length&&!t.placed)return 0.5;var acc=r.length?r.filter(function(x){return x.ok;}).length/r.length:0.5;return Math.min((1-acc)*0.6+((3-t.level)/2)*0.4+Math.min(unresolved(tid).length,4)*0.08,1.2);}
+function known(tid){if(_rin){var k='k'+tid;if(k in _rm)return _rm[k];return _rm[k]=T(tid).placed||recent(tid,1).length>0;}return T(tid).placed||recent(tid,1).length>0;}
+function unresolved(tid){
+  var k='u'+(tid||'');if(_rin&&_rm[k])return _rm[k];
+  var r=Object.keys(S.errors).filter(function(id){var q=qById(id);return q&&(!tid||q.t===tid)&&S.errors[id].ok<2;});
+  if(_rin)_rm[k]=r;return r;
+}
+function weakness(tid){if(_rin){var k='w'+tid;if(k in _rm)return _rm[k];return _rm[k]=weakness0(tid);}return weakness0(tid);}
+function weakness0(tid){var t=T(tid),r=recent(tid,10);if(!r.length&&!t.placed)return 0.5;var acc=r.length?r.filter(function(x){return x.ok;}).length/r.length:0.5;return Math.min((1-acc)*0.6+((3-t.level)/2)*0.4+Math.min(unresolved(tid).length,4)*0.08,1.2);}
 function lastAns(qid){for(var i=S.log.length-1;i>=0;i--){if(S.log[i].q===qid)return S.log[i];}return null;}
 function levelLabel(tid){var t=T(tid);if(!known(tid))return 'Da valutare';return t.fragile?'Da costruire':LV[t.level];}
 function meter(tid){var t=T(tid),k=known(tid);return '<span class="meter" role="img" aria-label="'+esc(levelLabel(tid))+'" style="--sc:var('+SUBJ[topicOf(tid).s].v+')">'+[1,2,3].map(function(i){return '<i style="--i:'+(i-1)+'" class="'+(k&&i<=t.level&&!(t.fragile&&i===1)?'on':'')+'"></i>';}).join('')+'</span>';}
@@ -2444,12 +2451,14 @@ function vErrors(){
   order.forEach(function(tid){
     var t=topicOf(tid);
     h+='<section class="panel subj" style="--sc:var('+SUBJ[t.s].v+')"><div class="between"><h2 style="margin:0">'+esc(t.n)+'</h2><span class="badge">'+by[tid].length+'</span></div><div class="two" style="margin:10px 0 6px"><button class="btn sm" data-act="quizErrTopic" data-t="'+tid+'">Rifai</button><button class="btn ghost sm" data-act="openTopic" data-t="'+tid+'">Ripassa</button></div>';
-    by[tid].forEach(function(q){
+    var lim=(ui.errAll&&ui.errAll[tid])?1e9:8;
+    by[tid].slice(0,lim).forEach(function(q){
       var e=S.errors[q.id],cached=S.expl[q.id+':'+e.last];
       h+='<details class="errq"><summary>'+(e.sure?'<span class="tagS">Eri sicuro</span>':'')+esc(q.q)+'</summary><p>Hai risposto: <span class="mine">'+esc(q.o[e.last])+'</span><br>Corretta: <span class="good">'+esc(q.o[q.a])+'</span></p><p>'+esc(q.e)+'</p>'+
         (claudeOk()?'<button class="btn ghost sm" data-act="explain" data-q="'+q.id+'" data-c="'+e.last+'">Spiegami meglio</button>':'')+
         '<div class="xp" id="xp-'+q.id+'"'+(cached?'':' hidden')+'>'+(cached?fmt(cached):'')+'</div></details>';
     });
+    if(by[tid].length>lim)h+='<button class="btn ghost sm" style="margin-top:8px" data-act="errMore" data-t="'+tid+'">Mostra altri '+(by[tid].length-lim)+'</button>';
     h+='</section>';
   });
   return h;
@@ -2551,7 +2560,7 @@ function backupBlock(){
 }
 function render(){
   stopAnims();
-  var body='';
+  var body='';_rm={};_rin=true;try{
   if(view==='lesson'&&S.lesson){ui.topic=S.lesson.tid;body=vLesson();}
   else if(view==='lessonDone'&&S.lesson)body=vLessonDone();
   else if(view==='play'&&sess)body=vPlay();
@@ -2566,6 +2575,7 @@ function render(){
   else if(view==='pick')body=vPick();
   else if(view==='topic'&&ui.topic)body=vTopic();
   else{view='home';body=vHome();}
+  }finally{_rin=false;_rm={};}
   var key=view+'|'+(view==='play'&&sess&&sess.q?sess.q.id:'')+(view==='topic'?ui.topic:'')+(view==='playcards'&&sess?sess.i:''),cls=key!==lastKey?' class="enter"':'';
   lastKey=key;
   app.innerHTML='<main'+cls+'>'+body+'</main>'+navHTML();
@@ -3129,6 +3139,7 @@ document.addEventListener('click',function(ev){
     case 'pickN':ui.pickN=+d.v;ui.focusSel='[data-v="'+d.v+'"][data-act="pickN"]';render();break;
     case 'pickGo':startQuiz('multi',selTopics(),{n:ui.pickN===undefined?10:ui.pickN,diff:S.diff===undefined?'auto':S.diff});break;
     case 'pickD':S.diff=d.v==='auto'?'auto':+d.v;save();ui.focusSel='[data-act="pickD"][data-v="'+d.v+'"]';render();break;
+    case 'errMore':ui.errAll=ui.errAll||{};ui.errAll[d.t]=true;render();break;
     case 'pickExam':S.diff=4;if(!selTopics().length)S.sel=rankTopics().slice(0,5);save();go('pick');break;
     case 'quizTopicExam':startQuiz('topic',d.t,{n:10,diff:4});break;
     case 'placeStart':startPlace(d.arg);break;
